@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sloppypasta Audit — Framework Overview</title>
+<style>
+  :root {
+    --bg: #faf8f5;
+    --text: #1a1a1a;
+    --muted: #6b6560;
+    --accent: #c45d2c;
+    --accent-light: #f0e6de;
+    --border: #d4cfc8;
+    --card-bg: #ffffff;
+    --gigi: #e8720c;
+    --signals: #2563eb;
+    --shared: #7c3aed;
+    --pass: #16a34a;
+    --partial: #ca8a04;
+    --fail: #dc2626;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 4rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: 1.1rem;
+    color: var(--muted);
+    margin-bottom: 2rem;
+    font-style: italic;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 2.5rem;
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--accent);
+  }
+
+  p { margin-bottom: 0.75rem; }
+
+  .thesis-box {
+    background: var(--accent-light);
+    border-left: 4px solid var(--accent);
+    padding: 1.25rem 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 0 8px 8px 0;
+    font-size: 1.05rem;
+  }
+
+  .axiom-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin: 1rem 0;
+  }
+
+  .axiom {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+  }
+
+  .axiom-id {
+    font-family: 'Space Grotesk', 'SF Mono', monospace;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.25rem;
+  }
+
+  .axiom-text {
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .axiom-desc {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .category-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    overflow: hidden;
+  }
+
+  .category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    background: linear-gradient(to right, var(--accent-light), var(--card-bg));
+  }
+
+  .category-name {
+    font-size: 1.2rem;
+    font-weight: 700;
+  }
+
+  .category-weight {
+    font-family: 'Space Grotesk', 'SF Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: white;
+    padding: 0.2rem 0.6rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  .category-question {
+    padding: 0.75rem 1.5rem;
+    font-style: italic;
+    color: var(--muted);
+    border-bottom: 1px solid var(--border);
+    font-size: 0.95rem;
+  }
+
+  .heuristic-list {
+    padding: 0;
+    list-style: none;
+  }
+
+  .heuristic {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .heuristic:last-child { border-bottom: none; }
+
+  .heuristic-id {
+    font-family: 'Space Grotesk', 'SF Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--muted);
+    padding: 0.85rem 0 0.85rem 1rem;
+    align-self: start;
+  }
+
+  .heuristic-content {
+    padding: 0.75rem 1.25rem 0.75rem 0.5rem;
+  }
+
+  .heuristic-name {
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .heuristic-test {
+    font-size: 0.88rem;
+    color: var(--muted);
+    margin-bottom: 0.3rem;
+  }
+
+  .source-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 600;
+    padding: 0.1rem 0.45rem;
+    border-radius: 3px;
+    margin-right: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+
+  .source-gigi { background: #fef3e2; color: var(--gigi); }
+  .source-37s { background: #e8f0fe; color: var(--signals); }
+  .source-shared { background: #f3e8ff; color: var(--shared); }
+  .source-other { background: #f0f0f0; color: #555; }
+
+  .scoring-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.95rem;
+  }
+
+  .scoring-table th {
+    text-align: left;
+    padding: 0.6rem 1rem;
+    border-bottom: 2px solid var(--border);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--muted);
+  }
+
+  .scoring-table td {
+    padding: 0.6rem 1rem;
+    border-bottom: 1px solid #eee;
+  }
+
+  .grade-a { color: var(--pass); font-weight: 700; }
+  .grade-b { color: #16a34a; font-weight: 600; }
+  .grade-c { color: var(--partial); font-weight: 600; }
+  .grade-d { color: var(--accent); font-weight: 600; }
+  .grade-f { color: var(--fail); font-weight: 700; }
+
+  .stats-row {
+    display: flex;
+    gap: 1rem;
+    margin: 1.5rem 0;
+    flex-wrap: wrap;
+  }
+
+  .stat-box {
+    flex: 1;
+    min-width: 120px;
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-top: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .source-breakdown {
+    display: flex;
+    gap: 0.5rem;
+    margin: 1rem 0;
+    height: 24px;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .sb-gigi { background: var(--gigi); flex: 56; }
+  .sb-37s { background: var(--signals); flex: 31; }
+  .sb-shared { background: var(--shared); flex: 13; }
+
+  .sb-legend {
+    display: flex;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .sb-legend-item { display: flex; align-items: center; gap: 0.4rem; }
+  .sb-dot { width: 10px; height: 10px; border-radius: 2px; }
+
+  .footer {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 0.85rem;
+    color: var(--muted);
+  }
+
+  @media (max-width: 640px) {
+    .axiom-grid { grid-template-columns: 1fr; }
+    .heuristic { grid-template-columns: 48px 1fr; }
+    h1 { font-size: 1.7rem; }
+  }
+</style>
+</head>
+<body>
+
+<h1>The Sloppypasta Audit</h1>
+<p class="subtitle">45-point product inspection grounded in sovereign engineering philosophy and craft principles</p>
+
+<div class="stats-row">
+  <div class="stat-box">
+    <div class="stat-number">8</div>
+    <div class="stat-label">Axioms</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-number">8</div>
+    <div class="stat-label">Categories</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-number">47</div>
+    <div class="stat-label">Heuristics</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-number">30+</div>
+    <div class="stat-label">Source Notes</div>
+  </div>
+</div>
+
+<h3>Source Distribution</h3>
+<div class="source-breakdown">
+  <div class="sb-gigi" title="Gigi / SovEng: 56%"></div>
+  <div class="sb-37s" title="37signals: 31%"></div>
+  <div class="sb-shared" title="Shared: 13%"></div>
+</div>
+<div class="sb-legend">
+  <span class="sb-legend-item"><span class="sb-dot" style="background:var(--gigi)"></span> Gigi / SovEng (56%)</span>
+  <span class="sb-legend-item"><span class="sb-dot" style="background:var(--signals)"></span> 37signals (31%)</span>
+  <span class="sb-legend-item"><span class="sb-dot" style="background:var(--shared)"></span> Shared (13%)</span>
+</div>
+
+<div class="thesis-box">
+  The internet's original sin was lacking native money. Attention became the surrogate currency, producing surveillance, addiction, censorship, and sloppypasta. The antidote is not a better platform but a return to protocols: Nostr for speech, Bitcoin for value. A product either respects these principles or it participates in the decay.
+</div>
+
+<!-- AXIOMS -->
+<h2>Axioms</h2>
+<p>Non-negotiable truths from which all heuristics derive. The worldview behind the test.</p>
+
+<div class="axiom-grid">
+  <div class="axiom">
+    <div class="axiom-id">A1 <span class="source-tag source-gigi">Gigi</span></div>
+    <div class="axiom-text">Information wants to be free</div>
+    <div class="axiom-desc">Zero marginal cost of reproduction. Paywalls and DRM fight nature and lose.</div>
+  </div>
+  <div class="axiom">
+    <div class="axiom-id">A2 <span class="source-tag source-gigi">Gigi</span></div>
+    <div class="axiom-text">Protocols have speakers; platforms have users</div>
+    <div class="axiom-desc">Free speech platforms are an oxymoron. Only protocols guarantee expression.</div>
+  </div>
+  <div class="axiom">
+    <div class="axiom-id">A3 <span class="source-tag source-gigi">Gigi</span></div>
+    <div class="axiom-text">Cryptography is necessary but not sufficient</div>
+    <div class="axiom-desc">Without computational proof, you fall back to trusting authorities.</div>
+  </div>
+  <div class="axiom">
+    <div class="axiom-id">A4 <span class="source-tag source-gigi">Gigi</span></div>
+    <div class="axiom-text">Monetary value is human action distilled</div>
+    <div class="axiom-desc">"Talk is cheap. Sats are not." Views can be faked. Payments cannot.</div>
+  </div>
+  <div class="axiom">
+    <div class="axiom-id">A5 <span class="source-tag source-gigi">Gigi</span></div>
+    <div class="axiom-text">Identity is prismatic</div>
+    <div class="axiom-desc">Forcing a single legal identity is surveillance. Pseudonymity is a feature.</div>
+  </div>
+  <div class="axiom">
+    <div class="axiom-id">A6 <span class="source-tag source-gigi">Gigi</span> <span class="source-tag source-other">Vervaeke</span></div>
+    <div class="axiom-text">Smart is not wise</div>
+    <div class="axiom-desc">LLMs can pattern-match but cannot care. Caring requires embodiment.</div>
+  </div>
+  <div class="axiom">
+    <div class="axiom-id">A7 <span class="source-tag source-gigi">Gigi</span></div>
+    <div class="axiom-text">Freedom by design, not by policy</div>
+    <div class="axiom-desc">"Don't be evil" fails. "Can't be evil" works. Exit costs must approach zero.</div>
+  </div>
+  <div class="axiom">
+    <div class="axiom-id">A8 <span class="source-tag source-37s">37signals</span></div>
+    <div class="axiom-text">Scope is the variable, not time</div>
+    <div class="axiom-desc">Build less. Say no by default. Half, not half-assed. Constraint is a blessing.</div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<h2>Heuristic Categories</h2>
+
+<!-- I. Content Integrity -->
+<div class="category-card">
+  <div class="category-header">
+    <span class="category-name">I. Content Integrity (Anti-Slop)</span>
+    <span class="category-weight">20%</span>
+  </div>
+  <div class="category-question">Does this product resist the flood of low-care, machine-generated content?</div>
+  <ul class="heuristic-list">
+    <li class="heuristic">
+      <div class="heuristic-id">CI-0</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No access gates on content</div>
+        <div class="heuristic-test">Paywalls, email harvesting modals ("enter email to continue reading"), forced account creation to view content, "sign up to see more" &mdash; all antipatterns. Information wants to be free (A1). If the content is good, let people pay voluntarily after reading. Gating access trades sovereignty for conversion metrics.</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CI-1</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No detectable LLM smell</div>
+        <div class="heuristic-test">Negation structures, em-dash density, false emphasis, sycophantic patterns, "mid" authority voice</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CI-2</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Human editorial judgment visible</div>
+        <div class="heuristic-test">Evidence of curation, selection, editorial voice — not just aggregation</div>
+        <span class="source-tag source-37s">37signals</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CI-3</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Proof of care</div>
+        <div class="heuristic-test">Named author, iteration history, corrections — someone stood behind this</div>
+        <span class="source-tag source-shared">Shared</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CI-4</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Information density</div>
+        <div class="heuristic-test">Signal-to-noise ratio. Padded with filler, engagement bait, or related-articles spam?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CI-5</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Provenance verifiable</div>
+        <div class="heuristic-test">Content signed, timestamped, attributed? Can you trace it to origin?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CI-6</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No drive-by contributions</div>
+        <div class="heuristic-test">If open-source: AI-generated PRs filtered? Maintainer craft protected?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- II. Sovereignty & Privacy -->
+<div class="category-card">
+  <div class="category-header">
+    <span class="category-name">II. Sovereignty & Privacy</span>
+    <span class="category-weight">20%</span>
+  </div>
+  <div class="category-question">Does this product respect user autonomy and resist surveillance?</div>
+  <ul class="heuristic-list">
+    <li class="heuristic">
+      <div class="heuristic-id">SP-1</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">The rugpull test</div>
+        <div class="heuristic-test">Can this product rugpull its users? If yes, it fails sovereignty.</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">SP-2</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Exit cost near zero</div>
+        <div class="heuristic-test">Export data, content, identity, relationships? In what format?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">SP-3</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No identity collection</div>
+        <div class="heuristic-test"><strong>Sliding scale:</strong> Keypair-only, no account (ideal) &rarr; Minimal account, no email required &rarr; Email-required but justified by product need &rarr; Email harvesting modals, forced signup walls (fail) &rarr; Government ID or biometrics (<strong>always 0</strong>, no exceptions &mdash; "legally required" is not an excuse, it's a reason to change jurisdictions). Does identity collection match what the service actually needs, or does it collect more?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">SP-4</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No surveillance by default</div>
+        <div class="heuristic-test">Analytics, tracking pixels, third-party scripts? What data is collected?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">SP-5</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Protocol-based, not platform-locked</div>
+        <div class="heuristic-test">Built on open protocols (RSS, Nostr, ActivityPub) or proprietary APIs?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">SP-6</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">User controls the algorithm</div>
+        <div class="heuristic-test">Can users see, modify, or disable recommendation/ranking logic?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">SP-7</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Self-hostable or verifiable</div>
+        <div class="heuristic-test">Can you run your own instance, or at minimum audit the code?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">SP-8</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Pay-per-service, not subscription</div>
+        <div class="heuristic-test">PPQ model: pay for what you use, no long-term contracts, no stored payment methods, no recurring charges requiring permission. Sats in, service out.</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- III. Craft & Care -->
+<div class="category-card">
+  <div class="category-header">
+    <span class="category-name">III. Craft & Care</span>
+    <span class="category-weight">15%</span>
+  </div>
+  <div class="category-question">Was this product built with intention, discipline, and taste?</div>
+  <ul class="heuristic-list">
+    <li class="heuristic">
+      <div class="heuristic-id">CC-1</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Opinionated, not configurable</div>
+        <div class="heuristic-test">Takes a stand, or offers infinite options hiding indecision?</div>
+        <span class="source-tag source-37s">37signals</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CC-2</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Iteration depth visible</div>
+        <div class="heuristic-test">Version history, changelog, blog posts about hard decisions</div>
+        <span class="source-tag source-shared">Shared</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CC-3</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Words crafted, not generated</div>
+        <div class="heuristic-test">Error messages, onboarding, about page — written by someone who cares?</div>
+        <span class="source-tag source-37s">37signals</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CC-4</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Built less, not more</div>
+        <div class="heuristic-test">Said no to features? Evidence of deliberate omission?</div>
+        <span class="source-tag source-37s">37signals</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CC-5</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No dark patterns</div>
+        <div class="heuristic-test">Clear unsubscribe, no guilt-tripping, no forced engagement loops</div>
+        <span class="source-tag source-shared">Shared</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">CC-6</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Human pace</div>
+        <div class="heuristic-test">Respects attention spans? Async-first? Not demanding constant engagement?</div>
+        <span class="source-tag source-shared">Shared</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- IV. Openness & Interoperability -->
+<div class="category-card">
+  <div class="category-header">
+    <span class="category-name">IV. Openness & Interoperability</span>
+    <span class="category-weight">10%</span>
+  </div>
+  <div class="category-question">Does this product play well with others and respect open standards?</div>
+  <ul class="heuristic-list">
+    <li class="heuristic">
+      <div class="heuristic-id">OI-1</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">RSS/feed available</div>
+        <div class="heuristic-test">RSS, Atom, or equivalent syndication?</div>
+        <span class="source-tag source-shared">Shared</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">OI-2</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">API access</div>
+        <div class="heuristic-test">Documented, stable API for programmatic access?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">OI-3</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Data portability</div>
+        <div class="heuristic-test">Export everything in standard format (JSON, CSV, OPML, markdown)?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">OI-4</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Open source (or auditable)</div>
+        <div class="heuristic-test">Source code available? Can you fork it?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">OI-5</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Interop with sovereign stack</div>
+        <div class="heuristic-test">Works with Nostr, Lightning, Bitcoin, or other open protocols?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- V. Honesty & Transparency -->
+<div class="category-card">
+  <div class="category-header">
+    <span class="category-name">V. Honesty & Transparency</span>
+    <span class="category-weight">15%</span>
+  </div>
+  <div class="category-question">Does this product tell you the truth about what it is and what it does?</div>
+  <ul class="heuristic-list">
+    <li class="heuristic">
+      <div class="heuristic-id">HT-1</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Business model visible</div>
+        <div class="heuristic-test">How does this make money? Obvious, or hidden behind "it's free"?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">HT-2</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No growth-hack language</div>
+        <div class="heuristic-test">Authentic enthusiasm or corporate-speak, buzzword soup, "AI-powered"?</div>
+        <span class="source-tag source-37s">37signals</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">HT-3</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Honest about AI usage</div>
+        <div class="heuristic-test">AI disclosed? AI-generated outputs labeled?</div>
+        <span class="source-tag source-shared">Shared</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">HT-4</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No manufactured urgency</div>
+        <div class="heuristic-test">Countdown timers, "limited time," "X people viewing this now"?</div>
+        <span class="source-tag source-37s">37signals</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- VI. Voice & Humanity -->
+<div class="category-card">
+  <div class="category-header">
+    <span class="category-name">VI. Voice & Humanity</span>
+    <span class="category-weight">10%</span>
+  </div>
+  <div class="category-question">Does this product sound human, or like a committee wrote it?</div>
+  <ul class="heuristic-list">
+    <li class="heuristic">
+      <div class="heuristic-id">VH-1</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Distinctive voice</div>
+        <div class="heuristic-test">Can you tell who made this from the writing alone?</div>
+        <span class="source-tag source-37s">37signals</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">VH-2</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Named humans visible</div>
+        <div class="heuristic-test">Real people behind this? About page with faces and stories?</div>
+        <span class="source-tag source-shared">Shared</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">VH-3</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Embodied perspective</div>
+        <div class="heuristic-test">Reflects lived experience, not just information aggregation?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">VH-4</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Conversations, not broadcasts</div>
+        <div class="heuristic-test">Enables dialogue, or just pushes content at you?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- VII. Wisdom & Restraint -->
+<div class="category-card">
+  <div class="category-header">
+    <span class="category-name">VII. Wisdom & Restraint</span>
+    <span class="category-weight">5%</span>
+  </div>
+  <div class="category-question">Does this product know when to stop, when to say no, and when to leave you alone?</div>
+  <ul class="heuristic-list">
+    <li class="heuristic">
+      <div class="heuristic-id">WR-1</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Deliberate constraints</div>
+        <div class="heuristic-test">Constrained by design choice, not by limitation?</div>
+        <span class="source-tag source-37s">37signals</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">WR-2</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Architecturally unable to nag</div>
+        <div class="heuristic-test"><strong>Sliding scale:</strong> Product holds no contact data &mdash; <em>can't</em> nag by design (ideal) &rarr; Has your email but never uses it for re-engagement &rarr; Sends occasional useful updates you opted into &rarr; "We miss you" campaigns, guilt-tripping, dark-pattern unsubscribe flows (fail). The test: does communication serve you or their retention metrics?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">WR-3</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Long-term thinking</div>
+        <div class="heuristic-test">Built for decades or for the next funding round?</div>
+        <span class="source-tag source-shared">Shared</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">WR-4</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">LLM as tool, not master</div>
+        <div class="heuristic-test">If AI is used, does it build understanding or bypass it?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- VIII. Value Alignment -->
+<div class="category-card">
+  <div class="category-header">
+    <span class="category-name">VIII. Value Alignment</span>
+    <span class="category-weight">5%</span>
+  </div>
+  <div class="category-question">Does this product align incentives between creators, users, and itself?</div>
+  <ul class="heuristic-list">
+    <li class="heuristic">
+      <div class="heuristic-id">VA-1</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Value flows to creators</div>
+        <div class="heuristic-test">Creators capture value, or platform extracts it?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">VA-2</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">No attention extraction</div>
+        <div class="heuristic-test">Helps you finish tasks, or maximizes time-on-app?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">VA-3</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">V4V or pay-per-use</div>
+        <div class="heuristic-test"><strong>Sliding scale:</strong> V4V or pay-per-use with sats (ideal) &rarr; One-time purchase &rarr; Subscription that genuinely offers better value than per-use (bus ticket: bulk discount, simpler UX) &rarr; Flat-rate subscription regardless of usage where the business model depends on people forgetting to cancel (fail &mdash; Netflix, ChatGPT charging $20 when you use $0.50). The test: would the company make the same money if every customer was fully informed and actively choosing each month?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+    <li class="heuristic">
+      <div class="heuristic-id">VA-4</div>
+      <div class="heuristic-content">
+        <div class="heuristic-name">Curation rewarded</div>
+        <div class="heuristic-test">Values discovery and curation, not just creation?</div>
+        <span class="source-tag source-gigi">Gigi</span>
+      </div>
+    </li>
+  </ul>
+</div>
+
+<!-- SCORING -->
+<h2>Scoring</h2>
+
+<p>Each heuristic scores <strong>Pass (1.0)</strong>, <strong>Partial (0.5)</strong>, or <strong>Fail (0.0)</strong>. Category score = heuristic sum / applicable max &times; 100. Overall = weighted sum of categories.</p>
+
+<table class="scoring-table">
+  <thead>
+    <tr><th>Grade</th><th>Score</th><th>Meaning</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="grade-a">A</td><td>85&ndash;100</td><td>Gigi would use this. Sovereign, crafted, honest.</td></tr>
+    <tr><td class="grade-b">B</td><td>70&ndash;84</td><td>Solid with gaps. Fixable with intention.</td></tr>
+    <tr><td class="grade-c">C</td><td>55&ndash;69</td><td>Mediocre. Some care visible, structural problems.</td></tr>
+    <tr><td class="grade-d">D</td><td>40&ndash;54</td><td>Platform thinking, attention extraction, or slop.</td></tr>
+    <tr><td class="grade-f">F</td><td>0&ndash;39</td><td>Slot machine. Surveillance product. Sloppypasta factory.</td></tr>
+  </tbody>
+</table>
+
+<h3>Weight Rationale</h3>
+<table class="scoring-table">
+  <thead>
+    <tr><th>Category</th><th>Weight</th><th>Why</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Content Integrity</td><td>20%</td><td>If content is slop, nothing else matters</td></tr>
+    <tr><td>Sovereignty & Privacy</td><td>20%</td><td>If you can be rugpulled, you're not sovereign</td></tr>
+    <tr><td>Craft & Care</td><td>15%</td><td>Intention in building &mdash; the Gigi/37signals bridge</td></tr>
+    <tr><td>Honesty & Transparency</td><td>15%</td><td>Honest products don't hide how they make money</td></tr>
+    <tr><td>Openness & Interop</td><td>10%</td><td>Protocol-first matters but not every product is a protocol</td></tr>
+    <tr><td>Voice & Humanity</td><td>10%</td><td>Voice matters but is secondary to structural properties</td></tr>
+    <tr><td>Wisdom & Restraint</td><td>5%</td><td>Hard to test objectively but philosophically important</td></tr>
+    <tr><td>Value Alignment</td><td>5%</td><td>V4V is aspirational; don't penalize honest pay-per-use</td></tr>
+  </tbody>
+</table>
+
+<div class="footer">
+  <p><strong>Sources:</strong> 21 Gigi/SovEng vault notes, 13 37signals/SVN notes, 3 methodology notes (Vervaeke, Zechner, Agentic Craft). 0 direct input from Dorsey, Calle, or Odell &mdash; their ideas reinforced Gigi but didn't produce unique heuristics.</p>
+  <p>Framework: <code>vault/notes/tech/editorial/gigi-internet-philosophy-synthesis.md</code></p>
+  <p>Generated 2026-03-30 for the /sloppypasta-audit skill.</p>
+</div>
+
+</body>
+</html>
