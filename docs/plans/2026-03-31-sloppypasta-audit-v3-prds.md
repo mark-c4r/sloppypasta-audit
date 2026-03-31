@@ -959,17 +959,17 @@ Check that every file path referenced in the skill actually exists (or will exis
 
 ### 5. Acceptance Criteria
 
-- [ ] File exists at `/Users/profile_1/Coding/sloppypasta-audit/.claude/skills/sloppypasta-audit/SKILL.md`
-- [ ] YAML frontmatter includes: name, description, allowed-tools
-- [ ] Skill accepts URL or product name as input
-- [ ] Skill instructs reading of scale-anchor files and detection-reference files by path
-- [ ] Scoring formula correctly implements: 5% floor, per-check scoring, geometric mean per category, weighted geometric mean overall
-- [ ] N/A handling is specified (exclude from geomean, redistribute weight if < 3 active checks in category)
-- [ ] Grade boundaries are defined (A: 85-100, B: 70-84, C: 55-69, D: 40-54, F: 0-39)
-- [ ] Output template produces: overall score + grade, category breakdown with per-check scores and justifications, priority improvement suggestions (3-5)
-- [ ] Tone instructions specify "wise sage" voice
-- [ ] Skill is self-contained — no references to external skills, plan files, or brainstorm context
-- [ ] Weight table sums to 1.00
+- [x] File exists at `/Users/profile_1/Coding/sloppypasta-audit/.claude/skills/sloppypasta-audit/SKILL.md`
+- [x] YAML frontmatter includes: name, description, allowed-tools
+- [x] Skill accepts URL or product name as input
+- [x] Skill instructs reading of scale-anchor files and detection-reference files by path
+- [x] Scoring formula correctly implements: 5% floor, per-check scoring, geometric mean per category, weighted geometric mean overall
+- [x] N/A handling is specified (exclude from geomean, redistribute weight if < 3 active checks in category)
+- [x] Grade boundaries are defined (A: 85-100, B: 70-84, C: 55-69, D: 40-54, F: 0-39)
+- [x] Output template produces: overall score + grade, category breakdown with per-check scores and justifications, priority improvement suggestions (3-5)
+- [x] Tone instructions specify "wise sage" voice
+- [x] Skill is self-contained — no references to external skills, plan files, or brainstorm context
+- [x] Weight table sums to 1.00
 
 ### 6. Dependencies
 
