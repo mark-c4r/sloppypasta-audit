@@ -1,8 +1,6 @@
 # The Sloppypasta Audit — Philosophical Framework
 
-The internet had no native money, so it used attention instead. Two failure modes emerged: surveillance advertising and subscription hell. Both optimize for screen time over truth. Both produce walled gardens, algorithmic addiction, and censorship. And now, with LLMs, an avalanche of content nobody cared enough to stand behind.
-
-The fix is not a better platform. The fix is protocols. Nostr for speech, Bitcoin for value, cryptography for identity. This framework checks whether a product respects those principles.
+Two things broke the internet: no native money, and no taste. The first gave us surveillance advertising and subscription traps. The second gave us sloppypasta — AI-generated content nobody cared enough to stand behind. This framework checks both dimensions. The structural one: is this built on protocols that can't rugpull you, or a platform that will? And the craft one: did someone give a damn about the words, the design, the experience? Sovereignty without craft is ugly. Craft without sovereignty is a gilded cage.
 
 ---
 
@@ -10,20 +8,20 @@ The fix is not a better platform. The fix is protocols. Nostr for speech, Bitcoi
 
 These are the worldview. They're not testable per product — they're what we believe.
 
-1. **Information is free by nature.** Zero cost to copy. Paywalls and DRM fight this and lose.
-2. **Protocols have speakers. Platforms have users.** You can't de-platform a speaker of a language.
-3. **Cryptography is necessary but not sufficient.** Keys prove identity. Proof-of-work proves history.
-4. **Sats are not fakeable.** Views, likes, comments — all faked at scale. Monetary value is human action distilled.
-5. **Identity is prismatic.** One legal identity for everything is surveillance dressed as convenience.
-6. **Smart is not wise.** LLMs pattern-match. They don't care. Caring requires embodiment.
-7. **"Can't be evil" beats "don't be evil."** Policy fails. Architecture endures.
-8. **Build less. Say no. Ship half.** Constraint is a design virtue.
+1. **Digital content has zero cost to copy.** Paywalls and DRM try to make information scarce. It isn't. Work with this property, not against it.
+2. **Protocols can't de-platform you. Platforms can.** A protocol has no intermediary who can silence you. That's the structural difference from any platform.
+3. **Crypto keys prove identity. Proof-of-work proves history.** Without both, someone has to vouch for the data — and that someone becomes a single point of failure.
+4. **Payments can't be faked the way engagement can.** Views, likes, followers — all manufactured at scale. A sat payment requires actual economic commitment. Reliable signal.
+5. **People have multiple identities depending on context.** Forcing one legal identity onto all interactions enables surveillance and kills the freedom to be wrong publicly.
+6. **Pattern-matching is not understanding.** LLMs produce statistically average output. Useful for drafts. Not useful for decisions that require taste, judgment, or caring about the outcome.
+7. **System architecture outlasts company policy.** "Don't be evil" depends on who's in charge. "Can't be evil" is enforced by code. If a system can betray its users, it eventually will.
+8. **The best products ship less, not more.** Opinionated software that does 5 things well beats configurable software that does 50 halfway. Saying no is the hardest design skill.
 
 ---
 
 ## Categories & Heuristics
 
-47 checks across 8 categories. Each scores 1 (pass), 0.5 (partial), or 0 (fail).
+47 checks across 8 categories. Each scores on a 0–100% sliding scale. Most products land in the 20–80% range on most checks. Zeros are rare — reserved for actively hostile behavior, not just "bad."
 
 ### I. Content Integrity — 20%
 
@@ -111,32 +109,29 @@ These are the worldview. They're not testable per product — they're what we be
 
 ## Scoring: Geometric Mean
 
-Multiply, don't add. That's the whole insight.
+Multiply, don't add. Low scores drag disproportionately through the multiplication chain. You can't compensate for a structural failure with nice fonts.
+
+Each heuristic scores **0–100%** on a sliding scale. Most products land in the 20–80% range. Zeros are rare — reserved for actively hostile behavior, not just "bad." If you're handing out zeros often, you're scoring too harshly.
 
 **Category score** = geometric mean of heuristic scores within that category.
 **Overall score** = weighted geometric mean of category scores.
-
-A zero on any heuristic kills its category. A dead category kills the overall. Beautiful typography doesn't save a surveillance product. FTX had great design.
 
 ### The math
 
 ```
 category = (h1 × h2 × ... × hN) ^ (1/N)
 overall  = cat1^w1 × cat2^w2 × ... × cat8^w8
-score    = overall × 100
 ```
 
 In Excel:
 ```
-category = IF(MIN(scores)=0, 0, EXP(AVERAGE(LN(scores))))
-overall  = IF(MIN(cats)=0, 0, EXP(SUMPRODUCT(weights, LN(cats)))) * 100
+category = EXP(AVERAGE(LN(scores/100))) * 100
+overall  = EXP(SUMPRODUCT(weights, LN(cats/100))) * 100
 ```
 
 ### Why geometric, not arithmetic
 
-Arithmetic: add and divide. A zero in a 20%-weighted category just loses 20 points. Makeup elsewhere. A scammer with good design gets a C.
-
-Geometric: multiply. A zero anywhere — zero. Integrity is not a line item. It's a prerequisite.
+Arithmetic: a 15% in Sovereignty just costs ~17 points. Score well elsewhere and you still pass. Geometric: that 15% drags everything down through multiplication. A product at 15% Sovereignty and 10% Honesty gets 43% (D) — not the 59% (C) arithmetic would give. The lower the score, the louder it pulls.
 
 ### Grades
 

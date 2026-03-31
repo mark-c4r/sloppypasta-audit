@@ -90,10 +90,10 @@
 <body>
 
 <h1>The Sloppypasta Audit</h1>
-<p class="lead">47 things to check before you trust a product with your attention, your data, or your sats.</p>
+<p class="lead">47 checks for sovereignty, craft, and honesty in internet products.</p>
 
 <div class="callout">
-The internet had no native money, so it used attention instead. That produced surveillance, addiction, censorship, and — now — an avalanche of AI-generated content nobody cared enough to stand behind. The fix is not a better platform. Platforms can always rugpull you. The fix is protocols: Nostr for speech, Bitcoin for value, cryptography for identity. This audit checks whether a product respects those principles — or participates in the decay.
+Two things broke the internet: no native money, and no taste. The first gave us surveillance advertising and subscription traps. The second gave us sloppypasta — AI-generated content nobody cared enough to stand behind. This audit checks both dimensions. The structural one: is this product built on protocols that can't rugpull you, or a platform that will? And the craft one: did someone actually give a damn about the words, the design, the experience — or did they ship a prompt and call it a product? Sovereignty without craft is ugly. Craft without sovereignty is a gilded cage.
 </div>
 
 <!-- ============ AXIOMS ============ -->
@@ -101,19 +101,19 @@ The internet had no native money, so it used attention instead. That produced su
 <p>The worldview. If you disagree with these, the audit will produce results you find unfair. That's fine. Use a different audit.</p>
 
 <div class="axioms">
-  <div class="axiom"><b>Information is free by nature</b><span>Zero cost to copy. Paywalls fight this and lose. DRM fights this and loses. Work with it.</span></div>
-  <div class="axiom"><b>Protocols have speakers. Platforms have users.</b><span>You can't de-platform a speaker of a language. You can always de-platform a user of a service.</span></div>
-  <div class="axiom"><b>Cryptography is necessary but not sufficient</b><span>Keys prove identity. Proof-of-work proves history. Without both, you're trusting someone.</span></div>
-  <div class="axiom"><b>Sats are not fakeable</b><span>Views, likes, followers, comments — all fakeable at scale. Monetary value is human action distilled. Talk is cheap.</span></div>
-  <div class="axiom"><b>Identity is prismatic</b><span>You are different people in different contexts. One legal identity for everything is surveillance dressed as convenience.</span></div>
-  <div class="axiom"><b>Smart is not wise</b><span>LLMs pattern-match. They do not care. Caring requires a body, pain, mortality. No embodiment, no wisdom.</span></div>
-  <div class="axiom"><b>"Can't be evil" beats "don't be evil"</b><span>Policy fails. Architecture endures. If the system can betray you, it eventually will.</span></div>
-  <div class="axiom"><b>Build less. Say no. Ship half.</b><span>Constraint is a design virtue. The best products are opinionated. The worst are configurable.</span></div>
+  <div class="axiom"><b>Digital content has zero cost to copy</b><span>Paywalls and DRM try to make information scarce. It isn't. Products should work with this property, not fight it — let people access first, pay voluntarily after.</span></div>
+  <div class="axiom"><b>Protocols can't de-platform you. Platforms can.</b><span>A language doesn't require an account. HTTP doesn't need a login. When you use a protocol, no intermediary can silence you. That's the structural difference.</span></div>
+  <div class="axiom"><b>Crypto keys prove identity. Proof-of-work proves history.</b><span>Without both, someone has to vouch for the data — and that someone becomes a single point of failure. Bitcoin showed that computational proof replaces trust.</span></div>
+  <div class="axiom"><b>Payments can't be faked the way engagement can</b><span>Views, likes, followers, comments — all manufactured at scale for pennies. A sat payment requires actual economic commitment. That makes it a reliable signal.</span></div>
+  <div class="axiom"><b>People have multiple identities depending on context</b><span>You use a different name at work, with friends, online. Forcing one legal identity onto all interactions enables surveillance and kills the freedom to be wrong publicly.</span></div>
+  <div class="axiom"><b>Pattern-matching is not the same as understanding</b><span>LLMs produce statistically average output. That's useful for drafts and research. It's not useful for decisions that require taste, judgment, or caring about the outcome.</span></div>
+  <div class="axiom"><b>System architecture outlasts company policy</b><span>"Don't be evil" depends on who's in charge. "Can't be evil" is enforced by code. If a system can betray its users — through terms changes, acquisitions, regulation — it eventually will.</span></div>
+  <div class="axiom"><b>The best products ship less, not more</b><span>Opinionated software that does 5 things well beats configurable software that does 50 things halfway. Saying no to features is the hardest and most valuable design skill.</span></div>
 </div>
 
 <!-- ============ CATEGORIES ============ -->
 <h2>The 47 Checks</h2>
-<p>Eight categories. Each heuristic scores <strong>1</strong> (pass), <strong>0.5</strong> (partial), or <strong>0</strong> (fail). A zero on any heuristic kills its category. A dead category kills the overall score. That's not a bug in the formula — it's the point.</p>
+<p>Eight categories. Each heuristic scores on a <strong>0–100% sliding scale</strong>. Most products land somewhere in the 20–80% range on most checks — a 0% means something is actively hostile or completely absent, which should be rare. The geometric mean scoring naturally makes low scores hurt more than high scores help, so you don't need to hand out zeros to make the math work. Let the scale do its job.</p>
 
 <!-- I. CONTENT INTEGRITY -->
 <div class="cat">
@@ -123,7 +123,6 @@ The internet had no native money, so it used attention instead. That produced su
     <li class="h-item"><div class="h-id">CI-0</div><div class="h-body">
       <div class="h-name">No access gates</div>
       <div class="h-test">Paywalls, email-harvesting modals, "sign up to continue reading." If the content is worth reading, let people read it. Let them pay after, voluntarily.</div>
-      <div class="h-zero">0 = paywall or forced signup to view content</div>
     </div></li>
     <li class="h-item"><div class="h-id">CI-1</div><div class="h-body">
       <div class="h-name">No LLM smell</div>
@@ -160,7 +159,6 @@ The internet had no native money, so it used attention instead. That produced su
     <li class="h-item"><div class="h-id">SP-1</div><div class="h-body">
       <div class="h-name">The rugpull test</div>
       <div class="h-test">Can the operator shut you out, delete your data, change the terms, or sell you to an acquirer? If yes: not sovereign.</div>
-      <div class="h-zero">0 = users can be unilaterally locked out</div>
     </div></li>
     <li class="h-item"><div class="h-id">SP-2</div><div class="h-body">
       <div class="h-name">Exit cost near zero</div>
@@ -169,12 +167,10 @@ The internet had no native money, so it used attention instead. That produced su
     <li class="h-item"><div class="h-id">SP-3</div><div class="h-body">
       <div class="h-name">No identity harvesting</div>
       <div class="h-test">Ideal: keypair only, no account. Acceptable: minimal account, no email required. Failing: email-gated signup wall. Government ID or biometrics: always zero. "Legally required" is not an excuse — it's a reason to pick a different jurisdiction or become a cypherpunk.</div>
-      <div class="h-zero">0 = government ID or biometrics required</div>
     </div></li>
     <li class="h-item"><div class="h-id">SP-4</div><div class="h-body">
       <div class="h-name">No surveillance by default</div>
       <div class="h-test">Tracking pixels, analytics scripts, third-party cookies, fingerprinting. What do they collect, and why?</div>
-      <div class="h-zero">0 = pervasive tracking with no opt-out</div>
     </div></li>
     <li class="h-item"><div class="h-id">SP-5</div><div class="h-body">
       <div class="h-name">Protocol, not platform</div>
@@ -263,7 +259,6 @@ The internet had no native money, so it used attention instead. That produced su
     <li class="h-item"><div class="h-id">HT-1</div><div class="h-body">
       <div class="h-name">Business model visible</div>
       <div class="h-test">How does this make money? If the answer isn't obvious within 30 seconds, you're the product.</div>
-      <div class="h-zero">0 = deceptive or hidden business model</div>
     </div></li>
     <li class="h-item"><div class="h-id">HT-2</div><div class="h-body">
       <div class="h-name">No growth-hack language</div>
@@ -355,36 +350,51 @@ The internet had no native money, so it used attention instead. That produced su
 <!-- ============ SCORING ============ -->
 <h2>Scoring</h2>
 
-<p>The formula is a <strong>geometric mean</strong> — multiply, don't add. This has one property that matters: <strong>a zero kills everything it touches.</strong> A product that requires eyeball scans gets a zero on SP-3. That zero kills the Sovereignty category. The dead category kills the overall score. Beautiful typography doesn't save you. FTX had great design.</p>
+<p>The formula is a <strong>geometric mean</strong> — multiply, don't add. This has one property that matters: <strong>low scores hurt disproportionately.</strong> A 15% on one category doesn't just lose you a few points — it drags the entire product score down through multiplication. You can't compensate for a structural failure with nice fonts. The math does what the philosophy demands.</p>
 
 <h3>How it works</h3>
 
-<p>Each heuristic scores <strong>1</strong> (pass), <strong>0.5</strong> (partial), or <strong>0</strong> (fail). N/A heuristics are excluded.</p>
+<p>Each heuristic scores <strong>0–100%</strong> on a sliding scale. Score what you actually observe — most things aren't binary.</p>
+
+<h3>Scoring guide</h3>
+
+<table>
+  <thead><tr><th>Range</th><th>What it means</th><th>When to use</th></tr></thead>
+  <tbody>
+    <tr><td><strong>85–100%</strong></td><td>Exemplary</td><td>This is what the ideal looks like. No meaningful gaps.</td></tr>
+    <tr><td><strong>60–84%</strong></td><td>Good with gaps</td><td>The intent is clear. Execution has room to improve.</td></tr>
+    <tr><td><strong>30–59%</strong></td><td>Mixed</td><td>Some effort visible, but significant problems undermine it.</td></tr>
+    <tr><td><strong>10–29%</strong></td><td>Poor</td><td>The product is working against this principle. Maybe unintentionally, but the result is the same.</td></tr>
+    <tr><td><strong>1–9%</strong></td><td>Hostile</td><td>Actively harmful on this dimension. Rare — most "terrible" things are still a 10%.</td></tr>
+    <tr><td><strong>0%</strong></td><td>Absent or antagonistic</td><td>Reserved for the worst cases: eyeball scanning, complete fraud, total surveillance. Should be rare. If you're handing out zeros often, you're scoring too harshly.</td></tr>
+  </tbody>
+</table>
 
 <p><strong>Category score</strong> = geometric mean of its heuristic scores.<br>
-<strong>Overall score</strong> = weighted geometric mean of category scores.</p>
+<strong>Overall score</strong> = weighted geometric mean of category scores.<br>
+<strong>N/A heuristics</strong> are excluded from the mean.</p>
 
 <div class="formula-box">
 <span class="comment">-- Category score (geometric mean of heuristics)</span><br>
 category = (h1 &times; h2 &times; h3 &times; ... &times; hN) ^ (1/N)<br><br>
 <span class="comment">-- Overall score (weighted geometric mean of categories)</span><br>
 overall = cat1^w1 &times; cat2^w2 &times; ... &times; cat8^w8<br><br>
-<span class="comment">-- Scale to percentage</span><br>
-score = overall &times; 100<br><br>
 <span class="comment">-- In Excel:</span><br>
-category &nbsp;= IF(MIN(scores)=0, 0, EXP(AVERAGE(LN(scores))))<br>
-overall &nbsp;&nbsp;= IF(MIN(cats)=0, 0, EXP(SUMPRODUCT(weights, LN(cats)))) * 100
+category &nbsp;= EXP(AVERAGE(LN(scores/100))) * 100<br>
+overall &nbsp;&nbsp;= EXP(SUMPRODUCT(weights, LN(cats/100))) * 100
 </div>
 
 <h3>Why geometric, not arithmetic</h3>
 
-<p>Arithmetic mean: add scores, divide. A zero in a 20%-weighted category just loses you 20 points. You can make it up elsewhere. A scammer with good design gets a C.</p>
+<p>Arithmetic mean: add and divide. A 15% in Sovereignty with 20% weight just costs you ~17 points. Score well elsewhere and you're a C. A scammer with good design passes the test.</p>
 
-<p>Geometric mean: multiply scores. A zero anywhere in the product chain — zero. A product that surveils you, demands your passport, and charges you for forgetting to cancel doesn't get to average that out with nice fonts. The math enforces what the philosophy demands: <strong>integrity is not a line item. It's a prerequisite.</strong></p>
+<p>Geometric mean: multiply. A 15% in Sovereignty drags the <em>entire product</em> down through the multiplication chain. You can't add your way out of a structural failure. The lower the score, the louder it pulls.</p>
 
 <div class="callout-warn">
-<strong>The FTX test.</strong> A product with 95% Craft, 90% Voice, 85% Content — but 0% Sovereignty (eyeball scans, no exit). Arithmetic gives 59%, a C. Geometric gives <strong>0%, an F</strong>. That's not a bug. Sam had a nice hoodie. The product was fraud.
+<strong>The FTX test.</strong> A product scoring 95% Craft, 90% Voice, 85% Content — but 15% Sovereignty (demands biometrics, no exit) and 10% Honesty (hidden business model). Arithmetic average: 59%, a C. Geometric mean: <strong>43%, a D.</strong> And if Sovereignty actually hits 0% (literal eyeball scanning): overall goes to <strong>0%, an F.</strong> Beautiful typography doesn't save fraud. FTX had great design. Sam had a nice hoodie.
 </div>
+
+<p>Note the difference: a product scoring 15% on Sovereignty gets a D — bad, but still on the scale. A product at 0% gets an F — off the scale. That 15-point gap between "terrible" and "absent" is meaningful. The sliding scale lets you make that distinction. A binary pass/fail can't.</p>
 
 <h3>Grades</h3>
 
