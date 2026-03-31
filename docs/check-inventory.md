@@ -147,20 +147,20 @@ Mobile sub-checks (5.5f–h) are N/A for web-only products — excluded from the
 
 | Cat | Name | V1 Checks | Weight |
 |-----|------|-----------|--------|
-| 1 | Slop Detection | 2 | 15% |
+| 1 | Slop Detection | 2 | 10% |
 | 2 | Writing & Thinking | 3 | 10% |
 | 3 | Design & Interface | 6 | 10% |
 | 4 | Product Craft | 4 | 10% |
 | 5 | Product Conduct | 10 | 15% |
 | 6 | Sovereignty & Privacy | 13 | 20% |
-| 7 | Honesty & Transparency | 5 | 10% |
+| 7 | Honesty & Transparency | 5 | 15% |
 | 8 | Economic Alignment | 3 | 10% |
 | **Total** | | **46** | **100%** |
 
 **Dimension breakdown**:
-- Structural (Sovereignty + Conduct) = 35%
-- Craft (Slop Detection + Writing + Design) = 35%
-- Character (Honesty + Craft + Economic) = 30%
+- Care (Slop + Writing + Design + Craft) = 40%
+- Structure (Conduct + Sovereignty) = 35%
+- Signal (Honesty + Economic) = 25%
 
 ---
 

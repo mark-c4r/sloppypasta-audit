@@ -111,13 +111,13 @@ Category weights:
 
 | Category | Name | Weight |
 |----------|------|--------|
-| 1 | Slop Detection | 0.15 |
+| 1 | Slop Detection | 0.10 |
 | 2 | Writing & Thinking | 0.10 |
 | 3 | Design & Interface | 0.10 |
 | 4 | Product Craft | 0.10 |
 | 5 | Product Conduct | 0.15 |
 | 6 | Sovereignty & Privacy | 0.20 |
-| 7 | Honesty & Transparency | 0.10 |
+| 7 | Honesty & Transparency | 0.15 |
 | 8 | Economic Alignment | 0.10 |
 
 **Weight redistribution**: If any category is excluded (fewer than 2 applicable checks), redistribute its weight proportionally. Multiply each remaining weight by `1 / (1 - excluded_weight)`.
@@ -153,7 +153,7 @@ cat_checks = {
     7: [XX, XX, XX, XX, XX],
     8: [XX, XX, XX],
 }
-weights = {1:0.15, 2:0.10, 3:0.10, 4:0.10, 5:0.15, 6:0.20, 7:0.10, 8:0.10}
+weights = {1:0.10, 2:0.10, 3:0.10, 4:0.10, 5:0.15, 6:0.20, 7:0.15, 8:0.10}
 sub55 = [max(s,5) for s in cat_checks['5.5'] if s is not None]
 if sub55:
     comp55 = math.exp(sum(math.log(s) for s in sub55)/len(sub55))
@@ -208,7 +208,7 @@ paths. Specific observations, not generic praise or criticism. No weasel words.]
 
 ## Category Breakdown
 
-### Cat 1: Slop Detection -- [XX]% (weight: 15%)
+### Cat 1: Slop Detection -- [XX]% (weight: 10%)
 
 | # | Check | Score | Justification |
 |---|-------|-------|---------------|
@@ -224,13 +224,13 @@ and condition tag in Justification.]
 
 | Cat | Name | Score | Weight | Checks |
 |-----|------|-------|--------|--------|
-| 1 | Slop Detection | XX% | 15% | N/N |
+| 1 | Slop Detection | XX% | 10% | N/N |
 | 2 | Writing & Thinking | XX% | 10% | N/N |
 | 3 | Design & Interface | XX% | 10% | N/N |
 | 4 | Product Craft | XX% | 10% | N/N |
 | 5 | Product Conduct | XX% | 15% | N/N |
 | 6 | Sovereignty & Privacy | XX% | 20% | N/N |
-| 7 | Honesty & Transparency | XX% | 10% | N/N |
+| 7 | Honesty & Transparency | XX% | 15% | N/N |
 | 8 | Economic Alignment | XX% | 10% | N/N |
 | **Overall** | | **XX%** | | **Grade [X]** |
 

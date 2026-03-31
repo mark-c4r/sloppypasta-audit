@@ -216,3 +216,23 @@ Conditions:
 - Grade boundaries produce intuitive results for the two extremes tested
 
 The framework is ready for V6 (Framework Document) and V7 (packaging).
+
+---
+
+## V6.1 Weight Adjustment (post-calibration)
+
+During V6 axiom alignment, two weights were adjusted:
+
+| Change | Old | New | Rationale |
+|--------|-----|-----|-----------|
+| Cat 1 Slop Detection | 15% | 10% | Only 2 checks. Was overweight relative to measurement surface. |
+| Cat 7 Honesty & Transparency | 10% | 15% | 5 checks, connects to 2 axioms (proof + business model). Was underweight. |
+
+Dimensions renamed and regrouped:
+- Care (Slop + Writing + Design + Craft) = 40%
+- Structure (Conduct + Sovereignty) = 35%
+- Signal (Honesty + Economic) = 25%
+
+Product Craft moved from Character (now Signal) to Care dimension to match Axiom 1 (care requires stakes).
+
+**Calibration impact**: Boris and Twitter grades unchanged (B and F respectively). Exact scores shift slightly: Slop weight decrease helps both products marginally, Honesty weight increase widens the gap (Boris 79% vs Twitter 37%). Directional validation still holds. Recalibration with exact scores deferred to next audit run.
