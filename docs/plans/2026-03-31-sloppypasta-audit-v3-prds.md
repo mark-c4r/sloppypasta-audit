@@ -186,16 +186,16 @@ Before finishing, verify:
 
 ### 5. Acceptance Criteria
 
-- [ ] File exists at `/Users/profile_1/Coding/sloppypasta-audit/docs/check-inventory.md`
-- [ ] All 5 overlap clusters are resolved (no duplicate concepts across categories)
-- [ ] 3 restored checks (provenance, iteration visible, dialogue) are present with category assignments
-- [ ] Every check has a `Condition` column entry (either `Universal` or a specific tag)
-- [ ] Only HIGH-measurability checks are in the V1 list
-- [ ] Check count is 35-42 (excluding conditional-only checks)
-- [ ] Weight table sums to 100%
-- [ ] Deferred-to-V2 section lists every excluded check with reason
-- [ ] V3-to-V1 number mapping table is present
-- [ ] 5.5 composite sub-check specification is complete
+- [x] File exists at `/Users/profile_1/Coding/sloppypasta-audit/docs/check-inventory.md`
+- [x] All 5 overlap clusters are resolved (no duplicate concepts across categories)
+- [x] 3 restored checks (provenance, iteration visible, dialogue) are present with category assignments
+- [x] Every check has a `Condition` column entry (either `Universal` or a specific tag)
+- [x] Only HIGH-measurability checks are in the V1 list
+- [x] Check count is 35-42 (excluding conditional-only checks)
+- [x] Weight table sums to 100%
+- [x] Deferred-to-V2 section lists every excluded check with reason
+- [x] V3-to-V1 number mapping table is present
+- [x] 5.5 composite sub-check specification is complete
 
 ### 6. Dependencies
 
@@ -330,16 +330,16 @@ Before finishing each file, re-read it and check:
 
 ### 5. Acceptance Criteria
 
-- [ ] 8 files exist in `/Users/profile_1/Coding/sloppypasta-audit/docs/scale-anchors/`
-- [ ] Every V1 check has exactly 5 anchor levels (0/25/50/75/100)
-- [ ] Behavioral descriptions come before product examples in every anchor
-- [ ] 0% and 100% are written first and are clearly extreme (hostile vs ideal)
-- [ ] 50% is genuinely the midpoint, not just "average"
-- [ ] Real product examples are used wherever the plan provides them
-- [ ] Behavioral tells from plan lines 1019-1035 appear in checks 3.7, 3.9, 4.3, 4.7
-- [ ] 5.5 composite sub-checks each have individual anchors
-- [ ] 5% floor note appears at the top of each file
-- [ ] No slop in the writing itself — no weasel words, filler, or throat-clearing
+- [x] 8 files exist in `/Users/profile_1/Coding/sloppypasta-audit/docs/scale-anchors/`
+- [x] Every V1 check has exactly 5 anchor levels (0/25/50/75/100)
+- [x] Behavioral descriptions come before product examples in every anchor
+- [x] 0% and 100% are written first and are clearly extreme (hostile vs ideal)
+- [x] 50% is genuinely the midpoint, not just "average"
+- [x] Real product examples are used wherever the plan provides them
+- [x] Behavioral tells from plan lines 1019-1035 appear in checks 3.4, 3.6, 4.1, 4.3 (V1 numbers)
+- [x] 5.5 composite sub-checks each have individual anchors
+- [x] 5% floor note appears at the top of each file
+- [x] No slop in the writing itself — no weasel words, filler, or throat-clearing
 
 ### 6. Dependencies
 
@@ -667,15 +667,15 @@ After writing all 3 files, verify that every V1 check that relies on detection m
 
 ### 5. Acceptance Criteria
 
-- [ ] 3 files exist in `/Users/profile_1/Coding/sloppypasta-audit/docs/reference/`
-- [ ] `slop-text-markers.md` contains: 49 banned words (alphabetized), 38 phrases, 16 openers, punctuation thresholds with numeric values, structural patterns, model-specific first words, scoring methodology
-- [ ] `slop-visual-markers.md` contains: CSS/layout markers organized by type (color, typography, layout, decoration, spacing), component framework tells, behavioral/interaction tells, quick-check markers
-- [ ] `sovereignty-checks.md` contains: test procedures for every Cat 6 check, scoring scales that map to scale anchors, conditional check activation rules
-- [ ] Each file has a "How to Use This Reference" section
-- [ ] Each file lists which checks it supports
-- [ ] All content is self-contained — no references to "the brainstorm" or "the plan" or external context
-- [ ] Banned word frequency is per-1000-words (relative), not binary presence
-- [ ] No slop in the writing itself
+- [x] 3 files exist in `/Users/profile_1/Coding/sloppypasta-audit/docs/reference/`
+- [x] `slop-text-markers.md` contains: 49 banned words (alphabetized), 38 phrases, 16 openers, punctuation thresholds with numeric values, structural patterns, model-specific first words, scoring methodology
+- [x] `slop-visual-markers.md` contains: CSS/layout markers organized by type (color, typography, layout, decoration, spacing), component framework tells, behavioral/interaction tells, quick-check markers
+- [x] `sovereignty-checks.md` contains: test procedures for every Cat 6 check, scoring scales that map to scale anchors, conditional check activation rules
+- [x] Each file has a "How to Use This Reference" section
+- [x] Each file lists which checks it supports
+- [x] All content is self-contained — no references to "the brainstorm" or "the plan" or external context
+- [x] Banned word frequency is per-1000-words (relative), not binary presence
+- [x] No slop in the writing itself
 
 ### 6. Dependencies
 
