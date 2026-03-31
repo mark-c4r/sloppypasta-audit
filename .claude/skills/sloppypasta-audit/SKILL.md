@@ -5,7 +5,7 @@ description: >
   and AI slop detection across 8 categories (46 checks). Outputs a graded
   markdown scorecard with improvement suggestions. Use when the user says
   /sloppypasta-audit or asks to audit a product.
-allowed-tools: Bash(curl *), Read, Grep, Glob, WebFetch, WebSearch, Write
+allowed-tools: Bash(python3 -c *, curl *), Read, Grep, Glob, WebFetch, WebSearch, Write
 ---
 
 # Sloppypasta Audit
@@ -49,33 +49,15 @@ Example: `/sloppypasta-audit Twitter`
 
 ## Phase 2: Score Each Check
 
-### Reference Files (Read Before Scoring)
+### Reference File
 
-Read these files to understand the checks, score levels, and detection methods:
+Read ONE file before scoring — it contains all 46 checks, scale anchors, detection markers, and scoring procedures:
 
-**Check inventory** (the definitive check list):
 ```
-~/Coding/sloppypasta-audit/docs/check-inventory.md
-```
-
-**Scale anchors** (behavioral descriptions at each score level):
-```
-~/Coding/sloppypasta-audit/docs/scale-anchors/cat1-slop-detection.md
-~/Coding/sloppypasta-audit/docs/scale-anchors/cat2-writing.md
-~/Coding/sloppypasta-audit/docs/scale-anchors/cat3-design.md
-~/Coding/sloppypasta-audit/docs/scale-anchors/cat4-craft.md
-~/Coding/sloppypasta-audit/docs/scale-anchors/cat5-conduct.md
-~/Coding/sloppypasta-audit/docs/scale-anchors/cat6-sovereignty.md
-~/Coding/sloppypasta-audit/docs/scale-anchors/cat7-honesty.md
-~/Coding/sloppypasta-audit/docs/scale-anchors/cat8-economic.md
+~/Coding/sloppypasta-audit/docs/scoring-reference.md
 ```
 
-**Detection references** (cheat sheets for specific check types):
-```
-~/Coding/sloppypasta-audit/docs/reference/slop-text-markers.md
-~/Coding/sloppypasta-audit/docs/reference/slop-visual-markers.md
-~/Coding/sloppypasta-audit/docs/reference/sovereignty-checks.md
-```
+Do NOT read individual scale anchor files or detection references separately. Everything is consolidated in this file.
 
 ### Scoring Procedure
 
@@ -90,15 +72,7 @@ For each V1 check in the inventory:
 
 **Score ALL checks in ALL categories before computing any aggregates. Do not skip categories.**
 
-### Category-Specific Scoring Guidance
-
-**Cat 1 (Slop Detection)**: Use `slop-text-markers.md` for check 1.1. Count banned words per 1,000 words of product text. Measure em-dash density. Check for structural patterns. For 1.2, examine social media presence for bot signals.
-
-**Cat 3 (Design)**: Use `slop-visual-markers.md` for visual assessment. Perform the window resize test (drag to ~800px). Check CSS for purple/indigo defaults, Inter font, uniform padding. Check behavioral tells (empty states, error handling, focus states).
-
-**Cat 5 (Conduct)**: Score check 5.5 as a composite -- score each of the 8 sub-checks (5.5a-5.5h) individually, then compute their geometric mean. For web-only products, sub-checks 5.5f, 5.5g, 5.5h are N/A and excluded from the composite.
-
-**Cat 6 (Sovereignty)**: Use `sovereignty-checks.md` for test procedures and scoring scales. Follow the specific test methods described for each check. Conditional checks (6.8-6.13) activate only when the product matches the condition tag.
+All category-specific guidance (detection markers, test procedures, composite specs) is inline in `scoring-reference.md` next to each check.
 
 ---
 
@@ -118,7 +92,7 @@ category_score = (check_1 * check_2 * ... * check_N) ^ (1/N)
 
 Where N = number of applicable checks (N/A checks excluded).
 
-**Minimum check threshold**: If a category has fewer than 3 applicable checks after N/A exclusions, exclude the entire category and redistribute its weight proportionally across remaining categories.
+**Minimum check threshold**: If a category has fewer than 2 applicable checks after N/A exclusions, exclude the entire category and redistribute its weight proportionally across remaining categories. (Cat 1 has 2 checks by design -- this is intentional, not an exclusion trigger.)
 
 ### Overall Score (Weighted Geometric Mean)
 
@@ -146,7 +120,7 @@ Category weights:
 | 7 | Honesty & Transparency | 0.10 |
 | 8 | Economic Alignment | 0.10 |
 
-**Weight redistribution**: If any category is excluded (fewer than 3 applicable checks), redistribute its weight proportionally. Multiply each remaining weight by `1 / (1 - excluded_weight)`.
+**Weight redistribution**: If any category is excluded (fewer than 2 applicable checks), redistribute its weight proportionally. Multiply each remaining weight by `1 / (1 - excluded_weight)`.
 
 Example: If Cat 8 (0.10) is excluded, each remaining weight is multiplied by `1 / 0.90 = 1.111`.
 
@@ -159,6 +133,53 @@ Example: If Cat 8 (0.10) is excluded, each remaining weight is multiplied by `1 
 | C | 55-69 | Mediocre -- functional but uninspired |
 | D | 40-54 | Poor -- significant issues across dimensions |
 | F | 0-39 | Failing -- actively hostile or negligent |
+
+### Verify Computation
+
+After computing scores manually, verify with python3:
+
+```bash
+python3 -c "
+import math
+# Fill in ALL check scores. Use None for N/A checks.
+cat_checks = {
+    1: [XX, XX],
+    2: [XX, XX, XX],
+    3: [XX, XX, XX, XX, XX, XX],
+    4: [XX, XX, XX, XX],
+    '5.5': [XX, XX, XX, XX, XX, XX, XX, XX],  # 5.5a-h, None if N/A
+    5: [XX, XX, XX, XX, 'composite', XX, XX, XX, XX, XX],
+    6: [XX, XX, XX, XX, XX, XX, XX, XX, XX, XX, XX, XX, XX],
+    7: [XX, XX, XX, XX, XX],
+    8: [XX, XX, XX],
+}
+weights = {1:0.15, 2:0.10, 3:0.10, 4:0.10, 5:0.15, 6:0.20, 7:0.10, 8:0.10}
+sub55 = [max(s,5) for s in cat_checks['5.5'] if s is not None]
+if sub55:
+    comp55 = math.exp(sum(math.log(s) for s in sub55)/len(sub55))
+    print(f'5.5 composite: {comp55:.1f}% ({len(sub55)} sub-checks)')
+else:
+    comp55 = None
+    print('5.5: N/A')
+cat_checks[5][4] = comp55
+cats = {}
+for c in [1,2,3,4,5,6,7,8]:
+    a = [max(s,5) for s in cat_checks[c] if s is not None]
+    if len(a) >= 2:
+        cats[c] = math.exp(sum(math.log(s) for s in a)/len(a))
+    else:
+        print(f'Cat {c}: excluded ({len(a)} checks)')
+w = sum(weights[c] for c in cats)
+adj = {c: weights[c]/w for c in cats}
+o = math.exp(sum(adj[c]*math.log(cats[c]) for c in cats))
+for c in sorted(cats): print(f'Cat {c}: {cats[c]:.1f}%')
+print(f'Overall: {o:.1f}%')
+grade = next(g for t,g in [(85,'A'),(70,'B'),(55,'C'),(40,'D'),(0,'F')] if o>=t)
+print(f'Grade: {grade}')
+"
+```
+
+If the script output differs from your manual calculation by more than 1 point, use the script's result.
 
 ---
 
@@ -230,29 +251,59 @@ approximately [Y] points, lifting the overall score by ~[Z] points.
 
 [Repeat for 3-5 improvements]
 
----
-
-## Methodology
-
-This audit uses the Sloppypasta Framework V1 -- 46 checks across 8 weighted
-categories, scored on a 0-100% scale with a 5% floor. Category scores are
-geometric means of applicable checks. The overall score is a weighted geometric
-mean of category scores. Geometric means penalize low scores
-disproportionately -- a single 10% score drags harder than a single 90% helps.
-
-Source: github.com/[repo] | Framework: docs/synthesis.md
+Source: github.com/mark-c4r/sloppypasta-audit | Framework: docs/scoring-reference.md
 ```
 
 ---
 
-## Voice Guidelines
+## Voice
 
-**Wise sage, not teenage dunker.** The audit exists to help builders improve. Every word serves that purpose.
+- Lead with strengths. Even F-grade products do something right.
+- Specific observations, not generic praise or criticism. Cite what you saw.
+- Match language to score: 50% is mediocre, 75% is good, 85%+ deserves praise.
+- Every low score connects to an improvement path: "here's what 75% looks like."
 
-- **Lead with strengths**: Acknowledge what's done well before identifying gaps. Even an F-grade product does something right.
-- **Specific, not vague**: "Error messages show generic 'Something went wrong' text with no recovery path (4.1: 25%)" -- not "error handling could be better."
-- **Calibrated language**: Don't say "great" for 50%. 50% is mediocre. 75% is good. 85%+ deserves praise. Match language to score.
-- **No slop in the audit**: The report must pass its own Cat 2 checks. No weasel words, no throat-clearing, no filler, no Bold Prefix lists.
-- **Improvement-focused**: Every low score connects to a specific improvement path. "Here's what 75% looks like" is more useful than "this is bad."
-- **Honest about uncertainty**: If you can't fully evaluate a check from external observation, say so. "Could not verify -- scored conservatively at 50%" is better than a confident wrong score.
-- **Product-only scope**: Audit the artifact, not the company. Don't speculate about internal culture, team size, or business strategy. Score what you can observe.
+---
+
+## Orchestrator Instructions (Multi-Agent Mode)
+
+When running this audit from an orchestrator that can dispatch sub-agents, use parallel scoring for faster execution and bias isolation.
+
+### Phase 1: Gather (orchestrator)
+- Read `docs/scoring-reference.md`
+- WebFetch/WebSearch product pages
+- Determine product type, conditional tags, applicable vs N/A checks
+
+### Phase 2: Dispatch 3 scoring agents in parallel
+
+Each agent receives: raw fetched page content + product type + conditional tags + N/A list + their reference slice + WebFetch/WebSearch access for independent verification.
+
+Each agent scores independently and returns ONLY check scores + justifications. Agents do NOT compute category or overall scores.
+
+| Agent | Categories | Also needs from scoring-reference.md |
+|-------|-----------|--------------------------------------|
+| craft-scorer | Cat 1-4 (15 checks) | Text Slop Markers (after 1.1, used by 2.1, 2.3), Visual Slop Markers (after 3.6, used by 4.1, 4.3) |
+| conduct-scorer | Cat 5 (10 + 8 sub-checks) | 5.5 sub-check scales |
+| structure-scorer | Cat 6-8 (21 checks) | Sovereignty test procedures (inline in Cat 6) |
+
+### Phase 3: Aggregate (orchestrator)
+- Collect score tables from all 3 agents
+- Compute 5.5 composite from conduct-scorer's sub-check scores
+- Run python3 verification (Phase 3 script above)
+- Write full report
+
+### Agent output format
+
+Each agent returns ONLY a scores table:
+
+```
+| # | Check | Score | Justification |
+|---|-------|-------|---------------|
+| N.N | Name | XX% | One sentence citing specific observation |
+```
+
+For 5.5, the conduct-scorer returns individual sub-check scores (5.5a-h). The orchestrator computes the composite.
+
+### Fallback
+
+If an agent fails, the orchestrator scores those categories directly. Note in the report Summary paragraph.

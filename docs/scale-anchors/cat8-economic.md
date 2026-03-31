@@ -1,3 +1,4 @@
+> **Note**: Operational scoring uses `docs/scoring-reference.md`. This file is preserved as deep calibration reference.
 # Cat 8: Economic Alignment — Scale Anchors
 
 Reference: check-inventory.md

@@ -1,3 +1,4 @@
+> **Note**: Operational scoring uses `docs/scoring-reference.md`. This file is preserved as deep calibration reference.
 # Cat 7: Honesty & Transparency — Scale Anchors
 
 Reference: check-inventory.md

@@ -1,3 +1,4 @@
+> **Note**: Operational scoring uses `docs/scoring-reference.md`. This file is preserved as deep calibration reference.
 # Text Slop Detection Reference
 
 Self-contained reference for detecting AI-generated text in products.

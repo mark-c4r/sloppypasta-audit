@@ -1,3 +1,4 @@
+> **Note**: Operational scoring uses `docs/scoring-reference.md`. This file is preserved as deep calibration reference.
 # Sovereignty Verification Reference
 
 Self-contained reference for testing product sovereignty and privacy.
