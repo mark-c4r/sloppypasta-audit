@@ -1,261 +1,170 @@
----
-title: "The Smell Test — Philosophical Framework for Evaluating Internet Products"
-captured: 2026-03-30
-tags: [bitcoin, nostr, sovereignty, writing, ai-agents, methodology, 37signals]
----
+# The Sloppypasta Audit — Philosophical Framework
 
-## Core Thesis
+The internet had no native money, so it used attention instead. Two failure modes emerged: surveillance advertising and subscription hell. Both optimize for screen time over truth. Both produce walled gardens, algorithmic addiction, and censorship. And now, with LLMs, an avalanche of content nobody cared enough to stand behind.
 
-The internet's original sin was lacking native money. This forced attention to become the surrogate currency, spawning two failure modes: surveillance advertising (sell eyeballs) and subscription hell (sell access via credit IOUs). Both optimize for screen time over truth, producing walled gardens, algorithmic addiction, censorship, and — with LLMs — an avalanche of "sloppypasta" content generated without care. The antidote is not a better platform but a return to protocols: free speech protocols (Nostr) paired with free money protocols (Bitcoin/Lightning) enable products built on sovereignty, craft, and value alignment. A product either respects these principles or it participates in the decay.
-
-## Axioms (Non-Negotiable Truths)
-
-These are foundational beliefs from which all heuristics derive. They are not directly testable per product — they are the worldview.
-
-**A1. Information wants to be free** — Digital content has zero marginal cost of reproduction. Paywalls and DRM fight the nature of information and lose. Products must work WITH this property, not against it. [[gigi-freedom-of-value-v4v-2021]]
-
-**A2. Protocols have speakers; platforms have users** — Platforms can de-platform. Protocols cannot. Free speech platforms are an oxymoron. Only free speech protocols can guarantee expression. [[gigi-speaking-freely-protocols-vs-platforms-2024]]
-
-**A3. Cryptography is necessary but not sufficient** — Keys handle private integrity. Proof-of-work handles public integrity. Without computational proof, you fall back to trusting authorities. [[gigi-cryptography-not-enough-2022]]
-
-**A4. Monetary value is human action distilled** — Sats cannot be faked the way views, downloads, and comments can. "Talk is cheap. Sats are not." [[gigi-attention-terrible-currency-thread]]
-
-**A5. Identity is prismatic** — Humans present differently across contexts. Forcing a single legal identity onto all interactions is surveillance, not identity. Pseudonymity is a feature, not a bug. [[gigi-true-names-not-required-pseudonymity-2020]]
-
-**A6. Smart is not wise** — LLMs can pattern-match but cannot care. Caring requires embodiment, pain, desire, and mortality. Products that replace human judgment with LLM output produce "mid" content by definition. [[gigi-caring-about-sloppypasta-2026]], [[vervaeke-ai-coming-thresholds-2023]]
-
-**A7. Freedom by design, not by policy** — "Don't be evil" fails. "Can't be evil" works. Liberty must be a property of the system, not a permission granted by an operator. Exit costs must approach zero. [[sovereign-engineering-philosophy-manifesto]]
-
-**A8. Scope is the variable, not time** — Build less. Make opinionated software. Say no by default. Half, not half-assed. Constraint is a blessing, not a limitation. [[37signals-getting-real-key-chapters]], [[37signals-pod-say-no-by-default]]
+The fix is not a better platform. The fix is protocols. Nostr for speech, Bitcoin for value, cryptography for identity. This framework checks whether a product respects those principles.
 
 ---
 
-## Heuristic Categories
+## Axioms
 
-### I. Content Integrity (Anti-Slop) — Weight: 20%
+These are the worldview. They're not testable per product — they're what we believe.
 
-Does this product resist the flood of low-care, machine-generated content?
-
-| # | Heuristic | Test | Sources |
-|---|-----------|------|---------|
-| CI-1 | **No detectable LLM smell** | Check for: negation structures, em-dash density, false emphasis, sycophantic patterns, "mid" authority voice | [[dergigi-internet-left-me-slop-sovereignty]], [[gigi-caring-about-sloppypasta-2026]] |
-| CI-2 | **Human editorial judgment visible** | Is there evidence of curation, selection, editorial voice — not just aggregation? | [[37signals-writing-craft-for-llm-voice]], [[svn-deep-dive-editorial-voice-broadsheet]] |
-| CI-3 | **Proof of care** | Did someone stand behind this content? Named author, iteration history, corrections? | [[gigi-caring-about-sloppypasta-2026]], [[37signals-pod-software-as-art]] |
-| CI-4 | **Information density** | High signal-to-noise ratio? Or padded with filler, related articles, engagement bait? | [[sovereign-engineering-ep06-winds-of-ai]] (information calories) |
-| CI-5 | **Provenance verifiable** | Can you trace content to its origin? Signed, timestamped, attributed? | [[sovereign-engineering-ep08-navigating-the-vibe]] (signed knowledge) |
-| CI-6 | **No drive-by contributions** | If open-source: are AI-generated PRs filtered? Is maintainer craft protected? | [[tldraw-blocking-ai-contributions-2026]], [[gigi-caring-about-sloppypasta-2026]] |
-
-### II. Sovereignty & Privacy — Weight: 20%
-
-Does this product respect user autonomy and resist surveillance?
-
-| # | Heuristic | Test | Sources |
-|---|-----------|------|---------|
-| SP-1 | **The rugpull test** | Can this product/platform rugpull its users? If yes, it fails sovereignty. | [[sovereign-engineering-philosophy-manifesto]], [[gigi-nostr-tier2-scan-heuristics]] |
-| SP-2 | **Exit cost near zero** | Can you export your data, content, identity, relationships? In what format? | [[sovereign-engineering-philosophy-manifesto]], [[gigi-speaking-freely-protocols-vs-platforms-2024]] |
-| SP-3 | **Pseudonymity supported** | Can you use the product without revealing your legal identity? No biometrics, no government ID? | [[gigi-true-names-not-required-pseudonymity-2020]] |
-| SP-4 | **No surveillance by default** | Analytics, tracking pixels, third-party scripts? What data is collected and why? | [[dergigi-internet-left-me-slop-sovereignty]], [[gigi-attention-terrible-currency-thread]] |
-| SP-5 | **Protocol-based, not platform-locked** | Built on open protocols (RSS, Nostr, ActivityPub, SMTP) or proprietary APIs? | [[gigi-speaking-freely-protocols-vs-platforms-2024]] |
-| SP-6 | **User controls the algorithm** | Can users see, modify, or disable recommendation/ranking logic? | [[sovereign-engineering-ep06-winds-of-ai]] (feed=slot machine) |
-| SP-7 | **Self-hostable or verifiable** | Can you run your own instance, or at minimum audit the code? | [[sovereign-engineering-philosophy-manifesto]] (Cypherpunks Write Code) |
-
-### III. Craft & Care — Weight: 15%
-
-Was this product built with intention, discipline, and taste?
-
-| # | Heuristic | Test | Sources |
-|---|-----------|------|---------|
-| CC-1 | **Opinionated, not configurable** | Does the product take a stand, or offer infinite options that hide indecision? | [[37signals-getting-real-key-chapters]], [[37signals-scan-pass-2026-03-30]] (aerodynamic product) |
-| CC-2 | **Iteration depth visible** | Evidence of refinement: version history, changelog, blog posts about hard decisions? | [[gigi-building-boris-21-days-insanity-2025]], [[37signals-pod-principles-of-communication]] |
-| CC-3 | **Words crafted, not generated** | Is the copy (error messages, onboarding, about page) written by someone who cares about language? | [[37signals-getting-real-key-chapters]] (Copywriting is Interface Design), [[svn-gruber-graham-spolsky-writing-voices]] |
-| CC-4 | **Built less, not more** | Has the product said no to features? Is there evidence of deliberate omission? | [[37signals-pod-say-no-by-default]], [[37signals-getting-real-key-chapters]] (Start With No) |
-| CC-5 | **No dark patterns** | Honest UI: clear unsubscribe, no guilt-tripping, no forced engagement loops? | [[37signals-how-we-communicate-philosophy]], [[sovereign-engineering-ep06-winds-of-ai]] |
-| CC-6 | **Human pace** | Does the product respect human attention spans, or demand constant engagement? Async-first? | [[37signals-how-we-communicate-philosophy]], [[zechner-slowing-down-agentic-coding-2026]] |
-
-### IV. Openness & Interoperability — Weight: 10%
-
-Does this product play well with others and respect open standards?
-
-| # | Heuristic | Test | Sources |
-|---|-----------|------|---------|
-| OI-1 | **RSS/feed available** | Does the product offer RSS, Atom, or equivalent syndication? | [[gigi-purple-text-orange-highlights-nostr-reading-2023]], [[37signals-pod-it-started-with-a-blog]] |
-| OI-2 | **API access** | Is there a documented, stable API for programmatic access? | [[sovereign-engineering-philosophy-manifesto]] |
-| OI-3 | **Data portability** | Can you export everything in a standard format (JSON, CSV, OPML, markdown)? | [[gigi-speaking-freely-protocols-vs-platforms-2024]] |
-| OI-4 | **Open source (or auditable)** | Is the source code available for inspection? Can you fork it? | [[sovereign-engineering-philosophy-manifesto]] (Cypherpunks Write Code) |
-| OI-5 | **Interop with sovereign stack** | Does the product work with Nostr, Lightning, Bitcoin, or other open protocols? | [[gigi-purple-text-orange-highlights-nostr-reading-2023]], [[gigi-vision-value-enabled-web-2022]] |
-
-### V. Honesty & Transparency — Weight: 15%
-
-Does this product tell you the truth about what it is and what it does?
-
-| # | Heuristic | Test | Sources |
-|---|-----------|------|---------|
-| HT-1 | **Business model visible** | How does this product make money? Is it obvious, or hidden behind "it's free"? | [[gigi-attention-terrible-currency-thread]], [[gigi-freedom-of-value-v4v-2021]] |
-| HT-2 | **No growth-hack language** | Marketing copy: authentic enthusiasm or corporate-speak, buzzword soup, "AI-powered"? | [[37signals-scan-pass-2026-03-30]] (marketing as transfer of enthusiasm) |
-| HT-3 | **Honest about AI usage** | If AI is used, is it disclosed? Are AI-generated outputs labeled? | [[gigi-caring-about-sloppypasta-2026]], [[sovereign-engineering-ep08-navigating-the-vibe]] |
-| HT-4 | **Changelog/transparency log** | Does the product communicate changes honestly? Or silently ship downgrades? | [[37signals-how-we-communicate-philosophy]] |
-| HT-5 | **No manufactured urgency** | Countdown timers, "limited time," "X people viewing this now" — manipulation signals? | [[37signals-how-we-communicate-philosophy]] (urgency is poison) |
-
-### VI. Voice & Humanity — Weight: 10%
-
-Does this product sound human, or like a committee/algorithm wrote it?
-
-| # | Heuristic | Test | Sources |
-|---|-----------|------|---------|
-| VH-1 | **Distinctive voice** | Can you tell who made this from the writing alone? Or is it generic? | [[svn-deep-dive-editorial-voice-broadsheet]], [[37signals-writing-craft-for-llm-voice]] |
-| VH-2 | **Named humans visible** | Are there real people behind this product? About page with faces and stories? | [[gigi-caring-about-sloppypasta-2026]], [[37signals-pod-give-it-a-name]] |
-| VH-3 | **Embodied perspective** | Does the content reflect lived experience, not just information aggregation? | [[gigi-caring-about-sloppypasta-2026]] (LLMs lack embodiment), [[sovereign-engineering-ep05-prompt-and-pray]] |
-| VH-4 | **Conversations, not broadcasts** | Does the product enable dialogue, or just push content at you? | [[gigi-speaking-freely-protocols-vs-platforms-2024]] (DiaLogos), [[37signals-pod-principles-of-communication]] |
-
-### VII. Wisdom & Restraint — Weight: 5%
-
-Does this product know when to stop, when to say no, and when to be quiet?
-
-| # | Heuristic | Test | Sources |
-|---|-----------|------|---------|
-| WR-1 | **Deliberate constraints** | Is the product constrained by design choice, not by limitation? | [[37signals-pod-say-no-by-default]], [[37signals-getting-real-key-chapters]] (Embrace Constraints) |
-| WR-2 | **Respects silence** | Does the product leave you alone when you're not using it? No push notifications, no "we miss you" emails? | [[37signals-how-we-communicate-philosophy]] (silence is communication) |
-| WR-3 | **Long-term thinking** | Is this built for decades or for the next funding round? | [[sovereign-engineering-philosophy-manifesto]] (Endurance), [[37signals-scan-pass-2026-03-30]] (Concept 2 standard) |
-| WR-4 | **LLM as tool, not master** | If AI is used, does it build understanding or bypass it? | [[gigi-nostr-tier2-scan-heuristics]] ("Choose wisely" quote), [[sovereign-engineering-ep06-winds-of-ai]] |
-
-### VIII. Value Alignment — Weight: 5%
-
-Does this product align incentives between creators, users, and the product itself?
-
-| # | Heuristic | Test | Sources |
-|---|-----------|------|---------|
-| VA-1 | **Value flows to creators** | Do content creators capture value, or does the platform extract it? | [[gigi-freedom-of-value-v4v-2021]], [[gigi-purple-text-orange-highlights-nostr-reading-2023]] |
-| VA-2 | **No attention extraction** | Is the product designed to help you finish tasks, or to maximize time-on-app? | [[gigi-attention-terrible-currency-thread]], [[sovereign-engineering-ep06-winds-of-ai]] |
-| VA-3 | **V4V or honest pricing** | Is there a direct value exchange? V4V, one-time purchase, transparent subscription? Or "free" with hidden costs? | [[gigi-freedom-of-value-v4v-2021]] |
-| VA-4 | **Curation rewarded** | Does the system value discovery and curation, not just creation? | [[gigi-purple-text-orange-highlights-nostr-reading-2023]] (swarm highlights) |
+1. **Information is free by nature.** Zero cost to copy. Paywalls and DRM fight this and lose.
+2. **Protocols have speakers. Platforms have users.** You can't de-platform a speaker of a language.
+3. **Cryptography is necessary but not sufficient.** Keys prove identity. Proof-of-work proves history.
+4. **Sats are not fakeable.** Views, likes, comments — all faked at scale. Monetary value is human action distilled.
+5. **Identity is prismatic.** One legal identity for everything is surveillance dressed as convenience.
+6. **Smart is not wise.** LLMs pattern-match. They don't care. Caring requires embodiment.
+7. **"Can't be evil" beats "don't be evil."** Policy fails. Architecture endures.
+8. **Build less. Say no. Ship half.** Constraint is a design virtue.
 
 ---
 
-## Scoring Model
+## Categories & Heuristics
 
-### Grade Calculation
+47 checks across 8 categories. Each scores 1 (pass), 0.5 (partial), or 0 (fail).
 
-Each category has N heuristics. Each heuristic scores:
-- **Pass (1.0)** — Clear evidence of compliance
-- **Partial (0.5)** — Mixed signals or partial implementation
-- **Fail (0.0)** — Clear evidence of violation or absence
+### I. Content Integrity — 20%
 
-Category score = sum of heuristic scores / max possible score × 100
+*Is this slop?*
 
-Weighted overall = Σ (category score × category weight)
+- **CI-0** No access gates — paywalls, email-harvesting modals, forced signups to view content
+- **CI-1** No LLM smell — negation reframes, sycophantic hedging, one-shot rhythm
+- **CI-2** Editorial judgment visible — curation, not aggregation
+- **CI-3** Someone stood behind it — named author, corrections acknowledged
+- **CI-4** Dense, not padded — signal per paragraph, no filler
+- **CI-5** Provenance traceable — signed, timestamped, attributed
+- **CI-6** No drive-by contributions — AI-generated PRs filtered (if open-source)
 
-### Grade Bands
+### II. Sovereignty & Privacy — 20%
+
+*Can they rugpull you?*
+
+- **SP-1** The rugpull test — can the operator lock you out?
+- **SP-2** Exit cost near zero — take everything with you in standard formats
+- **SP-3** No identity harvesting — keypair ideal, gov ID always 0, "legally required" is not an excuse
+- **SP-4** No surveillance by default — tracking, analytics, fingerprinting
+- **SP-5** Protocol, not platform — open protocols or proprietary lock-in?
+- **SP-6** You control the algorithm — visible, modifiable, or a black box?
+- **SP-7** Self-hostable or auditable — run your own, or at least read the source
+- **SP-8** Pay per service — sats in, service out. Subscriptions are honest when they're bus tickets, theft when they depend on people forgetting
+
+### III. Craft & Care — 15%
+
+*Did someone give a damn?*
+
+- **CC-1** Opinionated — takes a side, not 47 toggles
+- **CC-2** Iteration visible — changelogs, hard decisions documented
+- **CC-3** Words written, not generated — error messages, onboarding, about page
+- **CC-4** Less, on purpose — features cut, scope reduced, discipline of no
+- **CC-5** No dark patterns — cancel in one click, no guilt modals
+- **CC-6** Respects your time — open, get value, close. No dopamine hooks.
+
+### IV. Openness — 10%
+
+*Does it play with others?*
+
+- **OI-1** RSS or equivalent — syndication without an account
+- **OI-2** API access — documented, stable, usable
+- **OI-3** Data portability — export everything in standard formats
+- **OI-4** Source available — readable, forkable
+- **OI-5** Sovereign stack compatible — works with Nostr, Lightning, Bitcoin
+
+### V. Honesty — 15%
+
+*Does it tell you the truth?*
+
+- **HT-1** Business model visible — if not obvious in 30 seconds, you're the product
+- **HT-2** No growth-hack language — authentic, not "AI-powered revolutionary 10x"
+- **HT-3** Honest about AI — disclosed and labeled, not passed off as human
+- **HT-4** No manufactured urgency — no countdown timers, no "X people viewing"
+
+### VI. Voice & Humanity — 10%
+
+*Is a human in there?*
+
+- **VH-1** Distinctive voice — identifiable, not generic SaaS copy
+- **VH-2** Humans visible — real names, real faces, not "our team of innovators"
+- **VH-3** Lived experience — embodied knowledge, not aggregated research
+- **VH-4** Dialogue, not broadcast — can you talk back?
+
+### VII. Wisdom & Restraint — 5%
+
+*Does it know when to shut up?*
+
+- **WR-1** Constraints are deliberate — limited by choice, not accident
+- **WR-2** Can't nag you — holds no contact data (ideal), or never uses it for re-engagement
+- **WR-3** Decades, not quarters — will it work in 10 years?
+- **WR-4** AI builds understanding — helps you learn, not replaces your thinking
+
+### VIII. Value Alignment — 5%
+
+*Who captures the value?*
+
+- **VA-1** Value reaches creators — not extracted by the platform
+- **VA-2** Your attention isn't the product — helps you finish, not keeps you scrolling
+- **VA-3** Honest exchange — V4V, pay-per-use, or genuinely fair subscription. Not inertia billing.
+- **VA-4** Curators get value — discovery and curation rewarded, not just creation
+
+---
+
+## Scoring: Geometric Mean
+
+Multiply, don't add. That's the whole insight.
+
+**Category score** = geometric mean of heuristic scores within that category.
+**Overall score** = weighted geometric mean of category scores.
+
+A zero on any heuristic kills its category. A dead category kills the overall. Beautiful typography doesn't save a surveillance product. FTX had great design.
+
+### The math
+
+```
+category = (h1 × h2 × ... × hN) ^ (1/N)
+overall  = cat1^w1 × cat2^w2 × ... × cat8^w8
+score    = overall × 100
+```
+
+In Excel:
+```
+category = IF(MIN(scores)=0, 0, EXP(AVERAGE(LN(scores))))
+overall  = IF(MIN(cats)=0, 0, EXP(SUMPRODUCT(weights, LN(cats)))) * 100
+```
+
+### Why geometric, not arithmetic
+
+Arithmetic: add and divide. A zero in a 20%-weighted category just loses 20 points. Makeup elsewhere. A scammer with good design gets a C.
+
+Geometric: multiply. A zero anywhere — zero. Integrity is not a line item. It's a prerequisite.
+
+### Grades
 
 | Grade | Score | Meaning |
 |-------|-------|---------|
-| **A** | 85-100 | Gigi would use this. Sovereign, crafted, honest. |
-| **B** | 70-84 | Solid with gaps. Fixable with intention. |
-| **C** | 55-69 | Mediocre. Some care visible, but structural problems. |
-| **D** | 40-54 | Problematic. Platform thinking, attention extraction, or slop. |
-| **F** | 0-39 | Slot machine. Surveillance product. Sloppypasta factory. |
+| **A** | 85–100 | Sovereign, crafted, honest. |
+| **B** | 70–84 | Solid. Gaps fixable with intention. |
+| **C** | 55–69 | Some care visible. Structural problems. |
+| **D** | 40–54 | Platform thinking. Attention extraction. Carelessness. |
+| **F** | 0–39 | Surveillance product, sloppypasta factory, or fraud. |
 
-### Weight Calibration
+### Weights
 
-| Category | Weight | Rationale |
-|----------|--------|-----------|
-| Content Integrity | 20% | Core to the anti-slop thesis — if content is slop, nothing else matters |
-| Sovereignty & Privacy | 20% | Core to the freedom thesis — if you can be rugpulled, you're not sovereign |
-| Craft & Care | 15% | The bridge between Gigi and 37signals — intention in building |
-| Honesty & Transparency | 15% | The business model test — honest products don't hide how they make money |
-| Openness & Interoperability | 10% | Protocol-first is important but not all products need to be protocols |
-| Voice & Humanity | 10% | Distinctive voice matters but is secondary to structural properties |
-| Wisdom & Restraint | 5% | Hard to test objectively but philosophically important |
-| Value Alignment | 5% | V4V is aspirational for most products; don't penalize honest pricing |
-
----
-
-## Complementary Voices
-
-### DHH & Jason Fried (37signals)
-
-37signals provides the **craft dimension** that Gigi's sovereignty philosophy needs. Where Gigi asks "is this free?" and "is this sovereign?", 37signals asks "is this well-made?" and "does this respect the user's time?" Key convergences:
-
-- **Build less** = **Constraint as blessing** — both traditions see limitation as a design virtue
-- **Copywriting is interface design** = **Words matter** — both insist on craft in every user-facing word
-- **Opinionated software** = **Freedom by design** — both reject the "give users everything" approach
-- **Silence is communication** = **Respect human pace** — both resist the constant-notification paradigm
-
-The 37signals voice is pragmatic where Gigi is philosophical; together they form a complete evaluation framework.
-
-### John Vervaeke
-
-Vervaeke provides the **epistemological foundation** for why slop fails. His distinction between "smart" and "wise" underpins Gigi's argument that LLMs cannot care:
-
-- Wisdom requires embodiment (physical experience, mortality, desire)
-- Pattern matching (intelligence) is necessary but insufficient for meaning-making
-- The "meaning crisis" parallels the "care crisis" in content creation
-
-### Christoph Zechner
-
-Zechner provides the **practitioner's discipline** — the operational rules for building with AI without losing craft:
-
-- Rate-limit AI contributions; review everything
-- Slow down deliberately when tools speed up
-- Verification gates as the expression of caring
+| Category | Weight | Why |
+|----------|--------|-----|
+| Content Integrity | 20% | If the content is slop, nothing else matters. |
+| Sovereignty & Privacy | 20% | If they can rugpull you, everything else is decoration. |
+| Craft & Care | 15% | The difference between "built" and "shipped." |
+| Honesty | 15% | If you can't see the business model, you are it. |
+| Openness | 10% | Not every product is a protocol. Interop still matters. |
+| Voice & Humanity | 10% | A human should be visible. Structure outweighs style. |
+| Wisdom & Restraint | 5% | Hard to measure. Still matters. |
+| Value Alignment | 5% | V4V is aspirational. Honest pricing is sufficient. |
 
 ---
 
-## Sources (All Vault Notes Feeding This Synthesis)
+## Sources
 
-### Primary — Gigi Philosophy
-- [[dergigi-internet-left-me-slop-sovereignty]]
-- [[gigi-caring-about-sloppypasta-2026]]
-- [[gigi-speaking-freely-protocols-vs-platforms-2024]]
-- [[gigi-freedom-of-value-v4v-2021]]
-- [[gigi-attention-terrible-currency-thread]]
-- [[gigi-true-names-not-required-pseudonymity-2020]]
-- [[gigi-cryptography-not-enough-2022]]
-- [[gigi-cryptography-not-enough-baltic-honeybadger-2022]]
-- [[gigi-vision-value-enabled-web-2022]]
-- [[gigi-building-boris-21-days-insanity-2025]]
-- [[gigi-freedom-money-bitcoin-magazine-2023]]
-- [[gigi-purple-text-orange-highlights-nostr-reading-2023]]
-- [[gigi-nostr-tier2-scan-heuristics]]
-- [[stopsloppypasta-definition-2026]]
-- [[sovereign-engineering-philosophy-manifesto]]
-- [[sovereign-engineering-podcast-no-solutions]]
-- [[sovereign-engineering-ep08-navigating-the-vibe]]
-- [[sovereign-engineering-ep06-winds-of-ai]]
-- [[sovereign-engineering-ep05-prompt-and-pray]]
-- [[boris-nostr-reading-app]]
-- [[ants-nostr-text-search]]
+Synthesized from 30+ vault notes. Primary voices: Gigi (Sovereign Engineering, dergigi.com), 37signals (Getting Real, REWORK podcast, SVN), Vervaeke (meaning crisis, embodiment), Zechner (agentic discipline).
 
-### Secondary — 37signals / Craft
-- [[37signals-how-we-communicate-philosophy]]
-- [[37signals-pod-principles-of-communication]]
-- [[37signals-pod-say-no-by-default]]
-- [[37signals-getting-real-key-chapters]]
-- [[37signals-scan-pass-2026-03-30]]
-- [[37signals-pod-agent-accessibility-basecamp]]
-- [[37signals-writing-craft-for-llm-voice]]
-- [[37signals-pod-software-as-art]]
-- [[37signals-pod-it-started-with-a-blog]]
-- [[37signals-pod-give-it-a-name]]
-- [[svn-deep-dive-editorial-voice-broadsheet]]
-- [[svn-gruber-graham-spolsky-writing-voices]]
-- [[tldraw-blocking-ai-contributions-2026]]
-
-### Secondary — SVN Editorial Archive (reinforcing Craft & Voice dimensions)
-- [[svn-the-distance-editorial-project]]
-- [[svn-eureka-were-editors]]
-- [[svn-comments-not-engagement]]
-- [[svn-constraints-nightmares-dreams-haters]]
-- [[svn-is-group-chat-making-you-sweat]]
-- [[svn-rework-wrong-things]]
-- [[svn-saddleback-leather-storytelling]]
-- [[svn-sharing-a-first-draft]]
-- [[svn-tools-for-editing-rework]]
-- [[svn-why-business-writing-awful]]
-- [[svn-why-web-copywriting-sucks]]
-- [[svn-writing-decisions-saving-space]]
-- [[svn-chouinard-catalog-1972]]
-
-### Tertiary — Methodology
-- [[agentic-craft-thesis]]
-- [[zechner-slowing-down-agentic-coding-2026]]
-- [[vervaeke-ai-coming-thresholds-2023]]
+Full source list with wikilinks: `vault/notes/tech/editorial/gigi-internet-philosophy-synthesis.md`
