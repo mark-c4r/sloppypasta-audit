@@ -17,20 +17,20 @@
 
 | Cat | Name | Weight | V1 Checks |
 |-----|------|--------|-----------|
-| 1 | Slop Detection | 15% | 2 |
+| 1 | Slop Detection | 10% | 2 |
 | 2 | Writing & Thinking | 10% | 3 |
 | 3 | Design & Interface | 10% | 6 |
 | 4 | Product Craft | 10% | 4 |
 | 5 | Product Conduct | 15% | 10 |
 | 6 | Sovereignty & Privacy | 20% | 13 |
-| 7 | Honesty & Transparency | 10% | 5 |
+| 7 | Honesty & Transparency | 15% | 5 |
 | 8 | Economic Alignment | 10% | 3 |
 
 Minimum 3 applicable checks per category. Below 3 → exclude category, redistribute weight.
 
 ---
 
-## Cat 1: Slop Detection (weight: 15%, 2 checks)
+## Cat 1: Slop Detection (weight: 10%, 2 checks)
 
 ### 1.1 LLM Smell Markers in Text [Universal]
 
@@ -803,7 +803,7 @@ Whether a payment-handling product gives users control of their funds or holds f
 
 ---
 
-## Cat 7: Honesty & Transparency (weight: 10%, 5 checks)
+## Cat 7: Honesty & Transparency (weight: 15%, 5 checks)
 
 ### 7.1 Business Model Visible [Universal]
 
