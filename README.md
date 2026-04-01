@@ -1,6 +1,6 @@
 # The Sloppypasta Audit
 
-A framework for evaluating whether digital products are built with care or shipped as AI-generated slop. Measures craft, sovereignty, honesty, and economic alignment across 8 categories (46 checks).
+A framework for evaluating whether digital products are built with care or shipped as AI-generated slop. Measures craft, sovereignty, honesty, and economic alignment across 8 categories (47 checks).
 
 Built for the Bitcoin/Nostr community. Useful for anyone who gives a damn.
 
@@ -54,7 +54,7 @@ sloppypasta-audit/
 │   └── SKILL.md              # The Claude Code skill
 ├── docs/
 │   ├── synthesis.md           # Full framework document
-│   ├── check-inventory.md     # 46 checks across 8 categories
+│   ├── check-inventory.md     # 47 checks across 8 categories
 │   ├── scale-anchors/         # Scoring anchors (0-100) per check
 │   │   ├── cat1-slop-detection.md
 │   │   ├── cat2-writing.md

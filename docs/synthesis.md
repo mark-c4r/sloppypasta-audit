@@ -20,7 +20,7 @@ These are the worldview. They're not testable per product — they're what we be
 
 ## How It Works
 
-46 checks across 8 categories. Each check scores 0-100% on a sliding scale. Most products land in the 20-80% range. Zeros are rare, reserved for actively hostile behavior.
+47 checks across 8 categories. Each check scores 0-100% on a sliding scale. Most products land in the 20-80% range. Zeros are rare, reserved for actively hostile behavior.
 
 Category scores are the geometric mean of their checks. The overall score is the weighted geometric mean of category scores. Low scores drag disproportionately through multiplication. You can't compensate for a structural failure with nice fonts.
 
@@ -223,7 +223,7 @@ Checks tagged with conditions activate based on product type. Inapplicable check
 | `[if:messaging/social]` | Has communication or community features |
 | `[if:payments]` | Handles money |
 
-If conditional exclusions drop a category below 3 active checks, exclude the entire category and redistribute its weight proportionally.
+If conditional exclusions drop a category below 2 active checks, exclude the entire category and redistribute its weight proportionally.
 
 ### Composite: Check 5.5
 

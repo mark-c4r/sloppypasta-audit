@@ -19,7 +19,15 @@ Reference: check-inventory.md
 | 75% | Strong rugpull resistance. Open source with independent community means a fork is always possible. Self-hostable means you can run it regardless of the company's decisions. Published standards or specifications mean the protocol survives the company. The operator could try to rugpull but you have a credible exit path. | Basecamp (public pricing commitment, data export), WordPress (self-hostable, FOSS), Matrix protocol (federated, forkable) |
 | 100% | Rugpull-proof by architecture. No single entity can change the rules. Protocol-level operation means the product exists independent of any company. Cryptographic guarantees prevent retroactive modification. Even if every current developer quit, the product continues to function. | Bitcoin (protocol-native, no single point of failure), Nostr (protocol, not platform), IPFS-hosted content, signed git commits |
 
-**Scoring notes**: Evaluate: who controls the product's continued operation? Can a single entity change pricing, remove features, modify terms, or shut down? Has this entity exercised that power before? History of rugpulls (Google product shutdowns, Twitter API changes) is a factual signal, not speculation. Protocol-level products score highest because rugpull resistance is architectural, not contractual.
+**Rugpull severity spectrum** (severity of what the user loses in a rugpull event — use to adjust within anchor ranges):
+- **Convenience loss** (feature removal, UI changes): base anchor score applies
+- **Identity loss** (namespace taken, profile deleted, reputation erased): anchor -15 guidance — losing an identity is hard to rebuild
+- **Data loss** (photos, documents, messages, history permanently inaccessible): anchor -10 guidance — data is irreplaceable
+- **Financial loss** (funds locked, forced migration costs, sunk subscription): anchor -20 guidance — direct monetary harm is the most severe
+
+These are anchor guidance adjustments, not separate multipliers. A product that scores 50% on structural resistance but exposes users to financial loss on rugpull should be scored closer to 30%.
+
+**Scoring notes**: Evaluate: who controls the product's continued operation? Can a single entity change pricing, remove features, modify terms, or shut down? Has this entity exercised that power before? History of rugpulls (Google product shutdowns, Twitter API changes) is a factual signal, not speculation. Protocol-level products score highest because rugpull resistance is architectural, not contractual. Apply severity spectrum based on what the user stands to lose.
 
 ---
 
@@ -35,7 +43,7 @@ Reference: check-inventory.md
 | 75% | Low exit cost. Complete data export in standard, interoperable formats. Export is self-service and fast. Data is organized and documented. Competing products can import the export directly or with minimal transformation. The product makes it easy to leave because it's confident you'll stay by choice. | Basecamp (full export, documented format), Notion (Markdown export), products with API access that enables full extraction |
 | 100% | Zero exit cost. Data lives in standard formats from the start (Markdown files, SQLite databases, plain text). No export needed because your data is already in an open format on your machine or accessible via standard protocols. You didn't "import" your data — it was always yours in a format you control. | Obsidian (local Markdown files), Git repositories, Nostr (events on your relay), local-first software, FOSS tools with standard file formats |
 
-**Scoring notes**: Test the actual export: initiate a data export and evaluate completeness, format, and speed. Standard formats: CSV, JSON, Markdown, SQL, ICS (calendar), VCF (contacts). Proprietary formats or PDF-only exports indicate high exit cost. API access counts as an export mechanism (users can extract data programmatically). Local-first products with standard file formats score 100% — no export needed when data is already yours.
+**Scoring notes**: Test the actual export: initiate a data export and evaluate completeness, format, and speed. Standard formats: CSV, JSON, Markdown, SQL, ICS (calendar), VCF (contacts). Proprietary formats or PDF-only exports indicate high exit cost. API access counts as an export mechanism (users can extract data programmatically). Local-first products with standard file formats score 100% — no export needed when data is already yours. **Import without matching export** is a named dark pattern: if the product lets you import data easily but has no corresponding export, you're invited in but can't leave with your work — cap at 25% regardless of other factors.
 
 ---
 

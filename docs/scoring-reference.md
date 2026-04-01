@@ -18,15 +18,15 @@
 | Cat | Name | Weight | V1 Checks |
 |-----|------|--------|-----------|
 | 1 | Slop Detection | 10% | 2 |
-| 2 | Writing & Thinking | 10% | 3 |
-| 3 | Design & Interface | 10% | 6 |
+| 2 | Writing & Thinking | 10% | 4 |
+| 3 | Design & Interface | 10% | 5 |
 | 4 | Product Craft | 10% | 4 |
 | 5 | Product Conduct | 15% | 10 |
 | 6 | Sovereignty & Privacy | 20% | 13 |
-| 7 | Honesty & Transparency | 15% | 5 |
+| 7 | Honesty & Transparency | 15% | 6 |
 | 8 | Economic Alignment | 10% | 3 |
 
-Minimum 3 applicable checks per category. Below 3 → exclude category, redistribute weight.
+Minimum 2 applicable checks per category. If a category drops to 1 applicable check, exclude the entire category and redistribute weight.
 
 ---
 
@@ -113,6 +113,8 @@ Certainly, Absolutely, Sure, Great question, That's a great point, I'd be happy 
 
 Whether engagement metrics, followers, and community participation reflect real human activity versus manufactured or bot-driven signals.
 
+**N/A condition**: If product has no discoverable social media presence and no evidence of community engagement → N/A.
+
 | Score | Anchor | Archetype |
 |-------|--------|-----------|
 | 5% | Community is visibly manufactured. Follower counts wildly disproportionate to engagement. Comment sections filled with generic praise ("Great post!", "So helpful!") from accounts with no history. Obvious bot networks amplifying content. Dead internet in human clothing. | Products with purchased followers, crypto bot armies |
@@ -125,7 +127,7 @@ Whether engagement metrics, followers, and community participation reflect real 
 
 ---
 
-## Cat 2: Writing & Thinking (weight: 10%, 3 checks)
+## Cat 2: Writing & Thinking (weight: 10%, 4 checks)
 
 ### 2.1 Economy of Words [Universal]
 
@@ -141,19 +143,33 @@ Banned-word and phrase density per 1000 words — how much filler, hedging, and 
 
 **Scoring**: Use the 49 banned words, 38 phrases, and 16 openers list for quantitative measurement. Calculate density per 1000 words of product-facing text (UI copy, docs, marketing). Ignore user-generated content. A product with 200 words of perfect copy scores higher than one with 2000 words of mediocre copy — economy means knowing when to stop writing.
 
-### 2.2 Copy Is Interface Design [Universal]
+### 2.2a Copy Guides Action [Universal]
 
-Whether the product's text actively guides, orients, and instructs users — or whether it's decorative filler disconnected from the interface.
+Whether the product's text tells you what to do, where you are, and what went wrong. Error messages, empty states, labels, CTAs.
 
 | Score | Anchor | Archetype |
 |-------|--------|-----------|
-| 5% | Copy actively misleads or obstructs. Button labels don't match actions. Error messages are meaningless ("Error: null"). Placeholder text shipped to production ("Lorem ipsum" or "Add description here"). The text makes the product harder to use. | "Click here" buttons, stack trace error modals |
-| 25% | Copy exists but doesn't guide. Generic labels ("Submit", "Cancel", "OK") that could belong to any product. Empty states say "No items found" with no next step. Onboarding text is marketing copy pasted into a tooltip. The text occupies space without earning it. | Dead-end empty states, generic form labels |
-| 50% | Copy is correct but passive. Labels accurately describe features. Error messages name the problem. But the text doesn't anticipate what the user needs next. No proactive guidance, no personality, no awareness of context. Functional but forgettable. | Average web apps with accurate generic copy |
-| 75% | Copy works as a guide. Empty states suggest actions ("No projects yet — create your first one"). Error messages explain what happened AND what to do. Labels use the user's vocabulary, not the developer's. The text anticipates confusion and prevents it. | Basecamp, Notion, Linear |
-| 100% | Copy is inseparable from the interface. Remove the text and the product breaks. Labels teach the product's mental model. Microcopy handles edge cases gracefully. The voice is consistent, the tone matches the moment (serious for errors, encouraging for empty states). The text is the interface. | Stripe API docs, Superhuman |
+| 5% | No guidance anywhere. Error messages say "Error." Empty states are blank. Button labels don't match actions ("Click here" everywhere). Placeholder text shipped to production. The user must guess every action — the text is actively hostile to comprehension. | "Click here" buttons, stack trace error modals, "Lorem ipsum" in production |
+| 25% | Generic labels that could belong to any product. "Submit", "Cancel", "OK" — nothing product-specific. Empty states say "No items found" with no next step. Error messages name the error code but not the fix. Onboarding text is marketing copy pasted into tooltips. The text occupies space without guiding action. | Dead-end empty states, generic form labels, "Something went wrong" errors |
+| 50% | Labels accurately describe features. Error messages name the problem. But the text doesn't anticipate what the user needs next — no proactive guidance, no awareness of context. You can figure out what to do, but the copy doesn't help you. Functional but passive. | Average web apps with accurate but generic copy |
+| 75% | Copy actively guides. Empty states suggest specific actions ("No projects yet — create your first one"). Error messages explain what happened AND what to try next. Labels use the user's vocabulary, not the developer's. The text anticipates confusion and prevents it before the user feels lost. | Basecamp's empty states, Notion's contextual help, Linear's error messages |
+| 100% | Every state has specific, actionable copy. Errors explain what went wrong AND what to try. Empty states suggest next steps with specific CTAs. Labels disambiguate without tooltips. The copy alone — without any visual design — tells you where you are, what you can do, and what happens next. | Stripe API docs (copy IS the product), Superhuman's command labels |
 
-**Scoring**: Test by reading only the text with the visual design removed. Does the copy alone tell you where you are, what you can do, and what happens next? Score empty states, error messages, onboarding text, and button labels separately — the worst one anchors the score.
+**Scoring**: Test by reading only the text with the visual design removed. Score empty states, error messages, onboarding text, and button labels separately — the worst one anchors the score. A product with excellent labels but dead-end empty states scores on the weakest element.
+
+### 2.2b Copy Shows Authorship [Universal]
+
+Whether the copy could only exist in this product. Voice, specificity, personality — or interchangeable template text.
+
+| Score | Anchor | Archetype |
+|-------|--------|-----------|
+| 5% | All copy is interchangeable template text. "Welcome to [Product]. Get started today!" Nothing identifies this as a specific product. You could swap the product name and the copy would fit anywhere. Zero voice, zero personality, zero specificity. The copy was generated, not written. | AI-generated SaaS landing pages, white-label products with find-and-replaced names |
+| 25% | Copy has a consistent tone but no distinctive voice. Professional, competent, forgettable. "We help teams collaborate more effectively." True of any product. Domain-specific jargon appears but doesn't reveal a perspective. The copy sounds like it was written by someone who read the brief but doesn't use the product. | Generic B2B SaaS copy, most corporate product pages |
+| 50% | Occasional personality breaks through. Most copy is standard but some moments — an error message, a loading screen, a tooltip — reveal a human made a deliberate choice. The voice isn't consistent but it's present in spots. You can tell someone cared about some of the words. | Products with one memorable 404 page but generic everything else |
+| 75% | Copy has a recognizable voice. Reading the text without the product name, you could identify it. Specific references, domain language, opinions about how things should work. The copy reflects the team's perspective, not a template. Personality is consistent across surfaces, not just sprinkled in easter eggs. | Basecamp ("We don't do that here"), Pinboard's feature descriptions, Linear's opinionated product copy |
+| 100% | Copy has a distinctive voice that could not exist in any other product. Specific references, opinions, humor, or domain language that only this team would write. The writing has idiosyncratic rhythm, personal vocabulary, and a perspective that permeates every surface. Remove the logo and you'd still know the product. | Craig Mod's products, Panic's apps (Transmit, Nova), Superhuman's entire copy voice |
+
+**Scoring**: Read the product's copy with the brand name removed. Could this text belong to any other product in the same category? If yes, score below 50%. Products with template-derived copy ("Built for teams who value...") score 25% regardless of polish. Voice consistency matters — one memorable 404 page doesn't compensate for generic everything else.
 
 ### 2.3 No Throat-Clearing [if:content]
 
@@ -171,7 +187,7 @@ Whether content gets to the point or wastes the reader's time with filler openin
 
 ---
 
-## Cat 3: Design & Interface (weight: 10%, 6 checks)
+## Cat 3: Design & Interface (weight: 10%, 5 checks)
 
 ### 3.1 Information Density [Universal]
 
@@ -179,27 +195,13 @@ How effectively the product uses screen real estate — items per viewport, inte
 
 | Score | Anchor | Archetype |
 |-------|--------|-----------|
-| 5% | Screen is hostile to information consumption. Massive hero images with no content. One item visible per viewport with the rest hidden behind pagination or infinite scroll. Whitespace is uniform padding — the same 48px gap between every element regardless of relationship. The product treats your 27" display like a phone screen. | Landing pages 90% stock photography, single-item-per-screen e-commerce |
-| 25% | Low density with poor whitespace logic. 2-3 items per viewport when 6-8 would fit naturally. Spacing doesn't communicate grouping — related items have the same gaps as unrelated ones. Content is there but spread so thin you spend more time scrolling than reading. | Marketing-first SaaS dashboards |
-| 50% | Adequate density, uninspired layout. Reasonable items per viewport for the content type. Whitespace is consistent but not communicative — it doesn't help you parse relationships. Nothing wastes space aggressively, but nothing optimizes for it either. Standard grid, standard spacing, standard everything. | Average web applications, default Bootstrap/Tailwind layouts |
-| 75% | Good density with intentional spacing. Screen real estate is respected. Whitespace communicates hierarchy — tight spacing within groups, generous spacing between groups. Information-rich without feeling cramped. The layout reveals the content's structure. | Linear, Hacker News, Notion |
-| 100% | Density is a design decision, not an accident. Every viewport is packed with useful information. Whitespace is a tool — it groups, separates, and highlights. Resizing the window shows the layout was designed for multiple densities. The product shows you more because it respects your screen and your time. | Bloomberg Terminal, Figma |
+| 5% | Wall of undifferentiated content. No visual hierarchy — every element has equal weight, equal spacing, equal size. A wall of text with no headings, or a grid where every card is identical with no way to scan for what matters. The user must read everything to find anything. Alternatively: one giant hero image per viewport with content hidden below the fold. | Landing pages that are 90% stock photography, unformatted documentation dumps, content behind infinite scroll with no landmarks |
+| 25% | Low density with poor whitespace logic. 2-3 items per viewport when 6-8 would fit. Spacing doesn't communicate grouping — related items have the same gaps as unrelated ones. Content is there but spread so thin you spend more time scrolling than reading. The layout treats a 27" display like a phone screen. | Marketing-first SaaS dashboards, "modern" redesigns that halved density |
+| 50% | Adequate density, uninspired layout. Reasonable items per viewport. Whitespace is consistent but not communicative — it doesn't help you parse relationships. Standard grid, standard spacing, standard everything. Twitter's main feed: functional density, no hierarchy innovation. | Average web apps, default Bootstrap/Tailwind layouts, Twitter's timeline |
+| 75% | Density serves comprehension. Whitespace communicates hierarchy — tight within groups, generous between groups. Information-rich without feeling cramped. The layout reveals the content's structure at a glance. You can scan, not just scroll. Sparrow's UTXO interface: dense financial data made legible through spatial grouping. | Linear, Hacker News, Sparrow wallet UTXO view, Notion table views |
+| 100% | Layout communicates data hierarchy without labels. The spatial arrangement alone tells you what's primary, secondary, and metadata. Every viewport is packed with information that's instantly scannable. Resizing the window shows the layout was designed for multiple densities. Density is a deliberate design decision that respects both the content and the user's time. | Bloomberg Terminal, Figma canvas, well-designed financial dashboards |
 
 **Scoring**: Count visible items per viewport at 1440px width. Compare spacing between related items versus unrelated items — if they're the same, whitespace is decorative, not functional. The window resize test is critical: slowly drag to ~800px and watch what happens. Products that degrade gracefully were designed; products that break were assembled.
-
-### 3.2 Physical Obviousness [Universal]
-
-Whether the product is usable without instruction — controls look interactive, affordances are clear, the interface communicates what it does through its form.
-
-| Score | Anchor | Archetype |
-|-------|--------|-----------|
-| 5% | The interface hides its own functionality. Interactive elements look identical to static text. Navigation requires discovering invisible hover zones. Critical actions are behind unlabeled icons or gesture-only interactions with no fallback. Using the product requires a tutorial that doesn't exist. | Mystery-meat navigation, gesture-only mobile UIs |
-| 25% | Controls exist but affordances are ambiguous. Flat design taken to the extreme — buttons look like text, links look like headings, interactive cards look like static content. Users must click experimentally to discover what's interactive. Icons are unlabeled and non-standard. | Ultra-minimal design-forward apps |
-| 50% | Most controls are identifiable but some require guessing. Primary actions are obvious, secondary actions less so. Standard patterns are followed for common features but custom UI elements lack clear affordances. A new user can complete the main flow but will miss secondary features. | Average web applications |
-| 75% | Interface communicates clearly. Buttons look clickable, inputs look fillable, draggable items look grabbable. Standard patterns used consistently. A new user can discover most features through visual exploration alone. Minor affordance gaps in edge-case features. | Basecamp, Todoist |
-| 100% | The interface teaches itself. Every interactive element signals its capability through shape, color, or position. Disabled states explain why. Progressive disclosure reveals complexity only when needed. A user who has never seen the product can complete any flow by following visual cues alone. | Apple native apps, Stripe Dashboard |
-
-**Scoring**: Test with the "5-second rule" — show a screenshot to someone unfamiliar with the product. Can they identify the primary action within 5 seconds? Check for: buttons with clear boundaries, hover/focus states that confirm interactivity, labels on icons (or universally understood icons only), disabled states that explain themselves.
 
 ### 3.3 Design System Consistency [Universal]
 
@@ -207,11 +209,11 @@ Whether the product uses consistent visual tokens — spacing, type scale, color
 
 | Score | Anchor | Archetype |
 |-------|--------|-----------|
-| 5% | Visual chaos. Multiple type scales on the same page. Spacing values look random — 12px here, 17px there, 24px elsewhere with no system. Colors shift between pages. Components that serve the same function look different depending on where they appear. The product looks like it was built by 10 people who never spoke to each other. | Frankensteined WordPress sites, incompatible UI libraries |
-| 25% | Inconsistency is the pattern. A design system may have been intended but wasn't enforced. Buttons come in 3 different styles. Spacing mostly works but breaks on secondary pages. **Window resize test**: drag to ~800px tablet width and the layout breaks — overlapping elements, orphaned components, broken grids. This is a strong signal of AI-generated code that was never tested at intermediate widths. | Polished landing page, broken secondary pages |
-| 50% | Consistent within sections, inconsistent across them. The dashboard follows one system, the marketing site another, the settings page a third. Each section looks fine alone but navigating between them reveals the seams. Token values are close but not identical (14px vs 15px body text). | SaaS with separately-designed marketing and app sections |
-| 75% | Strong consistency with minor drift. One type scale, one spacing system, one color palette across all pages. Rare exceptions in legacy or rarely-visited pages. Components are clearly from the same system. The window resize test shows graceful degradation — the layout adapts, doesn't break. | Linear, Notion, Vercel Dashboard |
-| 100% | Pixel-level consistency everywhere. Every page, every state, every edge case follows the same token system. New features look like they were always there. The design system is enforced by tooling, not just documentation. Resize to any width and the layout responds as a coherent system. | Stripe Dashboard, Apple native apps, Figma |
+| 5% | No tokens, pure inline styles, inconsistent spacing. Multiple type scales on the same page. `style="margin-top: 12px"` next to `style="margin-top: 17px"` with no system. Colors are arbitrary hex values, not a palette. Components serving the same function look different on every page. The product looks like it was assembled from unrelated code snippets. | Frankensteined WordPress sites, AI-generated pages with inline styles, incompatible UI library mixtures |
+| 25% | A design system was intended but not enforced. Buttons come in 3 styles. Spacing mostly works on the landing page but breaks on secondary pages. **Window resize test**: drag to ~800px and the layout breaks — overlapping elements, orphaned components, broken grids. Strong signal of AI-generated code never tested at intermediate widths. | Polished landing page, broken settings/profile pages |
+| 50% | Consistent within sections, inconsistent across them. Dashboard follows one system, marketing site another, settings page a third. Each section looks fine alone but navigating between them reveals seams. Token values are close but not identical (14px vs 15px body text). Standard framework defaults, competently applied. | SaaS with separately-designed marketing and app sections |
+| 75% | One type scale, one spacing system, one color palette across all pages. Components are clearly from the same system. The window resize test shows graceful degradation. Rare exceptions in legacy pages. The design system is documented and mostly enforced. | Linear, Notion, Vercel Dashboard |
+| 100% | Custom design language that could not be mistaken for another product. Every page, state, and edge case follows the same token system. New features look like they were always there. The system is enforced by tooling, not documentation. Resize to any width and the layout responds as a coherent system. You recognize the product by its visual grammar alone. | Stripe Dashboard, Apple native apps, Figma's interface |
 
 **Scoring**: Check at least 5 pages including: landing/marketing, main feature, settings/profile, empty states, error states. Measure body text size, heading scale, spacing between components, and button styles. The window resize test (slowly drag to ~800px tablet width) is the highest-signal single test — AI-generated layouts almost always break at intermediate widths because they were generated for desktop and mobile, not the continuum between them.
 
@@ -221,11 +223,11 @@ Whether users can navigate, recover from mistakes, and handle empty/edge states 
 
 | Score | Anchor | Archetype |
 |-------|--------|-----------|
-| 5% | The product actively traps users. No undo for destructive actions. No back button or breadcrumbs. Empty states are dead ends — "No items found" with no explanation and no path forward. Errors provide no recovery path. Users must start over from scratch when something goes wrong. | Permanent delete with no confirmation, wizard flows with no back button |
-| 25% | Navigation exists but edge states are neglected. Empty states show "No items found" with no call to action — the user stares at a blank screen wondering what to do. Error handling is present but unhelpful ("Something went wrong. Try again."). Undo exists for some actions but not others. Users can navigate the happy path but get stuck the moment something unexpected happens. | Dead-end empty states, inconsistent undo behavior |
-| 50% | Happy path is self-evident, edge cases require learning. Main features are discoverable through the UI. Empty states exist but are generic. Undo works for common actions. A new user can complete the primary flow without help but will need documentation for advanced features. | Average web applications with adequate UX |
-| 75% | Most interactions are self-evident including edge cases. Empty states guide users toward their first action. Undo/back is available for all destructive operations. Error messages explain what happened and suggest fixes. A new user can explore confidently, knowing they can recover from mistakes. | Basecamp, Todoist, Notion |
-| 100% | The product anticipates confusion and prevents it. Empty states are onboarding moments ("Your inbox is empty — here's how messages arrive"). Every destructive action has undo with a clear time window. Error messages are specific and actionable. The UI teaches its own mental model through progressive disclosure — complex features emerge naturally from simple ones. | Stripe onboarding, Linear, Gmail undo-send |
+| 5% | Requires external documentation to use basic features. No undo for destructive actions. No back button or breadcrumbs. Controls don't signal what they do — flat text that's actually a button, icons with no labels, interactive elements indistinguishable from decoration. Empty states are dead ends. The user must read a manual or guess. | Permanent delete with no confirmation, unlabeled icon-only toolbars, wizard flows with no back button |
+| 25% | Navigation exists but controls are ambiguous and edge states neglected. Buttons look like text, text looks like buttons. Empty states say "No items found" with no call to action. Undo exists for some actions but not others. Users can navigate the happy path by trial and error but get stuck at every branch point. | Dead-end empty states, flat UI where clickable and non-clickable elements look identical, inconsistent undo |
+| 50% | Happy path is self-evident, edge cases require learning. Main features are discoverable. Controls generally look interactive. Empty states exist but are generic. Undo works for common actions. A new user can complete the primary flow without help but will need documentation for advanced features. | Average web applications with adequate UX |
+| 75% | Most interactions are self-evident including edge cases. Controls signal capability through shape, color, and position — buttons look pressable, links look followable, sliders look draggable. Empty states guide users toward their first action. Undo/back available for all destructive operations. A new user can explore confidently. | Basecamp, Todoist, Notion |
+| 100% | Interface teaches itself through progressive disclosure. Complex features emerge naturally from simple ones. Controls signal capability through form alone — no labels needed for obvious interactions, labels provided for ambiguous ones. Empty states are onboarding moments. Every destructive action has undo with a clear time window. The UI's physical design communicates its logic. | Stripe onboarding, Linear, Gmail undo-send |
 
 **Scoring**: Test the three edge states: empty (new account, no data), error (trigger a failure), and recovery (try to undo or go back). Dead-end empty states ("No items found" with no CTA) are a strong signal of 25% or below — they indicate the developer only built the happy path. Score the worst edge state, not the average.
 
@@ -249,11 +251,11 @@ Fundamental accessibility care — contrast ratios, tap target sizes, screen rea
 
 | Score | Anchor | Archetype |
 |-------|--------|-----------|
-| 5% | Accessibility is actively broken. Light gray text on white backgrounds. Tiny tap targets (under 24px). No semantic HTML — entire page is nested divs. Keyboard navigation impossible. Screen readers encounter an undifferentiated wall of content. The product is unusable for anyone with visual, motor, or cognitive needs. | Text below 3:1 contrast, div-soup, no ARIA |
-| 25% | Accessibility was never considered. Focus states removed with `outline-none` and no replacement — keyboard users literally cannot see where they are. Some semantic HTML exists but inconsistently (headers skip levels, nav not marked). Tap targets are too small on mobile. Contrast fails on secondary text. Broken focus states (`outline-none` without replacement) are an AI code tell — LLMs remove outlines for aesthetics without understanding they're a critical accessibility feature. | Global `outline-none`, skipped heading levels |
-| 50% | Basic accessibility present but incomplete. Contrast ratios pass on primary text, fail on secondary. Focus states exist but are the browser default (not styled). Semantic HTML used for main content but not navigation or forms. Tap targets adequate on most elements. A screen reader user can navigate the main flow with difficulty. | Average web applications without explicit a11y work |
-| 75% | Deliberate accessibility effort visible. Contrast ratios pass everywhere. Custom focus styles that match the design system. Proper heading hierarchy. ARIA labels on icon buttons. Tap targets meet 44px minimum. A keyboard-only user can complete the primary flow. Minor gaps in dynamic content announcements. | Stripe Dashboard, GitHub |
-| 100% | Accessibility is a design constraint, not an afterthought. Exceeds minimum contrast ratios. Focus management handles dynamic content (modals trap focus, route changes announce). Skip-to-content links. Reduced-motion preferences respected. Screen reader experience is designed, not accidental. The product works well for everyone because it was built for the margins. | GOV.UK, BBC web, Apple native a11y |
+| 5% | Accessibility is actively broken. Light gray text on white backgrounds (below 3:1 contrast). Tiny tap targets (under 24px). No semantic HTML — entire page is nested divs. Keyboard navigation impossible. Screen readers encounter an undifferentiated wall of content. Unusable for anyone with visual, motor, or cognitive needs. | Div-soup markup, no ARIA, mouse-only interactions |
+| 25% | Accessibility never considered. Focus states removed with `outline-none` and no replacement — keyboard users cannot see where they are. Some semantic HTML but inconsistent (headers skip levels, nav not marked). Contrast fails on secondary text. Broken focus states are an AI code tell — LLMs remove outlines for aesthetics without understanding they're critical. | Global `outline-none`, skipped heading levels, buttons under 44px |
+| 50% | Basic accessibility present but accidental. Contrast passes on primary text, fails on secondary (placeholder text, captions, metadata). Focus states are browser defaults (not styled). Some ARIA labels on obvious elements (nav, main) but not on icon buttons or dynamic content. Semantic HTML in main content but not forms. A screen reader user can navigate the main flow with difficulty. The gap between this and 75% is intentionality — this product didn't break a11y, but it didn't design for it either. | Average web apps that haven't explicitly broken accessibility |
+| 75% | Deliberate accessibility effort. Contrast ratios pass everywhere including secondary text. Custom focus styles matching the design system. Proper heading hierarchy. ARIA labels on all icon buttons. Tap targets meet 44px minimum. A keyboard-only user can complete the primary flow. The gap from here to 90%+: focus management on dynamic content (modals, route changes) and prefers-reduced-motion. | Stripe Dashboard, GitHub, well-maintained component libraries |
+| 100% | Systematic accessibility as a design constraint. Focus management handles dynamic content — modals trap focus, route changes announce to screen readers. Skip-to-content links. `prefers-reduced-motion` respected. `prefers-color-scheme` supported. Screen reader experience is designed, not accidental. Tested with actual screen readers (not just automated checks). The product works well for everyone because it was built for the margins. | GOV.UK, BBC web products, Apple native accessibility |
 
 **Scoring**: Run a quick check: Tab through the page — can you see where focus is? Inspect body/secondary text contrast (4.5:1 minimum). Check heading hierarchy in the DOM. Test tap targets on mobile (44px minimum). The `outline-none` test is the single highest-signal check: search the CSS for `outline: none` or `outline: 0` — if present without a custom focus replacement, score 25% or below. This is a care signal, not a compliance audit.
 
@@ -325,6 +327,8 @@ Whether the core flow works on first use — no placeholder data, no spinner tra
 | 100% | Indistinguishable from a mature product on first use. Zero placeholder data, zero spinner traps, zero brutal errors. Every state — loading, empty, error, success — is designed. The product handles network failures, edge cases, and unexpected input gracefully. You forget it's new because nothing reminds you. | Stripe Dashboard, Superhuman, Apple first-party apps |
 
 **Scoring**: Create a fresh account and complete the primary flow. Note every moment of friction: placeholder data, spinners longer than 200ms without visual feedback, error messages that don't explain the problem, states that feel unfinished. Spinner traps (no optimistic UI), brutal error handling ("Something went wrong"), and placeholder data in production are each individually sufficient for 25% or below.
+
+**Maturity context**: For products with 1M+ users or $10M+ revenue, the 50% anchor is: core flow works but secondary flows have issues. Billing bugs or data loss in a product at this scale should not score above 50%. Data source: use publicly reported figures (app store download counts, press releases, Crunchbase). If no public figures exist, use early-product anchors. Do not guess.
 
 ### 4.2 Orphaned Features [Universal]
 
@@ -472,7 +476,16 @@ The approach to user analytics — from none (best) through privacy-respecting t
 | 75% | Self-hosted privacy-respecting analytics. Plausible or Umami self-hosted — aggregate data that never leaves the product's infrastructure. No individual user tracking. No data shared with third parties. The product knows how many people visited, not who they are. | Self-hosted Plausible, self-hosted Umami |
 | 100% | No analytics at all, or server-side request logs only (access logs analyzed without client-side tracking). The product genuinely doesn't track user behavior beyond what the web server naturally records. No JavaScript analytics of any kind. | Signal, Pinboard, CLI tools |
 
-**Scoring**: Check page source and network requests for analytics scripts. Classify: GA4/GA3 (25%), Hotjar/FullStory/session recording (0-25%), Fathom/SimpleAnalytics hosted (50%), Plausible/Umami self-hosted (75%), no analytics JS (100%). If multiple analytics tools are present, score based on the most invasive one. Self-hosted vs hosted matters because self-hosted means data stays on their infrastructure.
+**Tracking quality taxonomy** (score ranges by tracking category):
+- **No tracking / server logs only**: 90-100%
+- **Self-hosted privacy-respecting** (Plausible, Umami self-hosted): 75-90%
+- **First-party analytics** (custom, no third-party data sharing): 70-85%
+- **Privacy-respecting third-party** (Fathom, Simple Analytics hosted): 50-65%
+- **Standard surveillance** (GA4, Mixpanel without user ID): 20-35%
+- **Advertising/profiling** (GA4 + Facebook Pixel, session recording): 5-20%
+- **Data brokering** (selling behavioral data to third parties): 5%
+
+**Scoring**: Check page source and network requests for analytics scripts. Use the taxonomy above to classify. If multiple analytics tools are present, score based on the most invasive one. Self-hosted vs hosted matters because self-hosted means data stays on their infrastructure.
 
 #### 5.5d Cookie Consent Quality [Universal]
 
@@ -495,7 +508,7 @@ Whether the product honors the Do-Not-Track browser header by modifying its trac
 | Score | Anchor | Archetype |
 |-------|--------|-----------|
 | 5% | DNT actively disrespected. Tracking behavior identical regardless of DNT header. The product may even fingerprint users who set DNT (using the header itself as a tracking signal). No acknowledgment that DNT exists. | Most commercial web platforms |
-| 25% | DNT acknowledged in privacy policy but not honored in practice. The policy mentions DNT but tracking behavior is unchanged when the header is present. Lip service without implementation. | "We acknowledge DNT" in legal text only |
+| 25% | DNT acknowledged in privacy policy but not honored in practice. The policy mentions DNT but tracking behavior is unchanged when the header is present. Lip service without implementation. **Note**: Acknowledging DNT and explicitly dismissing it ("We do not respond to DNT signals") is worse than silent ignorance — it demonstrates awareness of the user's preference and conscious choice to override it. Score 15-20% for explicit dismissal. | "We acknowledge DNT" in legal text only, "We do not respond to DNT signals" in privacy policy |
 | 50% | DNT partially honored. Some tracking disabled when DNT is set (e.g., analytics reduced to aggregate-only) but not all. Third-party trackers may still fire. The product makes an effort but doesn't follow through completely. | Products disabling own analytics on DNT but not third-party |
 | 75% | DNT fully honored for first-party tracking. When DNT is set, no analytics, no tracking cookies, no behavioral data collection from first-party systems. Third-party resources (CDN, fonts) may still make requests but no tracker scripts load. Clear documentation of DNT behavior. | Products with documented DNT respect |
 | 100% | DNT is moot because there's nothing to track. The product has no tracking to disable. DNT header makes no difference because the baseline behavior is already zero-tracking. Alternatively: the product explicitly documents that it honors DNT and verifiably does so. | Signal, zero-analytics products |
@@ -612,7 +625,7 @@ Absence of deceptive UX patterns — confirmshaming, hidden costs, trick questio
 | 75% | No dark patterns detected. All choices presented equally. Pricing is transparent and all tiers are visible. Decline buttons are neutral ("No thanks" or "Cancel"). No pre-checked boxes. No hidden costs. The product respects your autonomy in every interaction. Rare edge case: a mildly leading question in an optional survey. | Basecamp, Stripe |
 | 100% | Anti-dark-pattern design. The product actively ensures informed decisions. Pricing includes comparison tools. Decline is as easy as accept. Warnings before irreversible actions. Plain language everywhere — no double negatives, no legal-speak in consent flows. The UX is designed as if the user's lawyer is watching. | PPQ.AI, Signal |
 
-**Scoring**: Walk through every conversion flow: signup, upgrade, cancel, decline-offer, unsubscribe. Check for: confirmshaming (emotional language on decline buttons), hidden costs (fees appearing at checkout), pre-checked boxes, visual manipulation (bright accept vs muted decline), forced continuity (trial-to-paid without clear warning), trick questions (double negatives), roach motels (easy in, hard out). Score on the worst pattern found, not the average — one dark pattern in a critical flow (checkout, cancellation) is enough to cap at 50%.
+**Scoring**: Walk through every conversion flow: signup, upgrade, cancel, decline-offer, unsubscribe. Check for: confirmshaming (emotional language on decline buttons), hidden costs (fees appearing at checkout), pre-checked boxes, visual manipulation (bright accept vs muted decline), forced continuity (trial-to-paid without clear warning), trick questions (double negatives), roach motels (easy in, hard out), **import without matching export** (the product lets you import data easily but has no export — you're invited in but can't leave with your work). Score on the worst pattern found, not the average — one dark pattern in a critical flow (checkout, cancellation) is enough to cap at 50%.
 
 ---
 
@@ -630,7 +643,15 @@ How resistant the product is to unilateral changes by its operator — price inc
 | 75% | Strong rugpull resistance. Open source with independent community means a fork is always possible. Self-hostable means you can run it regardless of the company's decisions. Published standards or specifications mean the protocol survives the company. The operator could try to rugpull but you have a credible exit path. | Basecamp, WordPress, Matrix |
 | 100% | Rugpull-proof by architecture. No single entity can change the rules. Protocol-level operation means the product exists independent of any company. Cryptographic guarantees prevent retroactive modification. Even if every current developer quit, the product continues to function. | Bitcoin, Nostr, IPFS |
 
-**Scoring**: Evaluate: who controls the product's continued operation? Can a single entity change pricing, remove features, modify terms, or shut down? Has this entity exercised that power before? History of rugpulls (Google product shutdowns, Twitter API changes) is a factual signal, not speculation. Protocol-level products score highest because rugpull resistance is architectural, not contractual. Test procedure: Read ToS for "we may terminate at any time" clauses. Check asset custody model. Protocol = inherently resistant. Platform = vulnerable by design.
+**Rugpull severity spectrum** (severity of what the user loses in a rugpull event — use to adjust within anchor ranges):
+- **Convenience loss** (feature removal, UI changes): base anchor score applies
+- **Identity loss** (namespace taken, profile deleted, reputation erased): anchor -15 guidance — losing an identity is hard to rebuild
+- **Data loss** (photos, documents, messages, history permanently inaccessible): anchor -10 guidance — data is irreplaceable
+- **Financial loss** (funds locked, forced migration costs, sunk subscription): anchor -20 guidance — direct monetary harm is the most severe
+
+These are anchor guidance adjustments, not separate multipliers. A product that scores 50% on structural resistance but exposes users to financial loss on rugpull should be scored closer to 30%.
+
+**Scoring**: Evaluate: who controls the product's continued operation? Can a single entity change pricing, remove features, modify terms, or shut down? Has this entity exercised that power before? History of rugpulls (Google product shutdowns, Twitter API changes) is a factual signal, not speculation. Protocol-level products score highest because rugpull resistance is architectural, not contractual. Test procedure: Read ToS for "we may terminate at any time" clauses. Check asset custody model. Apply severity spectrum based on what the user stands to lose. Protocol = inherently resistant. Platform = vulnerable by design.
 
 ### 6.2 Exit Cost Zero [Universal]
 
@@ -644,7 +665,7 @@ Whether a user can leave with their data today — standard format export, no ve
 | 75% | Low exit cost. Complete data export in standard, interoperable formats. Export is self-service and fast. Data is organized and documented. Competing products can import the export directly or with minimal transformation. The product makes it easy to leave because it's confident you'll stay by choice. | Basecamp, Notion |
 | 100% | Zero exit cost. Data lives in standard formats from the start (Markdown files, SQLite databases, plain text). No export needed because your data is already in an open format on your machine or accessible via standard protocols. You didn't "import" your data — it was always yours in a format you control. | Obsidian, Git repositories, Nostr |
 
-**Scoring**: Test the actual export: initiate a data export and evaluate completeness, format, and speed. Standard formats: CSV, JSON, Markdown, SQL, ICS (calendar), VCF (contacts). Proprietary formats or PDF-only exports indicate high exit cost. API access counts as an export mechanism (users can extract data programmatically). Local-first products with standard file formats score 100% — no export needed when data is already yours. Test procedure: Is there an export function? What formats? Can you export your social graph? How long does it take?
+**Scoring**: Test the actual export: initiate a data export and evaluate completeness, format, and speed. Standard formats: CSV, JSON, Markdown, SQL, ICS (calendar), VCF (contacts). Proprietary formats or PDF-only exports indicate high exit cost. API access counts as an export mechanism (users can extract data programmatically). Local-first products with standard file formats score 100% — no export needed when data is already yours. **Import without matching export** is a named dark pattern: if the product lets you import data easily but has no corresponding export, you're invited in but can't leave with your work — cap at 25% regardless of other factors. Test procedure: Is there an export function? What formats? Can you export your social graph? How long does it take?
 
 ### 6.3 Identity Sovereignty [Universal]
 
@@ -803,7 +824,7 @@ Whether a payment-handling product gives users control of their funds or holds f
 
 ---
 
-## Cat 7: Honesty & Transparency (weight: 15%, 5 checks)
+## Cat 7: Honesty & Transparency (weight: 15%, 6 checks)
 
 ### 7.1 Business Model Visible [Universal]
 
@@ -833,19 +854,35 @@ Whether the product's marketing claims match its actual capabilities. No "revolu
 
 **Scoring**: Compare the marketing page to the actual product experience. Sign up and use the product — does it match? Check for: superlatives ("revolutionary", "blazing", "game-changing"), unsubstantiated claims ("AI-powered" without AI, "enterprise-grade" without enterprise features), and features listed in marketing that don't exist in the product. Products that demonstrate rather than claim score higher. "Show, don't tell" is the principle.
 
-### 7.3 AI Disclosed and Labeled [Universal]
+### 7.3a AI Content Transparency [Universal]
 
-Whether AI-generated content is clearly labeled as such, and whether the product is honest about where AI ends and human work begins.
+**Scope**: Measures user-facing AI content only — generated text, AI chatbots, AI summaries, AI recommendations. Backend AI (fraud detection, spam filtering, internal ML) is out of scope.
+
+**N/A condition**: If no user-facing AI content is detected through surface inspection → N/A. Note this as an acknowledged limitation in the Audit Scope section.
 
 | Score | Anchor | Archetype |
 |-------|--------|-----------|
-| 5% | AI content actively disguised as human. The product presents AI-generated text, images, or code as human-created work. Bylines on AI-written articles. "Hand-crafted" labels on AI-generated designs. The product profits from the illusion that humans did the work. Deliberately passing AI off as human is the core deception. | Content farms with fake author names |
-| 25% | AI use is hidden through omission. The product uses AI significantly but never mentions it. No "AI-assisted" labels, no disclosure in about/methodology pages, no transparency about what's generated and what's human. Users reasonably assume human authorship because nothing suggests otherwise. The deception is passive, not active. | AI customer support pretending to be human |
+| 5% | AI content actively disguised as human. The product presents AI-generated text, images, or code as human-created work. Bylines on AI-written articles. "Hand-crafted" labels on AI-generated designs. The product profits from the illusion that humans did the work. Deliberately passing AI off as human is the core deception. | Content farms with fake author names, "hand-made" products generated by AI |
+| 25% | AI use is hidden through omission. The product uses AI significantly but never mentions it. No "AI-assisted" labels, no disclosure in about/methodology pages. Users reasonably assume human authorship because nothing suggests otherwise. The deception is passive, not active. | AI customer support pretending to be human agents, undisclosed AI writing |
 | 50% | AI use disclosed but not at point of encounter. The product mentions AI somewhere (About page, blog post, FAQ) but doesn't label individual pieces of AI-generated content. A careful reader who investigates will find the disclosure. A casual user will encounter AI content without knowing its provenance. Disclosure exists but isn't functional. | "We use AI" in the footer or Terms of Service |
-| 75% | AI content labeled at point of encounter. AI-generated or AI-assisted content is marked where it appears ("Generated by AI," "AI-assisted"). Human-created content is distinguishable from AI content. The user knows what they're reading/using and can calibrate their trust accordingly. Minor gaps in labeling for edge cases. | ChatGPT, Google AI overviews |
-| 100% | AI relationship is transparent and nuanced. Not just "AI" or "human" labels — the product explains the AI's role precisely. "AI-drafted, human-edited." "AI-suggested, human-approved." "AI-summarized from these sources." The user understands exactly how AI contributed to what they're seeing. AI is a disclosed tool, not a hidden ghost writer. | Detailed AI methodology pages, AI confidence scores |
+| 75% | AI content labeled at point of encounter. AI-generated or AI-assisted content is marked where it appears ("Generated by AI," "AI-assisted"). Human-created content is distinguishable from AI content. The user knows what they're reading/using and can calibrate their trust accordingly. Minor gaps in labeling for edge cases. | ChatGPT, Google AI overviews (labeled) |
+| 100% | AI relationship is transparent and nuanced. Not just "AI" or "human" labels — the product explains the AI's role precisely. "AI-drafted, human-edited." "AI-suggested, human-approved." "AI-summarized from these sources." The user understands exactly how AI contributed to what they're seeing. AI is a disclosed tool, not a hidden ghost writer. | Products with detailed AI methodology pages, tools that show AI confidence scores |
 
-**Scoring**: Check: can you tell which content is AI-generated? Is there a label, badge, or disclosure at the content level (not just site level)? A product that uses AI for drafting and discloses this in the methodology section but doesn't label individual articles scores 50%. A product that labels each AI-generated piece scores 75%. Products that don't use AI at all score 100% by default (nothing to disclose). The rising baseline: as AI becomes ubiquitous, disclosure becomes more important, not less.
+**Scoring**: Check: can you tell which content is AI-generated? Is there a label, badge, or disclosure at the content level (not just site level)? A product that uses AI for drafting and discloses this in the methodology section but doesn't label individual articles scores 50%. A product that labels each AI-generated piece scores 75%. Score N/A for products with no detectable user-facing AI content (e.g., Sparrow, Vexl). For products where AI use is ambiguous (e.g., customer support chatbots that may or may not be AI), score based on what's detectable from the surface.
+
+### 7.3b Human Authorship Signal [Universal]
+
+Whether the content shows evidence of human creation — voice, opinions, personal references, irregular rhythm. Overlaps with Cat 1 but from the honesty dimension: "is this honest about its origins?"
+
+| Score | Anchor | Archetype |
+|-------|--------|-----------|
+| 5% | Content has zero human signal. Every text surface reads as machine-generated or template-derived. No opinions, no personal references, no irregular rhythm, no evidence that a human made deliberate word choices. The content is honest about nothing because there's nothing honest in it. | AI content farms, white-label products with zero original copy |
+| 25% | Minimal human signal. Most content is generic or template-derived. Occasional human touches (a blog post, an about page) but the product's primary text surfaces show no evidence of human authorship. The product could have been generated by a well-prompted LLM and you wouldn't know the difference. | Products with AI-generated marketing and one human-written founder letter |
+| 50% | Mixed signals. Some surfaces show clear human authorship (blog posts with opinions, error messages with personality) while others are generic or template-derived. The product isn't consistently honest about its origins — some content was clearly written, other content could be anything. | Products with strong blog content but generic app copy |
+| 75% | Consistent human signal. Most content shows evidence of human creation — opinions, domain expertise, personal references, product-specific language. Voice is identifiable and consistent. The content is credibly human across most surfaces, with minor gaps in secondary copy. | Basecamp, Pinboard, indie products with strong founder voice |
+| 100% | Unmistakably human. Writing has idiosyncratic voice, irregular rhythm, personal vocabulary, and references that no model would generate. Opinions are strong and specific. The content is not just human-written but distinctively so — you can tell who wrote it. The honesty of the content is self-evident. | Craig Mod, Julia Evans, patio11 — writing that could only come from one person |
+
+**Scoring**: This check measures honesty of origins, not writing quality. A product with mediocre but clearly human-written copy scores higher than one with polished but indeterminate copy. Look for: personal anecdotes, specific opinions, irregular sentence structure, domain-specific humor, references to real experiences. Products where every surface reads as "could be AI, could be human" score 50% regardless of quality.
 
 ### 7.4 No Degraded Free Experience [Universal]
 

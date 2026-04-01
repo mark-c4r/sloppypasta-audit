@@ -21,6 +21,8 @@ Reference: check-inventory.md
 
 **Scoring notes**: Create a fresh account and complete the primary flow. Note every moment of friction: placeholder data, spinners longer than 200ms without visual feedback, error messages that don't explain the problem, states that feel unfinished. Spinner traps (no optimistic UI), brutal error handling ("Something went wrong"), and placeholder data in production are each individually sufficient for 25% or below.
 
+**Maturity context**: For products with 1M+ users or $10M+ revenue, the 50% anchor is: core flow works but secondary flows have issues. Billing bugs or data loss in a product at this scale should not score above 50%. Data source: use publicly reported figures (app store download counts, press releases, Crunchbase). If no public figures exist, use early-product anchors. Do not guess.
+
 ---
 
 ## 4.2 Orphaned Features

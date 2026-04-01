@@ -121,7 +121,16 @@ Reference: check-inventory.md
 | 75% | Self-hosted privacy-respecting analytics. Plausible or Umami self-hosted — aggregate data that never leaves the product's infrastructure. No individual user tracking. No data shared with third parties. The product knows how many people visited, not who they are. | Products running self-hosted Plausible, self-hosted Umami, custom minimal analytics |
 | 100% | No analytics at all, or server-side request logs only (access logs analyzed without client-side tracking). The product genuinely doesn't track user behavior beyond what the web server naturally records. No JavaScript analytics of any kind. | Signal, Pinboard, static sites, most CLI tools, open-source projects with no analytics |
 
-**Scoring notes**: Check page source and network requests for analytics scripts. Classify: GA4/GA3 (25%), Hotjar/FullStory/session recording (0-25%), Fathom/SimpleAnalytics hosted (50%), Plausible/Umami self-hosted (75%), no analytics JS (100%). If multiple analytics tools are present, score based on the most invasive one. Self-hosted vs hosted matters because self-hosted means data stays on their infrastructure.
+**Tracking quality taxonomy** (score ranges by tracking category):
+- **No tracking / server logs only**: 90-100%
+- **Self-hosted privacy-respecting** (Plausible, Umami self-hosted): 75-90%
+- **First-party analytics** (custom, no third-party data sharing): 70-85%
+- **Privacy-respecting third-party** (Fathom, Simple Analytics hosted): 50-65%
+- **Standard surveillance** (GA4, Mixpanel without user ID): 20-35%
+- **Advertising/profiling** (GA4 + Facebook Pixel, session recording): 5-20%
+- **Data brokering** (selling behavioral data to third parties): 5%
+
+**Scoring notes**: Check page source and network requests for analytics scripts. Use the taxonomy above to classify. If multiple analytics tools are present, score based on the most invasive one. Self-hosted vs hosted matters because self-hosted means data stays on their infrastructure.
 
 ---
 
@@ -148,7 +157,7 @@ Reference: check-inventory.md
 | Score | Behavioral Description | Product Example |
 |-------|----------------------|-----------------|
 | 0% (5% floor) | DNT actively disrespected. Tracking behavior identical regardless of DNT header. The product may even fingerprint users who set DNT (using the header itself as a tracking signal). No acknowledgment that DNT exists. | Most commercial web platforms, ad-supported services, products that treat DNT as irrelevant (which is most of the web) |
-| 25% | DNT acknowledged in privacy policy but not honored in practice. The policy mentions DNT but tracking behavior is unchanged when the header is present. Lip service without implementation. | Products with "we acknowledge DNT" in legal text but no technical implementation |
+| 25% | DNT acknowledged in privacy policy but not honored in practice. The policy mentions DNT but tracking behavior is unchanged when the header is present. Lip service without implementation. **Note**: Acknowledging DNT and explicitly dismissing it ("We do not respond to DNT signals") is worse than silent ignorance — it demonstrates awareness of the user's preference and conscious choice to override it. Score 15-20% for explicit dismissal. | Products with "we acknowledge DNT" in legal text but no technical implementation, "We do not respond to DNT signals" in privacy policy |
 | 50% | DNT partially honored. Some tracking disabled when DNT is set (e.g., analytics reduced to aggregate-only) but not all. Third-party trackers may still fire. The product makes an effort but doesn't follow through completely. | Products that disable their own analytics on DNT but don't control third-party scripts |
 | 75% | DNT fully honored for first-party tracking. When DNT is set, no analytics, no tracking cookies, no behavioral data collection from first-party systems. Third-party resources (CDN, fonts) may still make requests but no tracker scripts load. Clear documentation of DNT behavior. | Products with documented DNT respect, privacy-focused services that disable analytics on DNT |
 | 100% | DNT is moot because there's nothing to track. The product has no tracking to disable. DNT header makes no difference because the baseline behavior is already zero-tracking. Alternatively: the product explicitly documents that it honors DNT and verifiably does so. | Signal, products with zero analytics, privacy-first tools where DNT is the default behavior |
@@ -281,6 +290,6 @@ Reference: check-inventory.md
 | 75% | No dark patterns detected. All choices presented equally. Pricing is transparent and all tiers are visible. Decline buttons are neutral ("No thanks" or "Cancel"). No pre-checked boxes. No hidden costs. The product respects your autonomy in every interaction. Rare edge case: a mildly leading question in an optional survey. | Basecamp (transparent pricing, no dark patterns), Stripe (clear flows), well-designed indie products |
 | 100% | Anti-dark-pattern design. The product actively ensures informed decisions. Pricing includes comparison tools. Decline is as easy as accept. Warnings before irreversible actions. Plain language everywhere — no double negatives, no legal-speak in consent flows. The UX is designed as if the user's lawyer is watching. | PPQ.AI (pay per use, no tricks), Signal (zero manipulation), products with "user-first" as a demonstrable design principle |
 
-**Scoring notes**: Walk through every conversion flow: signup, upgrade, cancel, decline-offer, unsubscribe. Check for: confirmshaming (emotional language on decline buttons), hidden costs (fees appearing at checkout), pre-checked boxes, visual manipulation (bright accept vs muted decline), forced continuity (trial-to-paid without clear warning), trick questions (double negatives), roach motels (easy in, hard out). Score on the worst pattern found, not the average — one dark pattern in a critical flow (checkout, cancellation) is enough to cap at 50%.
+**Scoring notes**: Walk through every conversion flow: signup, upgrade, cancel, decline-offer, unsubscribe. Check for: confirmshaming (emotional language on decline buttons), hidden costs (fees appearing at checkout), pre-checked boxes, visual manipulation (bright accept vs muted decline), forced continuity (trial-to-paid without clear warning), trick questions (double negatives), roach motels (easy in, hard out), **import without matching export** (the product lets you import data easily but has no export — you're invited in but can't leave with your work). Score on the worst pattern found, not the average — one dark pattern in a critical flow (checkout, cancellation) is enough to cap at 50%.
 
 ---

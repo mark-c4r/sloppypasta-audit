@@ -23,19 +23,35 @@ Reference: check-inventory.md
 
 ---
 
-## 2.2 Copy Is Interface Design
+## 2.2a Copy Guides Action
 
-**What it measures**: Whether the product's text actively guides, orients, and instructs users — or whether it's decorative filler disconnected from the interface.
+**What it measures**: Whether the product's text tells you what to do, where you are, and what went wrong. Error messages, empty states, labels, CTAs.
 
 | Score | Behavioral Description | Product Example |
 |-------|----------------------|-----------------|
-| 0% (5% floor) | Copy actively misleads or obstructs. Button labels don't match actions. Error messages are meaningless ("Error: null"). Placeholder text shipped to production ("Lorem ipsum" or "Add description here"). The text makes the product harder to use. | Products with "Click here" buttons everywhere, error modals showing stack traces, shipped placeholder text |
-| 25% | Copy exists but doesn't guide. Generic labels ("Submit", "Cancel", "OK") that could belong to any product. Empty states say "No items found" with no next step. Onboarding text is marketing copy pasted into a tooltip. The text occupies space without earning it. | Products with dead-end empty states ("No results"), generic form labels, tooltip text copied from the marketing site |
-| 50% | Copy is correct but passive. Labels accurately describe features. Error messages name the problem. But the text doesn't anticipate what the user needs next. No proactive guidance, no personality, no awareness of context. Functional but forgettable. | Average web apps with accurate but generic copy |
-| 75% | Copy works as a guide. Empty states suggest actions ("No projects yet — create your first one"). Error messages explain what happened AND what to do. Labels use the user's vocabulary, not the developer's. The text anticipates confusion and prevents it. | Basecamp's interface copy, Notion's empty states, Linear's contextual help |
-| 100% | Copy is inseparable from the interface. Remove the text and the product breaks. Labels teach the product's mental model. Microcopy handles edge cases gracefully. The voice is consistent, the tone matches the moment (serious for errors, encouraging for empty states). The text is the interface. | Stripe's API documentation (copy IS the product), Superhuman's command labels |
+| 0% (5% floor) | No guidance anywhere. Error messages say "Error." Empty states are blank. Button labels don't match actions ("Click here" everywhere). Placeholder text shipped to production. The user must guess every action — the text is actively hostile to comprehension. | Products with "Click here" buttons everywhere, stack trace error modals, "Lorem ipsum" in production |
+| 25% | Generic labels that could belong to any product. "Submit", "Cancel", "OK" — nothing product-specific. Empty states say "No items found" with no next step. Error messages name the error code but not the fix. Onboarding text is marketing copy pasted into tooltips. The text occupies space without guiding action. | Dead-end empty states, generic form labels, "Something went wrong" errors |
+| 50% | Labels accurately describe features. Error messages name the problem. But the text doesn't anticipate what the user needs next — no proactive guidance, no awareness of context. You can figure out what to do, but the copy doesn't help you. Functional but passive. | Average web apps with accurate but generic copy |
+| 75% | Copy actively guides. Empty states suggest specific actions ("No projects yet — create your first one"). Error messages explain what happened AND what to try next. Labels use the user's vocabulary, not the developer's. The text anticipates confusion and prevents it before the user feels lost. | Basecamp's empty states, Notion's contextual help, Linear's error messages |
+| 100% | Every state has specific, actionable copy. Errors explain what went wrong AND what to try. Empty states suggest next steps with specific CTAs. Labels disambiguate without tooltips. The copy alone — without any visual design — tells you where you are, what you can do, and what happens next. | Stripe's API documentation (copy IS the product), Superhuman's command labels |
 
-**Scoring notes**: Test by reading only the text with the visual design removed. Does the copy alone tell you where you are, what you can do, and what happens next? Score empty states, error messages, onboarding text, and button labels separately — the worst one anchors the score.
+**Scoring notes**: Test by reading only the text with the visual design removed. Score empty states, error messages, onboarding text, and button labels separately — the worst one anchors the score. A product with excellent labels but dead-end empty states scores on the weakest element.
+
+---
+
+## 2.2b Copy Shows Authorship
+
+**What it measures**: Whether the copy could only exist in this product. Voice, specificity, personality — or interchangeable template text.
+
+| Score | Behavioral Description | Product Example |
+|-------|----------------------|-----------------|
+| 0% (5% floor) | All copy is interchangeable template text. "Welcome to [Product]. Get started today!" Nothing identifies this as a specific product. You could swap the product name and the copy would fit anywhere. Zero voice, zero personality, zero specificity. The copy was generated, not written. | AI-generated SaaS landing pages, white-label products with find-and-replaced names |
+| 25% | Copy has a consistent tone but no distinctive voice. Professional, competent, forgettable. "We help teams collaborate more effectively." True of any product. Domain-specific jargon appears but doesn't reveal a perspective. The copy sounds like it was written by someone who read the brief but doesn't use the product. | Generic B2B SaaS copy, most corporate product pages |
+| 50% | Occasional personality breaks through. Most copy is standard but some moments — an error message, a loading screen, a tooltip — reveal a human made a deliberate choice. The voice isn't consistent but it's present in spots. You can tell someone cared about some of the words. | Products with one memorable 404 page but generic everything else |
+| 75% | Copy has a recognizable voice. Reading the text without the product name, you could identify it. Specific references, domain language, opinions about how things should work. The copy reflects the team's perspective, not a template. Personality is consistent across surfaces, not just sprinkled in easter eggs. | Basecamp ("We don't do that here"), Pinboard's feature descriptions, Linear's opinionated product copy |
+| 100% | Copy has a distinctive voice that could not exist in any other product. Specific references, opinions, humor, or domain language that only this team would write. The writing has idiosyncratic rhythm, personal vocabulary, and a perspective that permeates every surface. Remove the logo and you'd still know the product. | Craig Mod's products, Panic's apps (Transmit, Nova), Superhuman's entire copy voice |
+
+**Scoring notes**: Read the product's copy with the brand name removed. Could this text belong to any other product in the same category? If yes, score below 50%. Products with template-derived copy ("Built for teams who value...") score 25% regardless of polish. Voice consistency matters — one memorable 404 page doesn't compensate for generic everything else.
 
 ---
 

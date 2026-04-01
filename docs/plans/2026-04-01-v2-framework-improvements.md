@@ -1,6 +1,6 @@
 ---
 ticket: sloppypasta-audit#2
-status: active
+status: completed
 appetite: L
 risk_score: 4
 project: sloppypasta-audit
@@ -50,23 +50,23 @@ Fix the measurement instruments (checks and anchors), not the scoring math. Phas
 
 ## Acceptance Criteria
 
-- [ ] Check 3.2 (Physical Obviousness) removed from framework
-- [ ] Check 1.2 (Social Authenticity) has pre-community N/A condition
-- [ ] Every audit report includes an Audit Scope section
-- [ ] Grade assignment is programmatic (computed from score, not agent judgment)
-- [ ] Checks scoring < 70% must cite specific evidence in reports
-- [ ] Check 2.2 split into 2.2a (guides action) + 2.2b (shows authorship)
-- [ ] Check 7.3 split into 7.3a (AI transparency) + 7.3b (human authorship signal)
-- [ ] Check 4.1 has maturity-adjusted anchors
-- [ ] Cat 3 remaining anchors (3.1, 3.3, 3.4, 3.6) have sharper differentiation
-- [ ] 5.5 anchors include explicit tracking quality taxonomy
-- [ ] 6.1 anchors include rugpull severity spectrum
-- [ ] Validation re-scoring of 5 products shows improved Care-dimension discrimination
-- [ ] scoring-reference.md and individual anchor files are in sync
-- [ ] 3-check minimum rule changed to 2-check minimum in text (matches existing code)
-- [ ] check-inventory.md Cat 1/Cat 7 header weights corrected to match scoring-reference.md
-- [ ] SKILL.md python script updated for new check structure (47 checks, 48 with 8.4)
-- [ ] Phase 2 decision documented with data (weight shift needed or not?)
+- [x] Check 3.2 (Physical Obviousness) removed from framework
+- [x] Check 1.2 (Social Authenticity) has pre-community N/A condition
+- [x] Every audit report includes an Audit Scope section
+- [x] Grade assignment is programmatic (computed from score, not agent judgment)
+- [x] Checks scoring < 70% must cite specific evidence in reports
+- [x] Check 2.2 split into 2.2a (guides action) + 2.2b (shows authorship)
+- [x] Check 7.3 split into 7.3a (AI transparency) + 7.3b (human authorship signal)
+- [x] Check 4.1 has maturity-adjusted anchors
+- [x] Cat 3 remaining anchors (3.1, 3.3, 3.4, 3.6) have sharper differentiation
+- [x] 5.5 anchors include explicit tracking quality taxonomy
+- [x] 6.1 anchors include rugpull severity spectrum
+- [x] Validation re-scoring of 5 products shows improved Care-dimension discrimination
+- [x] scoring-reference.md and individual anchor files are in sync
+- [x] 3-check minimum rule changed to 2-check minimum in text (matches existing code)
+- [x] check-inventory.md Cat 1/Cat 7 header weights corrected to match scoring-reference.md
+- [x] SKILL.md python script updated for new check structure (47 checks)
+- [x] Phase 2 decision documented with data (no weight shift — gap is inherent, not a flaw)
 
 ## Slices
 

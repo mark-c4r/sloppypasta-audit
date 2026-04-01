@@ -27,6 +27,8 @@ Reference: check-inventory.md
 
 **What it measures**: Whether engagement metrics, followers, and community participation reflect real human activity versus manufactured or bot-driven signals.
 
+**N/A condition**: If product has no discoverable social media presence and no evidence of community engagement → N/A.
+
 | Score | Behavioral Description | Product Example |
 |-------|----------------------|-----------------|
 | 0% (5% floor) | Community is visibly manufactured. Follower counts wildly disproportionate to engagement. Comment sections filled with generic praise ("Great post!", "So helpful!") from accounts with no history. Obvious bot networks amplifying content. Dead internet in human clothing. | Products with purchased followers, crypto projects with bot armies, engagement-farmed launch campaigns |

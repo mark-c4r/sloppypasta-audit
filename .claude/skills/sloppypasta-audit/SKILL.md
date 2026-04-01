@@ -2,7 +2,7 @@
 name: sloppypasta-audit
 description: >
   Run the Sloppypasta Audit on a product. Scores craft, sovereignty, honesty,
-  and AI slop detection across 8 categories (46 checks). Outputs a graded
+  and AI slop detection across 8 categories (47 checks). Outputs a graded
   markdown scorecard with improvement suggestions. Use when the user says
   /sloppypasta-audit or asks to audit a product.
 allowed-tools: Bash(python3 -c *, curl *), Read, Grep, Glob, WebFetch, WebSearch, Write
@@ -51,7 +51,7 @@ Example: `/sloppypasta-audit Twitter`
 
 ### Reference File
 
-Read ONE file before scoring — it contains all 46 checks, scale anchors, detection markers, and scoring procedures:
+Read ONE file before scoring — it contains all 47 checks, scale anchors, detection markers, and scoring procedures:
 
 ```
 ~/Coding/sloppypasta-audit/docs/scoring-reference.md
@@ -68,6 +68,7 @@ For each V1 check in the inventory:
 3. Examine the product against the behavioral descriptions at each anchor level (0%, 25%, 50%, 75%, 100%)
 4. Assign a score from 5 to 100 (5% floor -- never assign below 5)
 5. Record a one-sentence justification citing the specific observation that determined the score
+5a. If the score is below 70%, the justification MUST include one specific observation: a URL, code pattern, exact text quote, or screenshot description. Generic justifications like "seems low quality" are not sufficient.
 6. If the check has a conditional tag and the condition does not apply to this product, mark N/A
 
 **Score ALL checks in ALL categories before computing any aggregates. Do not skip categories.**
@@ -144,13 +145,13 @@ import math
 # Fill in ALL check scores. Use None for N/A checks.
 cat_checks = {
     1: [XX, XX],
-    2: [XX, XX, XX],
-    3: [XX, XX, XX, XX, XX, XX],
+    2: [XX, XX, XX, XX],  # 2.1, 2.2a, 2.2b, 2.3
+    3: [XX, XX, XX, XX, XX],  # 3.1, 3.3, 3.4, 3.5, 3.6 (3.2 removed)
     4: [XX, XX, XX, XX],
     '5.5': [XX, XX, XX, XX, XX, XX, XX, XX],  # 5.5a-h, None if N/A
     5: [XX, XX, XX, XX, 'composite', XX, XX, XX, XX, XX],
     6: [XX, XX, XX, XX, XX, XX, XX, XX, XX, XX, XX, XX, XX],
-    7: [XX, XX, XX, XX, XX],
+    7: [XX, XX, XX, XX, XX, XX],  # 7.1, 7.2, 7.3a, 7.3b, 7.4, 7.5
     8: [XX, XX, XX],
 }
 weights = {1:0.10, 2:0.10, 3:0.10, 4:0.10, 5:0.15, 6:0.20, 7:0.15, 8:0.10}
@@ -187,6 +188,8 @@ If the script output differs from your manual calculation by more than 1 point, 
 
 Output a markdown report with this structure. Save to `~/Coding/sloppypasta-audit/docs/audits/YYYY-MM-DD-[product-slug].md`.
 
+**Grade assignment**: Always use the python script's grade output from Phase 3. Never compute or override the grade manually. If the script output and your judgment disagree, the script wins.
+
 ```markdown
 # Sloppypasta Audit: [Product Name]
 
@@ -196,6 +199,15 @@ Output a markdown report with this structure. Save to `~/Coding/sloppypasta-audi
 **Audit Mode**: External (V1, single-agent)
 **Conditions**: [list of activated tags, e.g. "[if:content], [if:identity]"]
 **Applicable Checks**: [X] of 46 ([Z] conditional activated, [W] N/A)
+
+---
+
+## Audit Scope
+
+**Surfaces assessed**: [list of surfaces directly examined — e.g., landing page, pricing page, about page, terms of service, app store listing]
+**Surfaces via proxy**: [surfaces inferred but not directly accessed — e.g., mobile app behavior inferred from responsive site, payment flow inferred from pricing page]
+**Surfaces not assessed**: [surfaces that exist but could not be examined — e.g., native mobile app (no device available), admin dashboard (requires account)]
+**Limitations**: [any constraints on the audit — e.g., "External audit only — no account created, no payment flow tested, no mobile app installed"]
 
 ---
 
@@ -280,11 +292,13 @@ Each agent receives: raw fetched page content + product type + conditional tags 
 
 Each agent scores independently and returns ONLY check scores + justifications. Agents do NOT compute category or overall scores.
 
+For checks scoring below 70%, justifications must include one specific observation (URL, code pattern, exact text, screenshot description). Generic justifications are not sufficient.
+
 | Agent | Categories | Also needs from scoring-reference.md |
 |-------|-----------|--------------------------------------|
 | craft-scorer | Cat 1-4 (15 checks) | Text Slop Markers (after 1.1, used by 2.1, 2.3), Visual Slop Markers (after 3.6, used by 4.1, 4.3) |
 | conduct-scorer | Cat 5 (10 + 8 sub-checks) | 5.5 sub-check scales |
-| structure-scorer | Cat 6-8 (21 checks) | Sovereignty test procedures (inline in Cat 6) |
+| structure-scorer | Cat 6-8 (22 checks) | Sovereignty test procedures (inline in Cat 6) |
 
 ### Phase 3: Aggregate (orchestrator)
 - Collect score tables from all 3 agents

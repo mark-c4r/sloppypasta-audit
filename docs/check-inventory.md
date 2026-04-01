@@ -3,14 +3,14 @@
 This is the definitive V1 check list. All scale anchors, detection references, and the audit skill reference this document.
 
 **Version**: V1 (HIGH measurability only)
-**Total checks**: 46 (37 universal + 4 content-conditional + 5 app-type-conditional)
+**Total checks**: 47 (38 universal + 4 content-conditional + 5 app-type-conditional)
 **Typical web app**: ~41 applicable checks
 
 ---
 
 ## Cat 1: Slop Detection — "Can you smell the AI?"
 
-**Weight**: 15% · **V1 checks**: 2
+**Weight**: 10% · **V1 checks**: 2
 
 | # | Check | Condition | Notes |
 |---|-------|-----------|-------|
@@ -21,24 +21,24 @@ This is the definitive V1 check list. All scale anchors, detection references, a
 
 ## Cat 2: Writing & Thinking — "Does the text show a thinking human?"
 
-**Weight**: 10% · **V1 checks**: 3
+**Weight**: 10% · **V1 checks**: 4
 
 | # | Check | Condition | Notes |
 |---|-------|-----------|-------|
 | 2.1 | Economy of words | Universal | *Promoted from MEDIUM via banned-word frequency metric.* Count banned words/phrases per 1000 words (relative density, not binary). 49 banned words, 38 phrases, 16 openers. |
-| 2.2 | Copy is interface design | Universal | Does copy guide, orient, instruct? Or is it decorative filler / placeholder text? |
+| 2.2a | Copy guides action | Universal | Does text tell you what to do, where you are, what went wrong? Error messages, empty states, labels, CTAs. |
+| 2.2b | Copy shows authorship | Universal | Could this copy only exist in this product? Voice, specificity, personality vs. interchangeable template text. |
 | 2.3 | No throat-clearing | `[if:content]` | No filler openings ("In today's landscape..."), no hedging seesaws, no padding paragraphs. Gets to the point. |
 
 ---
 
 ## Cat 3: Design & Interface — "Does the look show care?"
 
-**Weight**: 10% · **V1 checks**: 6
+**Weight**: 10% · **V1 checks**: 5
 
 | # | Check | Condition | Notes |
 |---|-------|-----------|-------|
 | 3.1 | Information density | Universal | Items per viewport. Respects screen real estate. Whitespace is intentional grouping, not uniform padding. |
-| 3.2 | Physical obviousness | Universal | Usable without instruction. Affordances are clear. Controls look interactive. |
 | 3.3 | Design system consistency | Universal | Consistent tokens, spacing, type scale across pages. **Window resize test**: slowly drag to ~800px tablet — if layout breaks, AI generated it. |
 | 3.4 | Self-evident UI | Universal | No tutorial needed. Undo/back available. Empty states are designed (not "No items found" dead ends). User control preserved. |
 | 3.5 | Modal-free experience | Universal | No hostile modals: popup-on-load, newsletter overlays, login-wall interstitials. Functional dialogs (confirm delete) are fine. |
@@ -119,13 +119,14 @@ Mobile sub-checks (5.5f–h) are N/A for web-only products — excluded from the
 
 ## Cat 7: Honesty & Transparency — "Does it tell you the truth?"
 
-**Weight**: 10% · **V1 checks**: 5
+**Weight**: 15% · **V1 checks**: 6
 
 | # | Check | Condition | Notes |
 |---|-------|-----------|-------|
 | 7.1 | Business model visible | Universal | Can you see how they make money? Explicit pricing/model (best) → implied → ambiguous → hidden/misleading (worst). |
 | 7.2 | No marketing exaggeration | Universal | Claims match reality. No "revolutionary," "AI-powered everything," vaporware promises. |
-| 7.3 | AI disclosed and labeled | Universal | AI-generated content clearly marked. Not pretending human-written material is original. |
+| 7.3a | AI content transparency | Universal | If AI used in user-facing content, is it disclosed at point of encounter? N/A if no user-facing AI detected. |
+| 7.3b | Human authorship signal | Universal | Does content show evidence of human creation? Voice, opinions, personal references, irregular rhythm. |
 | 7.4 | No degraded free experience | Universal | Free tier is genuinely useful, not crippled to force upgrade. Feature hostage-taking penalized. |
 | 7.5 | Dialogue, not broadcast | `[if:content]` | *Restored from V1 (VH-4).* Feedback channel exists: reply mechanism, issue tracker, public discussion forum. Can you talk back? |
 
@@ -148,14 +149,14 @@ Mobile sub-checks (5.5f–h) are N/A for web-only products — excluded from the
 | Cat | Name | V1 Checks | Weight |
 |-----|------|-----------|--------|
 | 1 | Slop Detection | 2 | 10% |
-| 2 | Writing & Thinking | 3 | 10% |
-| 3 | Design & Interface | 6 | 10% |
+| 2 | Writing & Thinking | 4 | 10% |
+| 3 | Design & Interface | 5 | 10% |
 | 4 | Product Craft | 4 | 10% |
 | 5 | Product Conduct | 10 | 15% |
 | 6 | Sovereignty & Privacy | 13 | 20% |
-| 7 | Honesty & Transparency | 5 | 15% |
+| 7 | Honesty & Transparency | 6 | 15% |
 | 8 | Economic Alignment | 3 | 10% |
-| **Total** | | **46** | **100%** |
+| **Total** | | **47** | **100%** |
 
 **Dimension breakdown**:
 - Care (Slop + Writing + Design + Craft) = 40%
@@ -176,7 +177,7 @@ Checks tagged with a condition activate based on what the product does. If a con
 | `[if:messaging/social]` | Product has communication or community features | Chat apps, forums, social networks |
 | `[if:payments]` | Product handles money (wallets, subscriptions, V4V) | Wallets, exchanges, tipping services |
 
-**Minimum 3 active checks per category** required. If conditional exclusions drop a category below 3, exclude the entire category and redistribute its weight proportionally across remaining categories.
+**Minimum 2 active checks per category** required. If conditional exclusions drop a category below 2, exclude the entire category and redistribute its weight proportionally across remaining categories.
 
 ---
 
@@ -190,7 +191,8 @@ Checks tagged with a condition activate based on what the product does. If a con
 | 1.4 | 1.2 | Social authenticity | Merged with 1.5 + 7.6 |
 | 1.5 | — | Dead internet signals | Merged into V1 1.2 |
 | 2.1 | 2.1 | Economy of words | Promoted from MEDIUM via banned-word frequency |
-| 2.2 | 2.2 | Copy is interface design | Kept |
+| 2.2 | 2.2a | Copy guides action | Split from 2.2 |
+| — | 2.2b | Copy shows authorship | Split from 2.2 |
 | 2.3 | — | Proof of thought | Deferred: MEDIUM |
 | 2.4 | 2.3 | No throat-clearing | Kept |
 | 2.5 | — | Distinctive voice | Deferred: MEDIUM |
@@ -242,7 +244,8 @@ Checks tagged with a condition activate based on what the product does. If a con
 | 6.17 | 6.13 | Custodial vs non-custodial | Kept |
 | 7.1 | 7.1 | Business model visible | Kept |
 | 7.2 | 7.2 | No marketing exaggeration | Kept |
-| 7.3 | 7.3 | AI disclosed and labeled | Kept |
+| 7.3 | 7.3a | AI content transparency | Split from 7.3 |
+| — | 7.3b | Human authorship signal | Split from 7.3 |
 | 7.4 | — | Marketing as enthusiasm | Deferred: MEDIUM |
 | 7.5 | — | Honest about limitations | Deferred: MEDIUM |
 | 7.6 | — | Earned audiences | Merged into V1 1.2 |
