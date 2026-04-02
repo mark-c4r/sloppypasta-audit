@@ -385,10 +385,10 @@ Whether the product gates content or functionality behind forced signups, login 
 | 5% | Content visible for 1-2 seconds then obscured by a full-screen login wall. Public content (user profiles, posts, images) requires authentication to view. The URL works but the product holds the content hostage until you create an account. The "fuck-you" login wall: you can see it exists but you can't have it unless you hand over your identity. | Instagram, Quora, LinkedIn |
 | 25% | Partial access with aggressive gating. You can see some content but hit a wall quickly — "Read more" requires signup, search results require login to click through, features locked behind mandatory accounts for basic use. The product lets you taste it then slams the door. | Medium, Twitter/X, Pinterest |
 | 50% | Reasonable gating with clear value exchange. Free content is genuinely accessible. Paid features are clearly separated from free ones. Signup required for personalized features (saving, preferences) but not for consuming public content. The gate exists but it's in a sensible place. | Freemium SaaS with generous free tiers |
-| 75% | Minimal gating. Almost all content and core features accessible without an account. Signup adds personalization or collaboration features, not access to what's already there. No login walls on public content. The product trusts you to decide if it's worth creating an account. | Hacker News, DuckDuckGo |
+| 75% | Minimal gating. Almost all content and core features accessible without an account. Signup adds personalization or collaboration features, not access to what's already there. No login walls on public content. The product trusts you to decide if it's worth creating an account. **OR**: the product is honestly paid — no free tier, clear pricing upfront, no dark patterns in the purchase flow. The distinction: a gate that says "sign up to see what exists" is hostile; a gate that says "this costs $20/month" is honest commerce. | Hacker News, DuckDuckGo, Claude Code (paid-only, upfront pricing) |
 | 100% | Zero access gates. Everything the product does is accessible without signup, login, or payment. Identity is optional and additive (saves preferences, enables sync) not required for core value. The product demonstrates its worth before asking for anything. | Pinboard, Wikipedia, PPQ.AI |
 
-**Scoring**: Visit the product in a private/incognito browser. How much of the advertised functionality can you access without creating an account? A login wall on public content (Instagram pattern) is 0%. A paywall on premium features with a genuine free tier is 50%. Score based on the ratio of accessible value to gated value, weighted by what a first-time visitor came for.
+**Scoring**: Visit the product in a private/incognito browser. How much of the advertised functionality can you access without creating an account? A login wall on public content (Instagram pattern) is 0%. A paywall on premium features with a genuine free tier is 50%. Score based on the ratio of accessible value to gated value, weighted by what a first-time visitor came for. **Honest commerce exception**: Paid-only products with no free tier, no dark patterns in the purchase flow, and upfront pricing score 75%. This check penalizes manipulative gates, not honest commerce.
 
 ### 5.2 No Manufactured Urgency [Universal]
 
@@ -631,6 +631,18 @@ Absence of deceptive UX patterns — confirmshaming, hidden costs, trick questio
 
 ## Cat 6: Sovereignty & Privacy (weight: 20%, 13 checks)
 
+**Subcluster aggregation**: Cat 6 uses a two-level geometric mean to prevent a single architectural choice (e.g., being a centralized platform) from tanking 5+ checks and amplifying its penalty through the flat geomean. Checks are grouped into 5 subclusters; each subcluster score is the geomean of its applicable checks; the Cat 6 score is the geomean of applicable subcluster scores. All 13 checks are still scored individually and reported in full.
+
+| Subcluster | Checks |
+|---|---|
+| Exit & Continuity | 6.1 (Rugpull), 6.2 (Exit Cost) |
+| Identity & Keys | 6.3 (Identity Sovereignty), 6.11 (Key Management) [if:identity] |
+| Protocol & Transparency | 6.4 (Protocol vs Platform), 6.5 (Self-Hostable), 6.7 (Source Code), 6.12 (Relay Independence) [if:messaging/social] |
+| Payment & Provenance | 6.6 (Payment Privacy), 6.8 (Provenance) [if:content], 6.13 (Custodial) [if:payments] |
+| Distribution | 6.9 (Distribution Independence) [if:mobile], 6.10 (No Play Services) [if:mobile] |
+
+Subclusters with 0 applicable checks are excluded. Subclusters with 1 applicable check use that score directly.
+
 ### 6.1 Rugpull Resistance [Universal]
 
 How resistant the product is to unilateral changes by its operator — price increases, feature removal, terms changes, shutdown.
@@ -680,7 +692,7 @@ How much identity control the user retains. Keypair-based identity (user holds k
 | 75% | Pseudonymous account. Username or handle is the primary identity. No email required for core function (or email is optional/unverified). No real-name requirement. The product knows you as a persistent pseudonym but has no link to your legal identity. You choose what to reveal. | Hacker News |
 | 100% | Keypair-based identity. The user generates their own identity via cryptographic keypair. No server-side identity required. No email, no phone, no username — just a public key. Identity is portable across clients and sovereign by construction. The product cannot revoke your identity because it never issued it. | Nostr, Bitcoin wallets, Damus, Primal |
 
-**Scoring**: Score based on the minimum identity requirement for core functionality, not optional features. If the product works with email but degrades without phone verification, score based on the degraded experience. Government ID is always 5% (floor) — no exception for "regulatory compliance" because the product chose its domain. Phone number is 25% maximum, including Signal — the phone requirement is a real sovereignty limitation even in a privacy-focused product. Test procedure: Go through signup flow. Note every piece of identity information required.
+**Scoring**: Score based on the minimum identity requirement for core functionality, not optional features. If the product works with email but degrades without phone verification, score based on the degraded experience. Government ID is always 5% (floor) — no exception for "regulatory compliance" because the product chose its domain. Phone number is 25% maximum, including Signal — the phone requirement is a real sovereignty limitation even in a privacy-focused product. Products with no user accounts or login of any kind (pure CLI tools, static sites, open-source libraries) score 100% — no server-side identity required means full identity sovereignty. Test procedure: Go through signup flow. Note every piece of identity information required.
 
 ### 6.4 Protocol vs Platform [Universal]
 
@@ -838,7 +850,7 @@ Whether you can see how the product makes money — explicit pricing, clear reve
 | 75% | Business model clearly stated. Pricing page is prominent and complete. The product explains how it makes money and how that aligns with user interests. No hidden revenue streams. If there's a free tier, the funding model for free users is explained. The product treats its business model as a feature, not a secret. | Basecamp, Pinboard |
 | 100% | Business model is a trust signal. The product leads with how it makes money because the model itself builds trust. Pay-per-use pricing visible before signup. No hidden fees, no future pricing uncertainty. The business model is as transparent as the product itself. You know exactly what you're paying for, what the company earns, and how those incentives align with your interests. | PPQ.AI, Signal |
 
-**Scoring**: Visit the product as a new user. Can you find how it makes money within 2 clicks from the homepage? Pricing page with clear tiers = minimum 50%. "Contact sales" as the only pricing option = 25%. No pricing information and no visible revenue model = 0%. Products that proactively explain WHY their business model benefits users score 75%+. VC-funded products with no revenue model yet are inherently risky for users — score based on what's visible, not what's planned.
+**Scoring**: Visit the product as a new user. Can you find how it makes money within 2 clicks from the homepage? Pricing page with clear tiers = minimum 50%. "Contact sales" as the only pricing option = 25%. No pricing information and no visible revenue model = 0%. Products that proactively explain WHY their business model benefits users score 75%+. VC-funded products with no revenue model yet are inherently risky for users — score based on what's visible, not what's planned. FOSS products with no revenue model score based on sustainability transparency: a project with clear "this is volunteer work, no funding needed" on GitHub scores 75-100%; one with no sustainability explanation scores 50% — the question "how does this keep existing?" is still valid.
 
 ### 7.2 No Marketing Exaggeration [Universal]
 
@@ -894,9 +906,9 @@ Whether the free tier is genuinely useful on its own, or whether it's deliberate
 | 25% | Free tier is a demo, not a product. Core functionality is technically available but crippled — aggressive limits (3 projects, 100 records), watermarks on output, "powered by" branding you can't remove, nag screens on every session. The free experience is designed to be frustrating enough to force an upgrade, not useful enough to be a product. | Crippling limits, watermarks, persistent upgrade nags |
 | 50% | Free tier is usable but constrained. Genuine functionality with reasonable limits. You can accomplish real work but hit ceilings that naturally drive upgrades (storage limits, team size limits, feature caps). The constraints feel like real product decisions, not artificial punishment. Upgrade messaging exists but isn't aggressive. | Notion free, Figma free, GitHub free |
 | 75% | Free tier is a real product. Full core functionality without crippling limits. Paid tier adds power-user features, team collaboration, or scale — not basic functionality. A user who never pays gets genuine value indefinitely. The free tier is good enough that paying feels like a choice, not a necessity. | Basecamp personal, GitHub free |
-| 100% | No degraded experience at any tier. Either the product is fully free (donation/grant-funded), or there's only one tier (you pay or you don't use it — honest about the exchange). No artificial limitations designed to frustrate. If a free tier exists, it's indistinguishable from paid for individual use. | Signal, Wikipedia, PPQ.AI |
+| 100% | No degraded experience at any tier. Either the product is fully free (donation/grant-funded), or there's only one tier (you pay or you don't use it — honest about the exchange). No artificial limitations designed to frustrate. If a free tier exists, it's indistinguishable from paid for individual use. | Signal, Wikipedia, PPQ.AI, Claude Code (one entry price, no free tier to degrade) |
 
-**Scoring**: Sign up for the free tier and use it for a real task. Ask: could someone genuinely use this product without paying, indefinitely? Does the free experience feel like a product or a demo? Count upgrade nags encountered during a 30-minute session. Products with no free tier (paid only) should be scored based on whether their trial period is genuinely useful (not just a countdown to payment). Pay-per-use products with no subscription score 100% — every use is a complete experience.
+**Scoring**: Sign up for the free tier and use it for a real task. Ask: could someone genuinely use this product without paying, indefinitely? Does the free experience feel like a product or a demo? Count upgrade nags encountered during a 30-minute session. **Paid-only products**: If there is only one tier (pay or don't use it), score 100% — there is no degraded experience because there is no tier system. If multiple paid tiers exist, score based on whether lower tiers are genuinely useful or deliberately crippled to force upgrades. The check measures tier fairness, not the existence of payment. Pay-per-use products with no subscription score 100% — every use is a complete experience.
 
 ### 7.5 Dialogue, Not Broadcast [if:content]
 

@@ -188,12 +188,27 @@ else:
     print('5.5: N/A')
 cat_checks[5][4] = comp55
 cats = {}
-for c in [1,2,3,4,5,6,7,8]:
+for c in [1,2,3,4,5,7,8]:
     a = [max(s,5) for s in cat_checks[c] if s is not None]
     if len(a) >= 2:
         cats[c] = math.exp(sum(math.log(s) for s in a)/len(a))
     else:
         print(f'Cat {c}: excluded ({len(a)} checks)')
+# Cat 6: two-level subcluster aggregation (fixes double-counting)
+c6 = cat_checks[6]
+subs = {'Exit':[0,1],'Identity':[2,10],'Protocol':[3,4,6,11],'Payment':[5,7,12],'Distrib':[8,9]}
+sub_scores = {}
+for name,idx in subs.items():
+    v = [max(s,5) for i,s in enumerate(c6) if i in idx and s is not None]
+    if v:
+        sub_scores[name] = math.exp(sum(math.log(x) for x in v)/len(v)) if len(v)>1 else v[0]
+if len(sub_scores) >= 2:
+    cats[6] = math.exp(sum(math.log(s) for s in sub_scores.values())/len(sub_scores))
+    print(f'Cat 6 subclusters: '+', '.join(f'{n}={s:.1f}%' for n,s in sub_scores.items()))
+elif len(sub_scores) == 1:
+    cats[6] = list(sub_scores.values())[0]
+else:
+    print('Cat 6: excluded (no applicable subclusters)')
 w = sum(weights[c] for c in cats)
 adj = {c: weights[c]/w for c in cats}
 o = math.exp(sum(adj[c]*math.log(cats[c]) for c in cats))
@@ -291,6 +306,20 @@ and condition tag in Justification.]
 
 ---
 
+## Counterevidence
+
+[For each category scoring below 60%, name one specific factor the audit may be
+underweighting or missing. Cite the check and what evidence would change the score.
+
+Example: "Cat 6 at 25% reflects closed-source architecture, but the team has
+publicly committed to open-sourcing the core in Q3 — if delivered, 6.5 and 6.7
+would both rise significantly."
+
+Generic hedging ("the product has potential") does not satisfy this requirement.
+Name specific checks and specific missing evidence.]
+
+---
+
 ## Priority Improvements
 
 [3-5 specific, actionable improvements sorted by expected impact on overall
@@ -353,6 +382,7 @@ For checks scoring below 70%, justifications must include one specific observati
 - Collect score tables from all 3 agents
 - Compute 5.5 composite from conduct-scorer's sub-check scores
 - Run python3 verification (Phase 3 script above)
+- Write the Counterevidence section (orchestrator has the full picture; individual agents do not)
 - Write full report
 
 ### Agent output format

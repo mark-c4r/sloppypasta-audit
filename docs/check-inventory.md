@@ -99,21 +99,23 @@ Mobile sub-checks (5.5f–h) are N/A for web-only products — excluded from the
 
 **Weight**: 20% · **V1 checks**: 13 (8 universal + 5 conditional)
 
-| # | Check | Condition | Notes |
-|---|-------|-----------|-------|
-| 6.1 | Rugpull resistance | Universal | Can they change terms, raise prices, remove features, shut down unilaterally? Protocol = resistant. Platform = vulnerable. |
-| 6.2 | Exit cost zero | Universal | Data export in standard formats. No vendor lock-in. Can you leave with your data today? |
-| 6.3 | Identity sovereignty | Universal | Keypair (best) → pseudonymous account → email account → phone-verified → gov ID required (worst). |
-| 6.4 | Protocol vs platform | Universal | Open protocol (best) → platform with open API → platform with restricted API → walled garden (worst). |
-| 6.5 | Self-hostable or auditable | Universal | Can you run it yourself? Can you verify what it does? Self-host (best) → auditable source → trust-but-verify → black box (worst). |
-| 6.6 | Privacy-preserving payment | Universal | Accepts Lightning/ecash/Monero (best) → on-chain crypto → privacy card service → credit card only (worst). Credit-card-only = identity permanently linked to purchase. |
-| 6.7 | Source code availability | Universal | FOSS with active maintenance (best) → source-viewable → proprietary free → proprietary paid (worst). |
-| 6.8 | Provenance traceable | `[if:content]` | *Restored from V1 (CI-5).* Content signed, timestamped, attributed. Cryptographic provenance (Nostr events, signed commits) is ideal. |
-| 6.9 | Distribution independence | `[if:mobile]` | Sideloadable APK + F-Droid (best) → App Store + sideload → App Store only (worst). |
-| 6.10 | No Google Play Services dependency | `[if:mobile]` | Works on GrapheneOS/CalyxOS/LineageOS → degrades gracefully → requires Play Services (worst). |
-| 6.11 | Key management sovereignty | `[if:identity]` | NIP-07/NIP-46 external signing (best) → app holds key with export → custodial key management (worst). |
-| 6.12 | Relay/node independence | `[if:messaging/social]` | Works with any relay/node (best) → recommended set → specific relays required (worst). |
-| 6.13 | Custodial vs non-custodial | `[if:payments]` | Non-custodial (best) → custodial with withdrawal → fully custodial (worst). |
+Scoring uses **two-level subcluster aggregation** — geomean per subcluster, then geomean of subclusters for Cat 6. This prevents one architectural choice from tanking 5+ checks simultaneously.
+
+| # | Check | Condition | Subcluster | Notes |
+|---|-------|-----------|------------|-------|
+| 6.1 | Rugpull resistance | Universal | Exit & Continuity | Can they change terms, raise prices, remove features, shut down unilaterally? Protocol = resistant. Platform = vulnerable. |
+| 6.2 | Exit cost zero | Universal | Exit & Continuity | Data export in standard formats. No vendor lock-in. Can you leave with your data today? |
+| 6.3 | Identity sovereignty | Universal | Identity & Keys | Keypair (best) → pseudonymous account → email account → phone-verified → gov ID required (worst). Products with no login score 100%. |
+| 6.4 | Protocol vs platform | Universal | Protocol & Transparency | Open protocol (best) → platform with open API → platform with restricted API → walled garden (worst). |
+| 6.5 | Self-hostable or auditable | Universal | Protocol & Transparency | Can you run it yourself? Can you verify what it does? Self-host (best) → auditable source → trust-but-verify → black box (worst). |
+| 6.6 | Privacy-preserving payment | Universal | Payment & Provenance | Accepts Lightning/ecash/Monero (best) → on-chain crypto → privacy card service → credit card only (worst). Credit-card-only = identity permanently linked to purchase. |
+| 6.7 | Source code availability | Universal | Protocol & Transparency | FOSS with active maintenance (best) → source-viewable → proprietary free → proprietary paid (worst). |
+| 6.8 | Provenance traceable | `[if:content]` | Payment & Provenance | *Restored from V1 (CI-5).* Content signed, timestamped, attributed. Cryptographic provenance (Nostr events, signed commits) is ideal. |
+| 6.9 | Distribution independence | `[if:mobile]` | Distribution | Sideloadable APK + F-Droid (best) → App Store + sideload → App Store only (worst). |
+| 6.10 | No Google Play Services dependency | `[if:mobile]` | Distribution | Works on GrapheneOS/CalyxOS/LineageOS → degrades gracefully → requires Play Services (worst). |
+| 6.11 | Key management sovereignty | `[if:identity]` | Identity & Keys | NIP-07/NIP-46 external signing (best) → app holds key with export → custodial key management (worst). |
+| 6.12 | Relay/node independence | `[if:messaging/social]` | Protocol & Transparency | Works with any relay/node (best) → recommended set → specific relays required (worst). |
+| 6.13 | Custodial vs non-custodial | `[if:payments]` | Payment & Provenance | Non-custodial (best) → custodial with withdrawal → fully custodial (worst). |
 
 ---
 
