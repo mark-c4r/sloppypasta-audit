@@ -70,6 +70,28 @@ For each V1 check in the inventory:
 5. Record a one-sentence justification citing the specific observation that determined the score
 5a. If the score is below 70%, the justification MUST include one specific observation: a URL, code pattern, exact text quote, or screenshot description. Generic justifications like "seems low quality" are not sufficient.
 6. If the check has a conditional tag and the condition does not apply to this product, mark N/A
+7. Tag each justification with its evidence class (may combine multiple tags):
+
+### Evidence Tags
+
+| Tag | Source | Example |
+|-----|--------|---------|
+| `[OBS]` | Direct observation during audit | "Counted 6 tracker domains in network panel" |
+| `[DOC]` | Official product docs, pricing, policy, ToS | "Privacy policy section 3.2 states..." |
+| `[CODE]` | Source code, repo, manifest, binary inspection | "package.json includes analytics SDK" |
+| `[STORE]` | App Store / Play Store labels, permissions | "Apple privacy label shows: Third-Party Advertising" |
+| `[REP]` | Credible third-party reporting (named publication) | "Vice reported in 2023 that..." |
+| `[USR]` | User reports/reviews (forums, review sites) | "PissedConsumer reviews cite cancellation difficulty" |
+| `[INF]` | Inference from other evidence | "Standard commercial platform; likely uses session tracking" |
+| `[GAP]` | Not verified / blocked / unknown | "Page returned 403; could not assess" |
+
+### Evidence Hard Rules
+
+- Scores below 25% require at least one **primary** tag: `[OBS]`, `[DOC]`, `[CODE]`, or `[STORE]`
+- `[INF]` alone cannot push a score below 40% — mark the score as **(provisional)** if only inference supports it
+- `[USR]` alone cannot justify claims of deception, dark patterns, or coercion
+- Blocked access = `[GAP]` + **(provisional)** marker on the score
+- Every overview paragraph must cite the specific checks carrying the verdict
 
 **Score ALL checks in ALL categories before computing any aggregates. Do not skip categories.**
 
@@ -127,13 +149,15 @@ Example: If Cat 8 (0.10) is excluded, each remaining weight is multiplied by `1 
 
 ### Grade Assignment
 
-| Grade | Score Range | Meaning |
-|-------|------------|---------|
-| A | 85-100 | Exceptional -- sets the standard |
-| B | 70-84 | Good -- clear care, minor gaps |
-| C | 55-69 | Mediocre -- functional but uninspired |
-| D | 40-54 | Poor -- significant issues across dimensions |
-| F | 0-39 | Failing -- actively hostile or negligent |
+| Grade | Range | Grade | Range | Grade | Range |
+|-------|-------|-------|-------|-------|-------|
+| A+ | 95-100 | B+ | 80-84 | C+ | 65-69 |
+| A | 90-94 | B | 75-79 | C | 60-64 |
+| A- | 85-89 | B- | 70-74 | C- | 55-59 |
+| D+ | 50-54 | D | 45-49 | D- | 40-44 |
+| F+ | 30-39 | F | 20-29 | F- | 0-19 |
+
+**Base grade meanings**: A = Exceptional. B = Good -- clear care, minor gaps. C = Mediocre -- functional but uninspired. D = Poor -- significant issues. F = Failing -- actively hostile or negligent. Modifiers (+/-) signal position within the band.
 
 ### Verify Computation
 
@@ -173,10 +197,20 @@ for c in [1,2,3,4,5,6,7,8]:
 w = sum(weights[c] for c in cats)
 adj = {c: weights[c]/w for c in cats}
 o = math.exp(sum(adj[c]*math.log(cats[c]) for c in cats))
+def grd(s):
+    for t,g in [(95,'A+'),(90,'A'),(85,'A-'),(80,'B+'),(75,'B'),(70,'B-'),(65,'C+'),(60,'C'),(55,'C-'),(50,'D+'),(45,'D'),(40,'D-'),(30,'F+'),(20,'F'),(0,'F-')]:
+        if s>=t: return g
+def gm(vals):
+    v=[max(x,5) for x in vals if x is not None]
+    return math.exp(sum(math.log(x) for x in v)/len(v)) if len(v)>=2 else None
 for c in sorted(cats): print(f'Cat {c}: {cats[c]:.1f}%')
-print(f'Overall: {o:.1f}%')
-grade = next(g for t,g in [(85,'A'),(70,'B'),(55,'C'),(40,'D'),(0,'F')] if o>=t)
-print(f'Grade: {grade}')
+print(f'Overall: {o:.1f}% — {grd(o)}')
+craft=gm([cats.get(c) for c in [1,2,3,4]])
+conduct=gm([cats.get(c) for c in [5,7,8]])
+sov=cats.get(6)
+if craft: print(f'Craft (Cats 1-4): {craft:.1f}% — {grd(craft)}')
+if conduct: print(f'Conduct (Cats 5,7,8): {conduct:.1f}% — {grd(conduct)}')
+if sov: print(f'Sovereignty (Cat 6): {sov:.1f}% — {grd(sov)}')
 "
 ```
 
@@ -188,7 +222,7 @@ If the script output differs from your manual calculation by more than 1 point, 
 
 Output a markdown report with this structure. Save to `~/Coding/sloppypasta-audit/docs/audits/YYYY-MM-DD-[product-slug].md`.
 
-**Grade assignment**: Always use the python script's grade output from Phase 3. Never compute or override the grade manually. If the script output and your judgment disagree, the script wins.
+**Grade assignment**: Always use the python script's grade output (with +/- modifiers) from Phase 3. Never compute or override grades manually. The script produces the overall grade AND the three split grades (Craft, Conduct, Sovereignty). If the script output and your judgment disagree, the script wins.
 
 ```markdown
 # Sloppypasta Audit: [Product Name]
@@ -211,10 +245,15 @@ Output a markdown report with this structure. Save to `~/Coding/sloppypasta-audi
 
 ---
 
-## Overall: [XX]% -- Grade [A/B/C/D/F]
+## Overall: [Grade+/-]
+
+Craft ......... [Grade+/-]
+Conduct ....... [Grade+/-]
+Sovereignty ... [Grade+/-]
 
 [One paragraph summary. Lead with strengths. Frame weaknesses as improvement
-paths. Specific observations, not generic praise or criticism. No weasel words.]
+paths. Specific observations, not generic praise or criticism. No weasel words.
+Use architecture language, not motive language.]
 
 ---
 
@@ -224,8 +263,8 @@ paths. Specific observations, not generic praise or criticism. No weasel words.]
 
 | # | Check | Score | Justification |
 |---|-------|-------|---------------|
-| 1.1 | LLM smell markers | XX% | [one sentence with specific observation] |
-| 1.2 | Social authenticity | XX% | [one sentence with specific observation] |
+| 1.1 | LLM smell markers | XX% | [one sentence with specific observation + evidence tag, e.g. "No banned words detected in 5 pages of copy `[OBS]`"] |
+| 1.2 | Social authenticity | XX% | [one sentence + evidence tag. Scores below 25% MUST have primary tag. `(provisional)` if `[INF]`/`[GAP]` only] |
 
 [Repeat for all 8 categories. Include N/A checks with "N/A" in Score column
 and condition tag in Justification.]
@@ -244,7 +283,11 @@ and condition tag in Justification.]
 | 6 | Sovereignty & Privacy | XX% | 20% | N/N |
 | 7 | Honesty & Transparency | XX% | 15% | N/N |
 | 8 | Economic Alignment | XX% | 10% | N/N |
-| **Overall** | | **XX%** | | **Grade [X]** |
+| | | | | |
+| **Craft** | Cats 1-4 | **XX%** | 40% | **[Grade+/-]** |
+| **Conduct** | Cats 5,7,8 | **XX%** | 40% | **[Grade+/-]** |
+| **Sovereignty** | Cat 6 | **XX%** | 20% | **[Grade+/-]** |
+| **Overall** | | **XX%** | | **[Grade+/-]** |
 
 ---
 
@@ -274,6 +317,12 @@ Source: github.com/mark-c4r/sloppypasta-audit | Framework: docs/scoring-referenc
 - Specific observations, not generic praise or criticism. Cite what you saw.
 - Match language to score: 50% is mediocre, 75% is good, 85%+ deserves praise.
 - Every low score connects to an improvement path: "here's what 75% looks like."
+- **Architecture language, not motive language.** Describe mechanisms, not intentions. Replace moral labels with observed structures:
+  - "surveillance-grade" → "GA + 6 third-party trackers including ad networks `[OBS]`"
+  - "hostile infrastructure" → "centralized with no user-controlled exit path `[DOC]`"
+  - "feature hostage-taking" → "offline maps require paid tier; safety-critical in backcountry context `[OBS]`"
+  - "devastating" → "20% sovereignty driven by closed-source, company-controlled, no data export `[OBS]`"
+- Loaded words ("devastating," "damning," "hostile," "surveillance-grade") require a primary evidence tag (`[OBS]`/`[DOC]`/`[CODE]`/`[STORE]`) in the same sentence. If you can't source it, soften it.
 
 ---
 
