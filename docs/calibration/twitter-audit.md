@@ -9,6 +9,15 @@
 
 ---
 
+## Audit Scope
+
+**Surfaces assessed**: x.com (returned 402/403 consistently — login-wall behavior documented); developer.x.com changelog; App Store and Google Play listings; January 2026 recommendation algorithm open-source (xai-org/x-algorithm on GitHub); Grok open-source releases; Terms of Service (January 2026 revision via web search); privacy policy; published third-party privacy analyses.
+**Surfaces via proxy**: Core product behavior (infinite scroll, login wall, notification defaults, algorithmic feed) from documented reporting and publicly known behavior — no authenticated session. Mobile app permissions from store listings. Premium tiers from public pricing pages.
+**Surfaces not assessed**: Authenticated user experience (no account used); DM interface; Spaces; Communities; Payments flows; Grok chat; Settings screens; actual cookie inspector output (403s prevented inspection); API pricing verified only via documentation.
+**Limitations**: x.com returned 402/403 on all direct fetch attempts — all scores rely on publicly documented behavior, privacy audits, journalism, and the platform's own materials.
+
+---
+
 ## Overall: 31% -- Grade F
 
 Twitter/X remains one of the most consequential communication platforms on the internet, and several things about it still work. The core posting and reply mechanic is fast, learnable, and low-friction. Community Notes represents a genuine innovation in collaborative fact-checking that no competitor has matched. The January 2026 algorithm open-sourcing was a real transparency step, not theater. Information density on the timeline is reasonable, and the interface -- whatever its rough edges -- handles a staggering volume of human conversation without collapsing.

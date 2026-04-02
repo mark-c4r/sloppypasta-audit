@@ -9,6 +9,15 @@
 
 ---
 
+## Audit Scope
+
+**Surfaces assessed**: read.withboris.com landing page (full source fetched); dergigi/boris-landing GitHub repo (Tailwind config inspected); dergigi/boris GitHub repo (CHANGELOG through v0.12.0, README, issues, ESLint config); Gigi's blog post on dergigi.com (zero banned-word density confirmed); Fathom analytics from v0.12.0 CHANGELOG; boris.bar (DNS NXDOMAIN).
+**Surfaces via proxy**: App interior (three-pane layout, highlight panel, Explore page) from README, CHANGELOG, and landing page screenshots — app is fully JS-rendered. Empty-state behavior from README troubleshooting. NIP-46 remote signing from README.
+**Surfaces not assessed**: Live app interior (JS-rendered, requires execution); actual cookie load; Fathom analytics runtime/DNT behavior; boris.bar canonical domain (NXDOMAIN); OG preview system; PWA installation flow.
+**Limitations**: Full JS rendering means nearly all in-app UX scores (Cat 3, Cat 4) scored conservatively from README and CHANGELOG. Fathom confirmed via CHANGELOG but runtime behavior unverified. Primary domain boris.bar unreachable.
+
+---
+
 ## Overall: 77% -- Grade B
 
 Boris is a genuinely sovereign product that earns its score through architectural decisions rather than surface polish. Built on Nostr's open protocol with keypair-based identity, MIT-licensed source code, and a Value4Value economic model, it represents the kind of product the Sloppypasta framework was designed to reward. The writing across the landing page and README is clean, direct, and distinctly human -- notable given the product was entirely vibe-coded. Where Boris loses ground is in the craft categories: the landing page uses default Tailwind tokens with no customization, the app itself is a JS-rendered shell that gives scrapers nothing to work with, and the vibe-coded origins surface in code patterns that mix paradigms. These are honest rough edges on a v0.12.0 product, not design negligence. The sovereignty and economic alignment scores (92% and 93%) are among the strongest a product can achieve without being a bare protocol, while the design and craft scores (58% and 58%) reflect a builder who cares deeply about architecture and values but hasn't yet invested in visual refinement.

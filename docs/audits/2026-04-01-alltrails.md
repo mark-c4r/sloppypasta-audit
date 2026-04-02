@@ -9,6 +9,15 @@
 
 ---
 
+## Audit Scope
+
+**Surfaces assessed**: alltrails.com homepage (direct web fetch); App Store listing (pricing, privacy label, app description); Apple privacy label (authoritative source for data collection claims); Trustpilot and community reviews; press releases and media coverage; AllTrails pricing/plans page; GitHub organization (23 peripheral repos).
+**Surfaces via proxy**: Mobile app behavior inferred from Apple privacy label, App Store listing metadata, and UX case study documentation — native app was not run. EU cookie consent behavior inferred from US-only homepage fetch.
+**Surfaces not assessed**: Native iOS and Android apps (not installed/run); blog and newsroom pages (returned 403); admin dashboard; trail recording/navigation in-session; subscription billing flow; cancellation UX firsthand.
+**Limitations**: Multiple AllTrails pages returned 403 to non-browser agents. Text analysis relies on accessible pages only — may undercount AI markers in gated content. Tracker count derived from Apple privacy label and secondary reports rather than direct network inspection.
+
+---
+
 ## Overall: 41% -- Grade D
 
 AllTrails is a well-crafted consumer product with genuine utility -- millions of real hikers use it to discover and navigate trails worldwide. The writing is reasonably clean (homepage copy is tight and action-oriented), the community reviews are authentic, and the product clearly works for its core use case. However, the audit reveals a product that systematically extracts value from multiple directions simultaneously: subscription fees, advertising, location data monetization, and aggressive re-engagement campaigns. The sovereignty score is devastating (20%) because AllTrails is a fully proprietary walled garden -- closed source, no API (actively shut down third-party access), no self-hosting, no privacy-preserving payment, and password-based identity with no user-controlled keys. The product conduct score (38%) reflects the combination of access gating (critical safety features like offline maps locked behind paywall), persistent app-download nagging on mobile web, auto-renewal billing complaints, and a cancellation flow that requires platform-specific navigation. AllTrails double-dips: it charges $36-80/year AND shows ads AND collects data for third-party advertising. The strongest signal is the gap between AllTrails' wholesome outdoor brand and its surveillance-grade data practices -- the Apple privacy label reveals precise location, contacts, and data linked to identity used for third-party advertising, and the app explicitly tracks location even when not open.

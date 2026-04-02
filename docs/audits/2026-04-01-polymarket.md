@@ -9,6 +9,15 @@
 
 ---
 
+## Audit Scope
+
+**Surfaces assessed**: polymarket.com landing page (live fetch); docs.polymarket.com (changelog, API docs, SDK docs); help.polymarket.com; GitHub org (96 repos, SDK source, polymarket-cli); App Store and Google Play listings/reviews; page source inspected for trackers (GA, TikTok Pixel confirmed); NYT, CNN, Bloomberg, CoinDesk, CJR investigative reporting.
+**Surfaces via proxy**: Privacy policy details from web search results and third-party analyses (policy pages returned navigation shells). Mobile app behavior from store ratings and user reviews. US version inferred from documented user reports.
+**Surfaces not assessed**: blog.polymarket.com (ECONNREFUSED); live trading interface behind auth; market resolution flows; UMA governance interface; cookie behavior via browser inspector; iOS app directly; US KYC flow; MoonPay deposit flow.
+**Limitations**: Core platform code is proprietary — only SDKs/API clients inspectable. Privacy policy sourced from third-party reporting. International vs US products diverge materially; international treated as primary.
+
+---
+
 ## Overall: 46% -- Grade D
 
 Polymarket is the world's largest prediction market by volume, backed by a $2B investment from ICE (NYSE parent) and valued near $20B. It demonstrates competent product execution in its core trading interface -- the market card layout is information-dense, the landing page avoids typical marketing bloat, and the developer documentation with SDKs in three languages shows genuine builder infrastructure. Where Polymarket fails the Sloppypasta framework is in the categories it weights most heavily: sovereignty, privacy, honesty, and product conduct. The platform runs Google Analytics and TikTok Pixel surveillance-grade tracking, DNT is ignored, the US version requires government ID, and the international version -- while more permissive -- still operates as a centralized platform that can freeze accounts and modify terms unilaterally. The NYT investigation documenting hundreds of false and misleading social media posts, combined with the UMA governance attack that resolved a $7M market incorrectly without refunds, reveals a platform whose honesty claims ("source of truth", "News 2.0") diverge substantially from observable behavior. The economic model -- recently expanding taker fees across most categories -- creates a house-takes-a-cut dynamic that aligns Polymarket's incentives with trading volume rather than prediction accuracy. A well-built product on hostile infrastructure.

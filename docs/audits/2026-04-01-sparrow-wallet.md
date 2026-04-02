@@ -9,6 +9,15 @@
 
 ---
 
+## Audit Scope
+
+**Surfaces assessed**: sparrowwallet.com (landing, features, best practices, spending privately guide, quick start, FAQ, download, donate/about, privacy policy); GitHub repository (source code, commit history, release notes, issues); Craig Raw's Twitter/X account.
+**Surfaces via proxy**: Desktop app UI inferred from feature descriptions, GitHub commits, release notes, and user-filed issues. Accessibility of JavaFX interface inferred from platform documentation. Telegram community from landing page links.
+**Surfaces not assessed**: Desktop app itself (not launched); Sparrow Server (headless variant); hardware wallet integration flows; airgapped signing workflow; coin selection and PSBT editor screens.
+**Limitations**: All UI/UX scores (Cat 3) based on documentation and GitHub issues rather than direct app interaction. A11y scores conservative — JavaFX runtime cannot be audited externally. Tor integration unverified beyond documentation.
+
+---
+
 ## Overall: 84% -- Grade B
 
 Sparrow Wallet is the highest-scoring product audited in this round, narrowly missing an A grade. It is a textbook example of sovereignty-respecting software: fully non-custodial, keypair-based identity (100% on 6.3), open source under Apache 2.0, zero telemetry, zero tracking, and a donation-funded business model with no ads, no data monetization, and no attention harvesting. The writing across documentation and marketing is clean, human-authored, and free of LLM markers -- the developer Craig Raw writes with domain expertise and genuine voice. Economic alignment is near-perfect (95%), and the product's conduct toward users is exemplary: no access gates, no urgency tactics, no dark patterns, no nag campaigns.

@@ -9,6 +9,15 @@
 
 ---
 
+## Audit Scope
+
+**Surfaces assessed**: github.com/mark-c4r/sloppypasta-audit (full repository); docs/synthesis.md (em-dash density analyzed); README.md; docs/scoring-reference.md (full 21K-word document); SKILL.md; docs/check-inventory.md; docs/scale-anchors/ (8 files); docs/calibration/ (3 files); docs/reference/ (3 files); full git log (14 commits); Python verification script (executed); LICENSE file.
+**Surfaces via proxy**: Claude Code skill invocation behavior from SKILL.md frontmatter — not triggered in a fresh session. Community engagement state from GitHub stars/forks/watchers at time of audit.
+**Surfaces not assessed**: Skill runtime behavior when invoked via Claude Code; Nostr announcement distribution (unshipped); downstream audits produced by the skill.
+**Limitations**: Self-audit — the auditor is the author. Cat 3 (Design & Interface) entirely N/A for a documentation repository. Social authenticity score reflects publication-date state.
+
+---
+
 ## Overall: 76% -- Grade B
 
 The Sloppypasta Audit is a well-crafted open-source framework with exceptional structural foundations: MIT-licensed, zero-dependency, zero-tracking, fully self-hostable, with all content in open markdown formats. Sovereignty (85%), Product Conduct (97%), and Economic Alignment (100%) are genuinely strong -- the framework practices what it preaches. The writing in synthesis.md is distinctive and opinionated, opening with "Two things broke the internet: no native money, and no taste" rather than the throat-clearing preambles it warns against. The main weakness is predictable for a just-launched project: zero community engagement (15% Social Authenticity) creates a severe drag through the geometric mean, collapsing Cat 1 to 30%. A secondary gap: the framework's own docs show elevated em-dash density (5-7 per 1000 words), tripping the very detection threshold it defines. The irony is instructive -- the framework catches tells its own authors didn't fully scrub. Content provenance relies on GitHub (platform-verified, not independently verifiable), and AI contribution is acknowledged in git commits but not disclosed in the documents themselves. Cat 3 (Design & Interface) is entirely N/A -- this is a documentation repo, not a visual product.

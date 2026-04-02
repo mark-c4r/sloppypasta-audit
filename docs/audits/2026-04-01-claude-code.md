@@ -9,6 +9,15 @@
 
 ---
 
+## Audit Scope
+
+**Surfaces assessed**: claude.ai/code marketing page (direct fetch — Intellimize tracking detected); code.claude.com/docs (directly read); github.com/anthropics/claude-code (50K+ stars, source code, issues, Apache 2.0 license); CLI --help output and error message patterns; Anthropic blog posts; pricing page ($20/$100/$200/month); third-party pricing guides.
+**Surfaces via proxy**: VS Code/JetBrains extensions inferred from docs and community issues — not installed. Desktop app UX inferred from documentation. Rate limit behavior from community reports, not firsthand.
+**Surfaces not assessed**: Live CLI session (not invoked); VS Code/JetBrains extensions; desktop app; web interface logged-in session; subscription billing flow; actual rate limits firsthand; iOS app.
+**Limitations**: Self-audit (Claude Code auditing itself) — inherent conflict of interest. CLI behavior from documentation and community evidence, not firsthand execution. Telemetry opt-out described but not tested.
+
+---
+
 ## Overall: 62% -- Grade C
 
 Claude Code is a well-crafted developer tool with strong product craft (79%), clean slop detection (75%), and solid writing (72%). The open-source CLI (Apache 2.0) is a genuine contribution -- actively maintained with 50K+ GitHub stars, transparent iteration via changelogs and releases, and a real community filing issues and contributing. The product earns its scores in categories measuring build quality, design consistency, and community authenticity. It is dragged down significantly by sovereignty and privacy (42%) -- the CLI is open source but the underlying model is a proprietary black box, identity is server-controlled, payment requires credit cards, and Anthropic retains unilateral power to change pricing, rate limits, and terms. Product conduct (65%) suffers from the absence of any free tier and rate-limit-driven upgrade pressure. Economic alignment (62%) reflects a flat subscription model where users who hit rate limits are pushed toward 5x more expensive tiers. The product is honest about being AI (it IS AI), but the broader Anthropic web presence includes surveillance-grade analytics (Intellimize) that undercuts the developer-friendly surface.
