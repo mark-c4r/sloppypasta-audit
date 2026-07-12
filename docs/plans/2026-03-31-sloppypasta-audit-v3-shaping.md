@@ -1,7 +1,7 @@
 ---
 shaping: true
 ticket: sloppypasta-audit
-status: active
+status: abandoned  # HYG C5 flip 2026-07-11 — project dormant 100d (last commit 2026-04-02); history push-verified via ls-remote OID match
 appetite: L
 project: sloppypasta-audit
 updated: 2026-03-31
