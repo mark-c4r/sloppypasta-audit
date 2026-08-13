@@ -335,7 +335,7 @@ approximately [Y] points, lifting the overall score by ~[Z] points.
 
 [Repeat for 3-5 improvements]
 
-Source: github.com/mark-c4r/sloppypasta-audit | Framework: docs/scoring-reference.md
+Source: github.com/czexan/sloppypasta-audit | Framework: docs/scoring-reference.md
 ```
 
 ---

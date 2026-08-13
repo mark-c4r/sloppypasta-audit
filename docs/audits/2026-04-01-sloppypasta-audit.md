@@ -1,7 +1,7 @@
 # Sloppypasta Audit: The Sloppypasta Audit
 
 **Date**: 2026-04-01
-**URL**: https://github.com/mark-c4r/sloppypasta-audit
+**URL**: https://github.com/czexan/sloppypasta-audit
 **Type**: Open-source framework / Claude Code skill (GitHub repo)
 **Audit Mode**: External + Source (V1, single-agent, self-audit)
 **Conditions**: [if:content]
@@ -11,7 +11,7 @@
 
 ## Audit Scope
 
-**Surfaces assessed**: github.com/mark-c4r/sloppypasta-audit (full repository); docs/synthesis.md (em-dash density analyzed); README.md; docs/scoring-reference.md (full 21K-word document); SKILL.md; docs/check-inventory.md; docs/scale-anchors/ (8 files); docs/calibration/ (3 files); docs/reference/ (3 files); full git log (14 commits); Python verification script (executed); LICENSE file.
+**Surfaces assessed**: github.com/czexan/sloppypasta-audit (full repository); docs/synthesis.md (em-dash density analyzed); README.md; docs/scoring-reference.md (full 21K-word document); SKILL.md; docs/check-inventory.md; docs/scale-anchors/ (8 files); docs/calibration/ (3 files); docs/reference/ (3 files); full git log (14 commits); Python verification script (executed); LICENSE file.
 **Surfaces via proxy**: Claude Code skill invocation behavior from SKILL.md frontmatter — not triggered in a fresh session. Community engagement state from GitHub stars/forks/watchers at time of audit.
 **Surfaces not assessed**: Skill runtime behavior when invoked via Claude Code; Nostr announcement distribution (unshipped); downstream audits produced by the skill.
 **Limitations**: Self-audit — the auditor is the author. Cat 3 (Design & Interface) entirely N/A for a documentation repository. Social authenticity score reflects publication-date state.
@@ -182,4 +182,4 @@ Category excluded (0 applicable checks). Weight redistributed proportionally.
 **Target**: 75% is already exceeded. 100% looks like: development is part of the product's identity, changelogs include reasoning, early versions acknowledged.
 **Impact**: Improving from 80% to 90% would raise Cat 4 from 77% to 80%, lifting overall by less than 1 point. Low score impact but high usability impact -- releases and changelogs make the framework's evolution accessible without git literacy.
 
-Source: github.com/mark-c4r/sloppypasta-audit | Framework: docs/scoring-reference.md
+Source: github.com/czexan/sloppypasta-audit | Framework: docs/scoring-reference.md

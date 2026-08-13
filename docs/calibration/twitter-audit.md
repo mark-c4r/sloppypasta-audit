@@ -193,4 +193,4 @@ All conditional tags activated for Twitter/X ([if:content], [if:mobile], [if:ide
 
 Product information gathered via web search on 2026-03-31. Direct page fetches of x.com were blocked (402/403 responses), consistent with the platform's access-gating behavior documented in this audit. Scoring relies on publicly available information, privacy analyses, terms of service, and documented platform behavior.
 
-Source: github.com/mark-c4r/sloppypasta-audit | Framework: docs/synthesis.md
+Source: github.com/czexan/sloppypasta-audit | Framework: docs/synthesis.md

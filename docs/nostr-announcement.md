@@ -4,7 +4,7 @@
 
 Shipped the Sloppypasta Audit — an open-source framework for scoring whether products are built with care or shipped as AI slop. 8 categories, 46 checks, geometric mean scoring, scale anchors for every check. Run it on anything.
 
-Built as a Claude Code skill. Repo: https://github.com/mark-c4r/sloppypasta-audit
+Built as a Claude Code skill. Repo: https://github.com/czexan/sloppypasta-audit
 
 #sloppypasta #bitcoin #nostr #sovereignty
 
@@ -16,4 +16,4 @@ Scoring uses geometric means, not arithmetic. A product that nails design but su
 
 The framework ships as a Claude Code skill (run `/sloppypasta-audit` on any product) and as a standalone reference doc anyone can use manually. It's been calibrated against Boris (77%, B) and Twitter/X (31%, F). The checks, anchors, and methodology are all open — run it on products you use, publish the results, help improve the framework.
 
-Repo: https://github.com/mark-c4r/sloppypasta-audit
+Repo: https://github.com/czexan/sloppypasta-audit
